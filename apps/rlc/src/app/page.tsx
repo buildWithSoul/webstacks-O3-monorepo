@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/ui";
 
 export default function Home() {
   return (

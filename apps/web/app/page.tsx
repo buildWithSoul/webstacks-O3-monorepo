@@ -1,7 +1,6 @@
 import Image, { type ImageProps } from "next/image";
 import styles from "./page.module.css";
-import { Button } from "@repo/ui/button";
-import { Card } from "@repo/ui/card";
+import { Button, Card } from "@repo/ui";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -22,9 +21,7 @@ const ThemeImage = (props: Props) => {
 export default function Home() {
   return (
     <>
-     <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    
           <Button appName="web">Click Me</Button>
           <Card href="" title="Welcome to the Web App">
             This is a card component from the shared UI package.
