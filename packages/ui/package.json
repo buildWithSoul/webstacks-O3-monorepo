@@ -5,12 +5,14 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    "./styles.css": "./dist/index.css",
-    "./button": "./dist/button.js",
-    "./card": "./dist/card.js",
-    "./*": "./dist/*.js"
+ "exports": {
+  ".": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js"
   },
+  "./styles.css": "./dist/index.css"
+}
+,
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component",
