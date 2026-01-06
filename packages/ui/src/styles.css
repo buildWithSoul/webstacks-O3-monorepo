@@ -1,1 +1,9 @@
 @import "tailwindcss";
+:root {
+  --button-primary: #2563eb;
+  --text-button: #ffffff;
+
+  --Border-Radius-round: 96px;
+
+  --link-hover: #1d4ed8;
+}

@@ -2,6 +2,6 @@ import { Button } from "@repo/ui";
 
 export default function Home() {
   return (
-    <Button appName="edge">Hello from edge</Button>
+    <Button>Hello from edge</Button>
   );
 }
