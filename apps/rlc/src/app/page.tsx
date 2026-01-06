@@ -4,8 +4,15 @@ import { Button } from "@repo/ui";
 
 export default function Home() {
   return (
-   <Button appName="rlc">
-    Hello from rlc
-   </Button>
+    <>
+      <Button
+
+        mode="filled"
+        tone="primary"
+        size="md"
+      >
+        Submit
+      </Button>
+    </>
   );
 }

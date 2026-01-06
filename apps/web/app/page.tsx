@@ -1,6 +1,6 @@
 import Image, { type ImageProps } from "next/image";
 import styles from "./page.module.css";
-import { Button, Card } from "@repo/ui";
+import { Button } from "@repo/ui";
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -22,11 +22,7 @@ export default function Home() {
   return (
     <>
     
-          <Button appName="web">Click Me</Button>
-          <Card href="" title="Welcome to the Web App">
-            This is a card component from the shared UI package.
-          </Card>
-          
+          <Button>Shared button component</Button>
 
     </>
   );
