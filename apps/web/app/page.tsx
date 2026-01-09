@@ -1,29 +1,19 @@
-import Image, { type ImageProps } from "next/image";
-import styles from "./page.module.css";
-import { Button } from "@repo/ui";
+import { fetchStory } from "@repo/storyblok";
+import { getStoryblokApi } from "@storyblok/react/rsc";
+import { StoryblokStory } from "@storyblok/react/rsc";
 
-type Props = Omit<ImageProps, "src"> & {
-  srcLight: string;
-  srcDark: string;
-};
+async function page() {
+  const story = await fetchStory("home", {
+    accessToken: process.env.NEXT_PUBLIC_STORYBLOK_CONTENT_API_ACCESS_TOKEN || 'GMyN9DiOZ9OGgCtgmrOtjgtt',
+    region: "eu",
+  });
 
-const ThemeImage = (props: Props) => {
-  const { srcLight, srcDark, ...rest } = props;
-
+  console.log(story, "story");
   return (
-    <>
-      <Image {...rest} src={srcLight} className="imgLight" />
-      <Image {...rest} src={srcDark} className="imgDark" />
-    </>
-  );
-};
-
-export default function Home() {
-  return (
-    <>
-    
-          <Button>Shared button component</Button>
-
-    </>
+    <div>
+      <StoryblokStory story={story} />
+    </div>
   );
 }
+
+export default page;

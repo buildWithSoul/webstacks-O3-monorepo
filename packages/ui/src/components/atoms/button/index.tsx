@@ -71,7 +71,7 @@ const Button: FC<ButtonProps> = ({
   openInNewTab,
   ...props
 }) => {
-  console.log('Button received props:', { label, mode, tone, linkType, internalLink, externalUrl, ...props });
+  // console.log('Button received props:', { label, mode, tone, linkType, internalLink, externalUrl, ...props });
   
   // Extract data from nested structure that StoryblokComponent provides
   const actualBlok = (props as any)?.blok || props;
@@ -101,10 +101,10 @@ const Button: FC<ButtonProps> = ({
     finalLink = { linkType: 'popup', popupForm: actualPopupForm, label: actualLabel };
   }
   
-  console.log('Button final link:', finalLink);
-  console.log('Button actualLabel:', actualLabel);
-  console.log('Button actualMode:', actualMode);
-  console.log('Button actualTone:', actualTone);
+  // console.log('Button final link:', finalLink);
+  // console.log('Button actualLabel:', actualLabel);
+  // console.log('Button actualMode:', actualMode);
+  // console.log('Button actualTone:', actualTone);
   
   // Get the raw link data without modification
   const rawLinkData = getLinkData(finalLink);

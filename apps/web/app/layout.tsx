@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@repo/ui/styles.css";
-import './globals.css';
+import "./globals.css";
+import "../lib/storyblok";
+import { StoryblokBridge } from "@repo/storyblok";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <StoryblokBridge>{children}</StoryblokBridge>
       </body>
     </html>
   );

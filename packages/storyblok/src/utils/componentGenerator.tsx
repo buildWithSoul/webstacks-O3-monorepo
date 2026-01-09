@@ -1,0 +1,163 @@
+'use client'
+
+
+import { Section, ImageBlock, isListingDocument, StatisticsPanel } from '@repo/ui';
+import type { SbBlokData } from '@storyblok/react/rsc';
+import type { FC } from 'react';
+import { useOptimistic } from 'react';
+// import { HeadingBlock } from '../components/sections/headingBlock';
+// import { IconCardDeck } from '../components/sections/cardDeck/iconCardDeck';
+// import { ImageCardDeck } from '../components/sections/cardDeck/imageCardDeck';
+// import { ImageBlock, StatisticsPanel } from '../components/sections';
+// import { isListingDocument } from '../lib/constants';
+
+
+
+interface componentGeneratorProps {
+  sections?: SbBlokData[] | null;
+  documentId: string;
+  documentType: string;
+  rels?: any; // Storyblok resolved relations
+}
+
+export const getComponent = (component: SbBlokData, rels?: any) => {
+  
+  switch (component.component) {
+    case 'sectionLayout':
+      // For sectionLayout, render its nested content directly
+      // The Section wrapper is handled by the ComponentGenerator loop
+      if (component.section && Array.isArray(component.section)) {
+        return (
+          <div key={component._uid}>
+            {component.section.map((nestedComponent: SbBlokData) => 
+              getComponent(nestedComponent, rels)
+            )}
+          </div>
+        );
+      }
+      return null;
+    
+    // case 'headingBlock':
+    //   return <HeadingBlock key={component._uid} {...component} />;
+    
+
+    
+    // case 'iconCardDeck':
+    //   return <IconCardDeck key={component._uid} {...component} component="iconCardDeck" />;
+    
+    // case 'imageCardDeck':
+    //   return <ImageCardDeck key={component._uid} {...component} component="imageCardDeck" rels={rels} />
+    
+    case 'imageBlock':
+      return <ImageBlock key={component._uid} {...component} component="imageBlock" />;
+    
+    case 'statisticsPanel':
+      return <StatisticsPanel key={component._uid} {...component} component="statisticsPanel" />;
+
+       
+    // Add more Storyblok components as you refactor them
+    default:
+      console.warn(`Storyblok component not yet refactored: ${component.component}`);
+      return (
+        <div key={component._uid} className="p-6 border-2 border-dashed border-gray-300 bg-gray-50 rounded-lg">
+          <p className="text-gray-700 font-semibold mb-2">Component: {component.component}</p>
+          <p className="text-gray-500 text-sm">This component needs to be refactored for Storyblok</p>
+          <details className="mt-2">
+            <summary className="text-xs text-gray-400 cursor-pointer">View data</summary>
+            <pre className="text-xs text-gray-600 mt-2 overflow-auto">
+              {JSON.stringify(component, null, 2)}
+            </pre>
+          </details>
+        </div>
+      );
+  }
+};
+
+// Helper function to get section props based on section type
+const getSectionProps = (section: SbBlokData) => {
+  const baseProps = {
+    theme: (section.theme as any) || 'light',
+    responsivePadding: (section.responsivePadding as any) || {
+      default: { 
+        top: parseInt(String(section.paddingTopDefault || '48')), 
+        bottom: parseInt(String(section.paddingBottomDefault || '48')) 
+      },
+      sm: { 
+        top: parseInt(String(section.paddingTopSm || '48')), 
+        bottom: parseInt(String(section.paddingBottomSm || '48')) 
+      },
+      md: { 
+        top: parseInt(String(section.paddingTopMd || '64')), 
+        bottom: parseInt(String(section.paddingBottomMd || '64')) 
+      },
+      lg: { 
+        top: parseInt(String(section.paddingTopLg || '80')), 
+        bottom: parseInt(String(section.paddingBottomLg || '80')) 
+      },
+      xl: { 
+        top: parseInt(String(section.paddingTopXl || '96')), 
+        bottom: parseInt(String(section.paddingBottomXl || '96')) 
+      },
+      xxl: { 
+        top: parseInt(String(section.paddingTopXxl || '96')), 
+        bottom: parseInt(String(section.paddingBottomXxl || '96')) 
+      }
+    },
+    backgroundImage: (section.backgroundImage as any),
+    minHeight: (section.minHeight as any),
+  };
+
+  // Handle sections with background gradients
+  if (section.bgGradient && section.bgGradient !== 'none') {
+    return {
+      ...baseProps,
+      bgGradient: (section.bgGradient as any),
+      // Only use inverse gradient for textRevealBlock
+      inverseGradient: section.component === 'textRevealBlock',
+    };
+  }
+
+  return baseProps;
+};
+
+export const ComponentGenerator: FC<componentGeneratorProps> = ({ sections, documentId, documentType, rels }) => {
+  // Keep sections responsive to reorders via Presentation tool
+  const [optimisticSections] = useOptimistic<SbBlokData[] | undefined, any>(
+    sections ?? undefined,
+    (current, action) => {
+      if (!action || action.id !== documentId) return current;
+      if (action.document?.sections) return action.document.sections as SbBlokData[];
+      return current;
+    }
+  );
+
+  // Check if this is a listing document - sections are never first on listing pages
+  const skipFirstSectionSpacing = isListingDocument(documentType);
+
+  return (
+    <div>
+      {(optimisticSections ?? []).map((section, index, arr) => {
+        const sectionProps = getSectionProps(section);
+        
+        const prevSection = index > 0 ? arr[index - 1] : null;
+        const nextSection = index < arr.length - 1 ? arr[index + 1] : null;
+
+        return (
+          <Section
+            key={section._uid}
+            {...sectionProps}
+            isFirstSection={!skipFirstSectionSpacing && index === 0}
+            sectionType={section.component}
+            prevTheme={prevSection?.theme as any}
+            nextTheme={nextSection?.theme as any}
+            id={section.htmlId as string}
+          >
+            {getComponent(section, rels)}
+          </Section>
+          
+        );
+      })}
+    </div>
+  );
+};
+

@@ -6,6 +6,7 @@
 // Export all molecule components here
 
 export * from './image';
+export * from './section'
 // Example:
 // export { default as SearchForm } from './SearchForm';
 // export { default as Card } from './Card';
