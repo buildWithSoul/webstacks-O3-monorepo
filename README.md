@@ -1,135 +1,147 @@
-# Turborepo starter
+# Turborepo Monorepo
 
-This Turborepo starter is maintained by the Turborepo core team.
+This repository is a Turborepo-powered monorepo using pnpm workspaces. It is designed to support multiple Next.js applications along with shared packages for UI components, configuration, styling, and CMS integrations.
 
-## Using this example
 
-Run the following command:
+## Monorepo Background
 
-```sh
-npx create-turbo@latest
-```
+This monorepo was initially created using the Turborepo starter, which by default provides:
+- A web application
+- A docs application
+- Shared configuration packages (ESLint, TypeScript, etc.)
 
-## What's inside?
+The structure was later extended and customized:
+- Added three new Next.js applications: main, rlc, and edge
+- Added a dedicated Storybook application
+- Added a shared UI component library
+- Configured Tailwind CSS as a shared setup
+- Integrated Storyblok as the CMS layer
 
-This Turborepo includes the following packages/apps:
+## Repository Structure
 
-### Apps and Packages
+.
+├── apps
+│   ├── web         # Default
+│   ├── main        
+│   ├── rlc         
+│   ├── edge       
+│   └── storybook   # Storybook for UI development
+│
+├── packages
+│   ├── ui                # Shared React UI component library
+│   ├── storyblok         # Storyblok client and apis
+│   ├── tailwind-config   # Shared Tailwind CSS configuration
+│   ├── eslint-config     # Shared ESLint configuration
+│   └── typescript-config # Shared TypeScript configuration
+│
+├── turbo.json
+├── pnpm-workspace.yaml
+├── pnpm-lock.yaml
+├── package.json
+└── README.md
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## Applications
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+All applications live inside the apps directory and are built with Next.js.
 
-### Utilities
+- web  
+  Default created with turborepo starter
 
-This Turborepo has some additional tools already setup for you:
+- main  
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- rlc  
+  
+- edge  
+  
+- storybook  
+  Dedicated Storybook application used to develop, test, and document UI components from the ui package.
 
-### Build
+## Packages
 
-To build all apps and packages, run the following command:
+Reusable and shared code lives inside the packages directory.
 
-```
-cd my-turborepo
+- ui  
+  Shared React component library used across all applications.
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
+- storyblok  
+  Centralized Storyblok utilities, and rendering helpers.
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
+- tailwind-config  
+  Shared Tailwind CSS configuration consumed by all applications and packages.
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+- eslint-config  
+  Shared ESLint rules to enforce consistent code quality.
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+- typescript-config  
+  Base TypeScript configuration extended by apps and packages.
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+All packages are written in TypeScript and consumed via pnpm workspace aliases.
 
-### Develop
+## Styling
 
-To develop all apps and packages, run the following command:
+Tailwind CSS is configured once in the tailwind-config package and reused across:
+- All Next.js applications
+- The shared UI component library
 
-```
-cd my-turborepo
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
+## Tech Stack
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+- Turborepo
+- pnpm
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Storybook
+- Storyblok
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+## Getting Started
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+### Prerequisites
 
-### Remote Caching
+- Node.js 18 or higher
+- pnpm 8 or higher
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### Install dependencies
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+pnpm install
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## Development
 
-```
-cd my-turborepo
+Run all applications and packages:
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+pnpm turbo dev
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
+Run a specific application:
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+pnpm turbo dev --filter=web
+pnpm turbo dev --filter=storybook
+pnpm turbo dev --filter=main
+pnpm turbo dev --filter=rlc
+pnpm turbo dev --filteredge
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## Build
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
+Build everything:
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
+pnpm turbo build
+
+Build a specific app or package:
+
+pnpm turbo build --filter=web
+pnpm turbo build --filter=ui
+pnpm turbo build --filter=rlc
+pnpm turbo build --filter=edge
+pnpm turbo build --filter=main
+
+
+Configuration is defined in turbo.json.
 
 ## Useful Links
 
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+- Turborepo: https://turborepo.com/docs
+- pnpm Workspaces: https://pnpm.io/workspaces
+- Next.js: https://nextjs.org
+- Tailwind CSS: https://tailwindcss.com
+- Storybook: https://storybook.js.org
+- Storyblok: https://www.storyblok.com
