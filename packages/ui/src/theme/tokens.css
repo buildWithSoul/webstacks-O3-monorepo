@@ -1,0 +1,359 @@
+/**
+ * Semantic Design Tokens
+ * Light and dark theme mappings for consistent UI components
+ */
+
+/* ========== TEXT TOKENS ========== */
+
+@utility text-heading {
+  @apply text-teal-900 dark:text-white;
+}
+
+@utility text-body {
+  @apply text-teal-500 dark:text-sugar;
+}
+
+@utility text-eyebrow {
+  @apply text-teal-500 dark:text-kiwi-500;
+}
+
+@utility text-link {
+  @apply text-teal-500 dark:text-kiwi-500;
+}
+
+@utility text-link-hover {
+  @apply text-teal-800 dark:text-kiwi-200;
+}
+
+@utility text-hyperlink {
+  @apply text-kiwi-500 dark:text-kiwi-200;
+}
+
+@utility text-hyperlink-hover {
+  @apply text-black dark:text-kiwi-100;
+}
+
+@utility text-button {
+  @apply text-kiwi-500 dark:text-teal-1000;
+}
+
+@utility text-button-hover {
+  @apply text-white dark:text-violet-900;
+}
+
+@utility text-secondary-button {
+  @apply text-teal-500 dark:text-sugar;
+}
+
+@utility text-disabled {
+  @apply text-neutral-900 dark:text-neutral-400;
+}
+
+@utility text-placeholder {
+  @apply text-teal-200 dark:text-teal-300;
+}
+
+@utility text-nav-item {
+  @apply text-teal-500 dark:text-white;
+}
+
+@utility text-eyebrow-date {
+  @apply text-violet-900 dark:text-white;
+}
+
+@utility text-eyebrow-category {
+  @apply text-teal-500 dark:text-kiwi-500;
+}
+
+@utility text-link-active {
+  @apply text-teal-500 dark:text-kiwi-500;
+}
+
+@utility text-link-disabled {
+  @apply text-teal-500 dark:text-teal-700;
+}
+
+@utility text-filled {
+  @apply text-teal-500 dark:text-teal-100;
+}
+
+@utility text-highlight {
+  background: radial-gradient(283.48% 167.31% at -6.61% 116.41%, #7F8742 1%, #02403D 19.74%, #8A55B8 74.15%, #421876 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  
+  .dark & {
+    background: linear-gradient(180deg, #C680F3 0%, #FFFCF6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* ========== SURFACE/BACKGROUND TOKENS ========== */
+
+@utility bg-background {
+  @apply bg-sugar dark:bg-teal-500;
+}
+
+@utility bg-secondary-background {
+  @apply bg-teal-500 dark:bg-teal-400;
+}
+
+@utility bg-card {
+  @apply bg-white dark:bg-teal-500;
+}
+
+@utility bg-button-primary {
+  @apply bg-teal-500 hover:bg-teal-800 group-hover:bg-teal-800 dark:bg-kiwi-500 dark:hover:bg-kiwi-200 dark:group-hover:bg-kiwi-200;
+}
+
+@utility bg-button-secondary {
+  @apply bg-sugar hover:bg-kiwi-50 dark:bg-teal-800 dark:hover:bg-violet-600;
+}
+
+@utility bg-button-active {
+  @apply bg-kiwi-400 dark:bg-kiwi-400;
+}
+
+@utility bg-navbar {
+  @apply bg-sugar dark:bg-sugar;
+}
+
+@utility bg-navlink-active {
+  @apply bg-alpha-black-2 dark:bg-alpha-violet;
+}
+
+@utility bg-disabled {
+  @apply bg-alpha-black-2 dark:bg-alpha-white-5;
+}
+
+@utility bg-eyebrow {
+  @apply bg-alpha-teal dark:bg-alpha-teal;
+}
+
+@utility bg-accordion-default {
+  @apply bg-white dark:bg-alpha-black-5;
+}
+
+@utility bg-accordion-selected {
+  @apply bg-kiwi-50 dark:bg-alpha-teal;
+}
+
+@utility bg-cta-bar {
+  @apply bg-alpha-lavender dark:bg-alpha-kiwi;
+}
+
+@utility bg-input {
+  @apply bg-white dark:bg-alpha-black-10;
+}
+
+@utility bg-table-cell {
+  @apply bg-alpha-black-2 dark:bg-alpha-white-5;
+}
+
+@utility bg-stats-card {
+  @apply bg-teal-500  dark:bg-kiwi-500;
+}
+
+/* ========== ICON TOKENS ========== */
+
+@utility icon-primary {
+  @apply text-teal-500 dark:text-kiwi-500;
+}
+
+@utility icon-button {
+  @apply text-kiwi-500 dark:text-teal-500;
+}
+
+@utility icon-button-hover {
+  @apply text-white dark:text-violet-900;
+}
+
+@utility icon-link {
+  @apply text-teal-500 dark:text-kiwi-500;
+}
+
+@utility icon-link-hover {
+  @apply text-kiwi-500 dark:text-kiwi-200;
+}
+
+@utility icon-success {
+  @apply text-success-700 dark:text-success-200;
+}
+
+@utility icon-warning {
+  @apply text-warning-700 dark:text-warning-300;
+}
+
+@utility icon-error {
+  @apply text-error-700 dark:text-error-300;
+}
+
+@utility icon-disabled {
+  @apply text-neutral-800 dark:text-neutral-400;
+}
+
+@utility icon-breadcrumb {
+  @apply text-teal-100 dark:text-kiwi-100;
+}
+
+@utility icon-contained {
+  @apply text-white dark:text-white;
+}
+
+@utility icon-brand-fg {
+  @apply text-lavender-500 dark:text-white;
+}
+
+@utility icon-brand-bg {
+  @apply text-lavender-200 dark:text-white;
+}
+
+/* ========== STROKE/BORDER TOKENS ========== */
+
+@utility border-primary {
+  @apply border-teal-200 dark:border-teal-300;
+}
+
+@utility border-secondary {
+  @apply border-alpha-black-5 dark:border-alpha-white-20;
+}
+
+@utility border-secondary-button {
+  @apply border-teal-500 dark:border-sugar;
+}
+
+@utility border-error {
+  @apply border-error-800 dark:border-error-800;
+}
+
+@utility border-input {
+  @apply border-neutral-400 dark:border-neutral-500;
+}
+
+@utility border-table-of-contents {
+  @apply border-kiwi-500 dark:border-peach-500;
+}
+
+/* ========== SEMANTIC STATE TOKENS ========== */
+
+@utility bg-success {
+  @apply bg-success-50 dark:bg-success-900;
+}
+
+@utility bg-warning {
+  @apply bg-warning-50 dark:bg-warning-900;
+}
+
+@utility bg-error {
+  @apply bg-error-50 dark:bg-alpha-error;
+}
+
+@utility text-success {
+  @apply text-success-700 dark:text-success-200;
+}
+
+@utility text-warning {
+  @apply text-warning-700 dark:text-warning-200;
+}
+
+@utility text-error {
+  @apply text-error-700 dark:text-error-300;
+}
+
+/* ========== SPECIAL COMPONENT TOKENS ========== */
+
+@utility bg-search-button {
+  @apply bg-violet-200 dark:bg-violet-900;
+}
+
+@utility bg-switcher-default {
+  @apply bg-teal-200 dark:bg-teal-800;
+}
+
+@utility bg-switcher-active {
+  @apply bg-kiwi-500/20 dark:bg-kiwi-500;
+}
+
+@utility bg-switcher-progress {
+  @apply bg-teal-100 dark:bg-teal-200;
+}
+
+@utility bg-scroll {
+  @apply bg-teal-300 dark:bg-teal-900;
+}
+
+@utility bg-tabbed-switcher {
+  @apply bg-violet-900 dark:bg-white;
+}
+
+@utility bg-tab-active {
+  @apply bg-kiwi-50 dark:bg-teal-400;
+}
+
+@utility border-tabbed-switcher-active {
+  @apply border-teal-500 dark:border-kiwi-500;
+}
+
+@utility bg-blog-cta-card {
+  @apply bg-alpha-kiwi dark:bg-alpha-lavender;
+}
+
+@utility bg-blog-cta-button {
+  @apply bg-kiwi-500 dark:bg-peach-500;
+}
+
+@utility text-blog-cta-card {
+  @apply text-teal-900 dark:text-teal-900;
+}
+
+@utility text-blog-cta-button {
+  @apply text-kiwi-500 dark:text-kiwi-500;
+}
+
+/* ========== EYEBROW INDICATOR TOKENS ========== */
+
+@utility bg-eyebrow-pink {
+  @apply bg-lavender-900 dark:bg-lavender-900;
+}
+
+@utility bg-eyebrow-pink-inner {
+  @apply bg-lavender-300 dark:bg-lavender-300;
+}
+
+@utility bg-eyebrow-purple {
+  @apply bg-kiwi-900 dark:bg-kiwi-900;
+}
+
+@utility bg-eyebrow-purple-inner {
+  @apply bg-kiwi-200 dark:bg-kiwi-200;
+}
+
+@utility bg-eyebrow-celtic {
+  @apply bg-peach-800 dark:bg-peach-800;
+}
+
+@utility bg-eyebrow-celtic-inner {
+  @apply bg-peach-300 dark:bg-peach-300;
+}
+
+@utility bg-eyebrow-blue {
+  @apply bg-neutral-900 dark:bg-neutral-900;
+}
+
+@utility bg-eyebrow-blue-inner {
+  @apply bg-neutral-300 dark:bg-neutral-300;
+}
+
+/* ========== LOGO TOKENS ========== */
+
+@utility logo-icon {
+  @apply text-kiwi-500 dark:text-kiwi-500;
+}
+
+@utility logo-text {
+  @apply text-black dark:text-white;
+}

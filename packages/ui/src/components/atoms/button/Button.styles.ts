@@ -57,7 +57,7 @@ export const buttonStyles = cva(
         mode: 'filled',
         tone: 'primary',
         className: [
-          'bg-blue-600 font-semibold text-button px-5 py-2 xl:py-3',
+          'bg-button-primary font-semibold text-button px-5 py-2 xl:py-3',
           '[border-radius:var(--Border-Radius-round,96px)]',
           'disabled:bg-neutral-300 disabled:text-white dark:disabled:bg-neutral-600 dark:disabled:text-neutral-400 disabled:cursor-not-allowed',
         ],

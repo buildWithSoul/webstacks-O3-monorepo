@@ -1,0 +1,3 @@
+@utility form-inputs {
+  @apply w-full border-input px-3 py-2 text-md text-heading focus-outline-primary placeholder:text-body disabled:cursor-not-allowed data-[error=true]:border-2 data-[error=true]:border-error-500 data-[error=true]:shadow-xs data-[error=true]:focus-outline-error dark:focus-outline-primary has-value:bg-white;
+}

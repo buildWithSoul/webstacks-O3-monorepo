@@ -1,4 +1,4 @@
-import { StoryblokSiteSettings } from '../../types/storyblok-site-settings';
+import { StoryblokSiteSettings, StoryblokAsset } from '../../types/storyblok-site-settings';
 import { storyblokApi } from './client';
 
 /**
@@ -27,3 +27,4 @@ export const getSiteSettings = async (isDraft: boolean = false): Promise<Storybl
 
 // Re-export the type for convenience
 export type { StoryblokSiteSettings };
+export type { StoryblokAsset };
