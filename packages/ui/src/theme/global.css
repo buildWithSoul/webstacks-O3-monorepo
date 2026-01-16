@@ -1,0 +1,56 @@
+@import 'tailwindcss';
+
+/* @config '../../tailwind.config.js'; */
+
+@import './animation.css';
+@import './blur.css';
+@import './breakpoints.css';
+@import './color.css';
+@import './container.css';
+@import './formInputs.css';
+@import './gradient.css';
+@import './mask.css';
+@import './shadow.css';
+@import './spacing.css';
+@import './tokens.css';
+@import './typography.css';
+@import './utilities.css';
+
+/* Disable this if you want to leverage `prefers-color-scheme` */
+@custom-variant dark (&:where(.dark, .dark *):not(.light):not(.light *));
+@custom-variant light (&:where(.light, .light *));
+@custom-variant force-light (&:where(.force-light, .force-light *));
+@custom-variant has-value (&:not(:placeholder-shown));
+@custom-variant child-has-value (& input:not(:placeholder-shown));
+
+@layer base {
+  :root {
+    --Border-Radius-round: 96px;
+    --Border-Radius-md: 4px;
+  }
+
+  * {
+    @apply antialiased;
+  }
+
+  body {
+    @apply font-body;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply scroll-m-24 font-heading;
+  }
+  .container {
+    @apply 2xl:!max-w-7xl;
+  }
+
+  /* rich text blockquote style */
+  .prose blockquote {
+    @apply border-l-4 border-teal-300 italic pl-4;
+  }
+}

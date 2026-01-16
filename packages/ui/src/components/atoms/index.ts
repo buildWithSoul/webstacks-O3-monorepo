@@ -3,13 +3,15 @@
 // atoms are our HTML tags, such as a form label, an input or a button.
 
 // Export all atom components here
-export { Eyebrow } from './eyebrow';
+export * from './eyebrow';
 export { Heading } from './heading/heading';
 export { HR } from './hr';
-export { Link, getLinkData } from './link';
+export * from './link';
 export { TopicTag } from './topicTag';
 export { Icon } from './icon';
-export { default as Button } from './button';
+export { default as Button,  } from './button';
+export {Brand} from './brand'
+export * from './companyBrand'
 
 // Example:
 // 

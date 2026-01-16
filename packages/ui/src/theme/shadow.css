@@ -1,0 +1,34 @@
+@theme {
+  --shadowXs: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  --shadowSm: 0px 1px 3px 0px rgba(16, 24, 40, 0.10), 0px 1px 2px 0px rgba(16, 24, 40, 0.06);
+  --shadowMd: 0px 4px 8px -2px rgba(16, 24, 40, 0.10), 0px 2px 4px -2px rgba(16, 24, 40, 0.06);
+  --shadowLg: 0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+  --shadowXl: 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+  --shadow2xl: 0px 24px 48px -12px rgba(16, 24, 40, 0.18);
+  --shadow3xl: 0px 32px 64px -12px rgba(16, 24, 40, 0.14);
+
+  --drop-shadowSm: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  --drop-shadowMd: 0px 1px 3px rgba(16, 24, 40, 0.10);
+  --drop-shadowLg: 0px 4px 8px rgba(16, 24, 40, 0.10);
+  --drop-shadowXl: 0px 20px 24px rgba(16, 24, 40, 0.08);
+  --drop-shadow2xl: 0px 24px 48px rgba(16, 24, 40, 0.18);
+  --drop-shadow3xl: 0px 32px 64px rgba(16, 24, 40, 0.14);
+
+  --shadow-none: unset;
+  --shadow-sm: var(--shadowXs);
+  --shadow-md: var(--shadowMd);
+  --shadow-lg: var(--shadowLg);
+  --shadow-xl: var(--shadowXl);
+  --shadow-2xl: var(--shadow2xl);
+  --shadow-3xl: var(--shadow3xl);
+  --shadow-focus-ring: 0px 0px 0px 4px var(--color-Teal-500, #6DFFEC);
+  --shadow-image: 0px 0px 0px 6px rgba(255, 255, 255, 0.35), 0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+
+  --drop-shadow-none: unset;
+  --drop-shadow-sm: var(--drop-shadowSm);
+  --drop-shadow-md: var(--drop-shadowMd);
+  --drop-shadow-lg: var(--drop-shadowLg);
+  --drop-shadow-xl: var(--drop-shadowXl);
+  --drop-shadow-2xl: var(--drop-shadow2xl);
+  --drop-shadow-3xl: var(--drop-shadow3xl);
+}

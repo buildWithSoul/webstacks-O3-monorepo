@@ -1,0 +1,215 @@
+/*
+* ALL FONT SIZES ARE IN REM VALUES
+* Preference would be to use unitless or % values for line-height
+*/
+
+@theme {
+  --text-*: initial;
+
+  /* Semantic font variables are now injected from fonts.config.ts at runtime */
+  
+  /* LEGACY FONT FAMILIES (for backward compatibility) */
+  --font-inter: var(--font-primary), ui-sans-serif, system-ui, sans-serif;
+  --font-inter-tight: var(--font-secondary), ui-sans-serif, system-ui, sans-serif;
+  --font-grotesk: var(--font-accent), ui-sans-serif, system-ui, sans-serif;
+
+  /* FONT SIZES */
+  /* Display - Based on design system scale */
+  --text-display-2xs: 0.75rem; /* 12px */
+  --text-display-2xs--line-height: 1.33;
+  --text-display-2xs--letter-spacing: 0;
+  --text-display-xs: 0.875rem; /* 14px */
+  --text-display-xs--line-height: 1.43;
+  --text-display-xs--letter-spacing: 0;
+  --text-display-sm: 1rem; /* 16px */
+  --text-display-sm--line-height: 1.5;
+  --text-display-sm--letter-spacing: 0;
+  --text-display-md: 1.125rem; /* 18px */
+  --text-display-md--line-height: 1.44;
+  --text-display-md--letter-spacing: 0;
+  --text-display-lg: 1.25rem; /* 20px */
+  --text-display-lg--line-height: 1.4;
+  --text-display-lg--letter-spacing: -0.01em;
+  --text-display-xl: 1.5rem; /* 24px */
+  --text-display-xl--line-height: 1.33;
+  --text-display-xl--letter-spacing: -0.01em;
+  --text-display-2xl: 1.875rem; /* 30px */
+  --text-display-2xl--line-height: 1.2;
+  --text-display-2xl--letter-spacing: -0.02em;
+  --text-display-3xl: 2.25rem; /* 36px */
+  --text-display-3xl--line-height: 1.17;
+  --text-display-3xl--letter-spacing: -0.02em;
+  --text-display-4xl: 3rem; /* 48px */
+  --text-display-4xl--line-height: 1.17;
+  --text-display-4xl--letter-spacing: -0.03em;
+  --text-display-5xl: 4rem; /* 64px */
+  --text-display-5xl--line-height: 1.09;
+  --text-display-5xl--letter-spacing: -0.03em;
+  --text-display-6xl: 4.5rem; /* 72px */
+  --text-display-6xl--line-height: 1.11;
+  --text-display-6xl--letter-spacing: -0.04em;
+  --text-display-7xl: 7rem; /* 112px */
+  --text-display-7xl--line-height: 1;
+  --text-display-7xl--letter-spacing: -0.04em;
+
+  /* Accent */
+  --text-accent-xs: 1.5rem;
+  --text-accent-xs--line-height: 1;
+  --text-accent-xs--letter-spacing: 0.015rem;
+  --text-accent-sm: 1.875rem;
+  --text-accent-sm--line-height: 1;
+  --text-accent-sm--letter-spacing: 0.01875rem;
+  --text-accent-md: 2.25rem;
+  --text-accent-md--line-height: 1;
+  --text-accent-md--letter-spacing: 0.0225rem;
+  --text-accent-lg: 3rem;
+  --text-accent-lg--line-height: 1;
+  --text-accent-lg--letter-spacing: 0.03rem;
+  --text-accent-xl: 4rem;
+  --text-accent-xl--line-height: 1;
+  --text-accent-xl--letter-spacing: 0.04rem;
+  --text-accent-2xl: 5.25rem;
+  --text-accent-2xl--line-height: 1;
+  --text-accent-2xl--letter-spacing: 0.0525rem;
+
+  /* Body */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.42;
+  --text-md: 1rem;
+  --text-md--line-height: 1.5;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.55;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.5;
+
+  /* Rich Text */
+  --text-rich-h1: 3.125rem;
+  --text-rich-h1--line-height: 1.2;
+  --text-rich-h1--letter-spacing: -0.0625rem;
+  --text-rich-h2: 2.0625rem;
+  --text-rich-h2--line-height: 1.15;
+  --text-rich-h3: 1.6875rem;
+  --text-rich-h3--line-height: 1.4;
+  --text-rich-h4: 1.5rem;
+  --text-rich-h4--line-height: 1.33;
+  --text-rich-h5: 1.25rem;
+  --text-rich-h5--line-height: 1.5;
+  --text-rich-h6: 1rem;
+  --text-rich-h6--line-height: 1.5;
+  --text-rich-body: 1.125rem;
+  --text-rich-body--line-height: 1.555;
+
+  /* FONT WEIGHTS */
+  --font-weight-regular: 400;
+}
+
+/* SEMANTIC FONT UTILITIES */
+@utility font-body {
+  font-family: var(--font-body);
+}
+
+@utility font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Back-compat: alias legacy utility to new heading-accent */
+@utility font-display {
+  font-family: var(--font-heading-accent);
+}
+
+
+@utility font-ui {
+  font-family: var(--font-ui);
+}
+
+@utility font-caption {
+  font-family: var(--font-caption);
+}
+
+/* TEXT STYLE UTILITIES */
+@utility text-overline {
+  font-size: var(--text-md);
+  line-height: var(--text-md--line-height);
+  text-transform: uppercase;
+}
+
+@utility text-body-sm {
+  @apply font-body;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
+
+@utility text-body-base {
+  @apply font-body;
+  font-size: var(--text-md);
+  line-height: var(--text-md--line-height);
+}
+
+@utility text-body-lg {
+  @apply font-body;
+  font-size: var(--text-lg);
+  line-height: var(--text-lg--line-height);
+}
+
+@utility text-heading-sm {
+  @apply font-heading font-medium;
+  font-size: var(--text-display-xs);
+  line-height: var(--text-display-xs--line-height);
+  letter-spacing: var(--text-display-xs--letter-spacing);
+}
+
+@utility text-heading-md {
+  @apply font-heading font-medium;
+  font-size: var(--text-display-sm);
+  line-height: var(--text-display-sm--line-height);
+  letter-spacing: var(--text-display-sm--letter-spacing);
+}
+
+@utility text-heading-lg {
+  @apply font-heading font-medium;
+  font-size: var(--text-display-md);
+  line-height: var(--text-display-md--line-height);
+  letter-spacing: var(--text-display-md--letter-spacing);
+}
+
+@utility text-heading-xl {
+  @apply font-heading font-medium;
+  font-size: var(--text-display-lg);
+  line-height: var(--text-display-lg--line-height);
+  letter-spacing: var(--text-display-lg--letter-spacing);
+}
+
+@utility text-display-sm {
+  @apply font-medium;
+  font-size: var(--text-accent-sm);
+  line-height: var(--text-accent-sm--line-height);
+  letter-spacing: var(--text-accent-sm--letter-spacing);
+}
+
+@utility text-display-md {
+  @apply font-medium;
+  font-size: var(--text-accent-md);
+  line-height: var(--text-accent-md--line-height);
+  letter-spacing: var(--text-accent-md--letter-spacing);
+}
+
+@utility text-display-lg {
+  @apply font-medium;
+  font-size: var(--text-accent-lg);
+  line-height: var(--text-accent-lg--line-height);
+  letter-spacing: var(--text-accent-lg--letter-spacing);
+}
+
+@utility text-ui {
+  @apply font-ui;
+  font-size: var(--text-md);
+  line-height: var(--text-md--line-height);
+}
+
+@utility text-caption {
+  @apply font-caption;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+}
