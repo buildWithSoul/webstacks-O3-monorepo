@@ -18,13 +18,26 @@ const config: StorybookConfig = {
   ],
   "addons": [
     getAbsolutePath('@chromatic-com/storybook'),
-    // getAbsolutePath('@storybook/addon-vitest'),
+    getAbsolutePath('@storybook/addon-vitest'),
     getAbsolutePath('@storybook/addon-a11y'),
     getAbsolutePath('@storybook/addon-docs')
   ],
   "framework": getAbsolutePath('@storybook/nextjs-vite'),
   "staticDirs": [
     "../public"
-  ]
+  ],
+  viteFinal: async (config) => {
+    config.server ??= {};
+    config.server.fs ??= {};
+
+    config.server.fs.allow = [
+      '..',
+      '../../',
+      '../../../',
+      'node_modules', 
+    ];
+
+    return config;
+  },
 };
 export default config;
