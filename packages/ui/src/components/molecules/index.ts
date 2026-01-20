@@ -16,9 +16,11 @@ export * from './cards';
 export * from './dropdown';
 export { VideoModal } from './videoModal';
 export { default as  TableModule } from './table';
+export type {TableProps} from './table'
 export { SliderControls } from './sliderControls';
 export {default as  ShareButtons } from './shareButtons';
 export { SelectComponent} from './select'
+export type { SelectItem } from './select';
 export { Section} from './section'
 export { InlineIcon,StaticInlineIcon} from './richText/inlineIcon'
 export { default as RichHeading} from './richText/richHeading'
