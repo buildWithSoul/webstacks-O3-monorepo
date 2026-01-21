@@ -7,7 +7,7 @@ import { Heading, Link } from '../../atoms';
 import Image from '../../molecules/image';
 
 // Universal resource type that handles blogs, case studies, webinars, and press releases
-interface ResourceCardProps {
+export interface ResourceCardProps {
   _id: string;
   _type: 'blogPost' | 'caseStudy' | 'webinar' | 'pressRelease';
   title: string;
