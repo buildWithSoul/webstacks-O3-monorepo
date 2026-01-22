@@ -18,7 +18,7 @@ import MobileNavigation from './components/mobile';
 
 
 // Define the props for the HeaderNavigation component
-interface HeaderNavigationProps {
+export interface HeaderNavigationProps {
   headerNavigation: StoryblokGlobalNavigation | null;
 }
 

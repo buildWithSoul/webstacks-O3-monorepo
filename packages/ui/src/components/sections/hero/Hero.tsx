@@ -25,4 +25,3 @@ export const Hero = ({ blok }: { blok: any }) => {
     </section>
   );
 };
-
