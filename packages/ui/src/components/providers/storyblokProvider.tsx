@@ -1,10 +1,10 @@
 'use client';
 
 import { storyblokInit, apiPlugin, StoryblokComponent, storyblokEditable } from '@storyblok/react';
-import { HeadingBlock } from '../sections/headingBlock';
+// import { HeadingBlock } from '../sections/headingBlock';
 import CTABar from '../molecules/ctaBar';
-import { ImageCardDeck } from '../sections/cardDeck/imageCardDeck';
-import { IconCardDeck } from '../sections/cardDeck/iconCardDeck';
+// import { ImageCardDeck } from '../sections/cardDeck/imageCardDeck';
+// import { IconCardDeck } from '../sections/cardDeck/iconCardDeck';
 import { ImageBlock, StatisticsPanel } from '../sections';
 
 // import { AwardsBlade } from '@/components/sections/awardsBlade';
@@ -43,12 +43,12 @@ storyblokInit({
   components: {
     websitePage: WebsitePage,
     sectionLayout: SectionLayout,
-    headingBlock: HeadingBlock,
+    // headingBlock: HeadingBlock,
     ctaBar: CTABar,
-    imageCardDeck: ImageCardDeck,
+    // imageCardDeck: ImageCardDeck,
     // awardsBlade: AwardsBlade,
     // accordion: Accordion,
-    iconCardDeck: IconCardDeck,
+    // iconCardDeck: IconCardDeck,
     // switchback: Switchback,
     imageBlock: ImageBlock,
     statisticsPanel: StatisticsPanel,

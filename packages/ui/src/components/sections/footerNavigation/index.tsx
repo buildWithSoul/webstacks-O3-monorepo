@@ -130,7 +130,7 @@ export const FooterNavigation: React.FC<FooterNavigationProps> = ({ footerNaviga
                   {footerData?.bottomSection?.[0]?.socialLinks?.map((item: StoryblokFooterSocialLink) => (
                     <Link key={item._uid} href={item.url} className="text-kiwi-400 hover:text-kiwi-200 transition-colors">
                       {item.platform && <Icon icon={item.platform} size={24} spriteType="ui" />}
-                    </Link>
+                    </Link>           
                   ))}
                 </div>
               </div>

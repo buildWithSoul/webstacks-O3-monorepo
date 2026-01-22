@@ -4,9 +4,9 @@
 import type { SbBlokData } from '@storyblok/react';
 import type { FC } from 'react';
 import { useOptimistic } from 'react';
-import { HeadingBlock } from '../components/sections/headingBlock';
-import { IconCardDeck } from '../components/sections/cardDeck/iconCardDeck';
-import { ImageCardDeck } from '../components/sections/cardDeck/imageCardDeck';
+// import { HeadingBlock } from '../components/sections/headingBlock';
+// import { IconCardDeck } from '../components/sections/cardDeck/iconCardDeck';
+// import { ImageCardDeck } from '../components/sections/cardDeck/imageCardDeck';
 import { ImageBlock, StatisticsPanel } from '../components/sections';
 import { isListingDocument } from '../lib/constants';
 
@@ -37,15 +37,15 @@ export const getComponent = (component: SbBlokData, rels?: any) => {
       return null;
     
     case 'headingBlock':
-      return <HeadingBlock key={component._uid} {...component} />;
+      // return <HeadingBlock key={component._uid} {...component} />;
     
 
     
     case 'iconCardDeck':
-      return <IconCardDeck key={component._uid} {...component} component="iconCardDeck" />;
+      // return <IconCardDeck key={component._uid} {...component} component="iconCardDeck" />;
     
     case 'imageCardDeck':
-      return <ImageCardDeck key={component._uid} {...component} component="imageCardDeck" rels={rels} />
+      // return <ImageCardDeck key={component._uid} {...component} component="imageCardDeck" rels={rels} />
     
     case 'imageBlock':
       return <ImageBlock key={component._uid} {...component} component="imageBlock" />;
