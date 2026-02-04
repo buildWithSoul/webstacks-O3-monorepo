@@ -7,6 +7,12 @@ export * from './hero';
 export * from './footerNavigation';
 export * from './headerNavigation';
 export * from './videoBlock'; 
-
+export * from './headingBlock';
+export * from './trustBar';
+export * from './switchback';
+export * from './accordion';
+export * from './awardsBlade';
+export * from './formBlock';
+export * from './cardDeck'
 
 
