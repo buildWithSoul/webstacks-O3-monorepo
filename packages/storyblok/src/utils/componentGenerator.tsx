@@ -72,7 +72,6 @@ export const getComponent = (component: SbBlokData, rels?: any) => {
           key={component._uid}
           {...component}
           component="awardsBlade"
-          rels={rels}
         />
       );
 
