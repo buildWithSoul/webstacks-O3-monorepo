@@ -5,7 +5,13 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": [
+        "STORYBLOK_PERSONAL_ACCESS_TOKEN",
+        "STORYBLOK_SPACE_ID",
+        "STORYBLOK_PREVIEW_ACCESS_TOKEN",
+        "STORYBLOK_PUBLIC_ACCESS_TOKEN"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"]
