@@ -1,0 +1,1 @@
+export { AwardsBlade } from './awardsBlade'

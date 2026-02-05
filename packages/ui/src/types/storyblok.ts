@@ -1,5 +1,7 @@
 // Basic Storyblok types for the frontend
 
+import { StoryblokRichTextNode } from "@storyblok/react";
+
 export interface StoryblokStory<T = any> {
   id: number;
   uuid: string;
@@ -171,3 +173,5 @@ export interface StoryblokNavigationFeaturedCard {
   submenuBlocks?: any[];
   submenuLayout?: string;
 }
+
+export type RichTextContent = StoryblokRichTextNode<any>;
