@@ -1,1 +1,2 @@
-export * from './getStory'
+export * from './getStory';
+export * from './siteSettings'

@@ -27,7 +27,7 @@ interface StoryblokAwardRow {
 }
 
 interface StoryblokAwardsBlade {
-  _uid: string;
+  _uid?: string;
   component: string;
   rows?: StoryblokAwardRow[];
 }
