@@ -14,7 +14,10 @@ export {Brand} from './brand'
 export * from './companyBrand';
 export * from './avatar';
 export * from './badge';
-export * from './blanket'
+export * from './blanket';
+export * from './videoPlayButton';
+export * from './carouselButton';
+export * from './checkbox'
 
 // Example:
 // 

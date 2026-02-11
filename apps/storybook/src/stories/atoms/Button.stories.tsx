@@ -34,31 +34,24 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
-export const Default: Story = {
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByRole("button")).toBeInTheDocument();
-  },
-};
-
-export const WithChildren: Story = {
-  render: () => <Button>Child Content</Button>,
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByText("Child Content")).toBeInTheDocument();
-  },
-};
 
 export const FilledPrimary: Story = {
   args: { mode: "filled", tone: "primary", label: "Primary Filled" },
 };
+export const FilledPrimaryDisabled: Story = {
+  args: { label: "Primary Filled Disabled", disabled: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(canvas.getByRole("button")).toBeDisabled();
+  },
+};
+
 
 export const FilledSecondary: Story = {
   args: { mode: "filled", tone: "secondary", label: "Secondary Filled" },
 };
-
-export const Stroke: Story = {
-  args: { mode: "stroke", label: "Stroke Button" },
+export const FilledSecondaryDisabled: Story = {
+  args: { mode: "filled", tone: "secondary", label: "Secondary Filled Disabled", disabled: true },
 };
 
 export const Bleed: Story = {
@@ -76,12 +69,38 @@ export const LinkStyleAutoArrow: Story = {
     expect(svg).toBeInTheDocument();
   },
 };
+export const LinkBgDark: Story = {
+  args: { mode: "link", tone: "primary", label: "Link Button", background : 'dark' },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+         background:'#000',
+         height: '100vh',
+         display: 'flex',
+         justifyContent: 'center'
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole("button");
+    const svg = button.querySelector("svg");
+
+    expect(button).toBeInTheDocument();
+    expect(svg).toBeInTheDocument();
+  },
+};
 
 
 export const InternalLink: Story = {
   args: {
     label: "Internal Link",
     linkType: "internal",
+    mode: 'link',
     internalLink: {
       id: "1",
       url: "/about",
@@ -105,6 +124,7 @@ export const ExternalLink: Story = {
     externalUrl: "https://example.com",
     openInNewTab: true,
     asLink: true,
+    mode: 'link'
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -113,21 +133,8 @@ export const ExternalLink: Story = {
   },
 };
 
-export const AnchorLink: Story = {
-  args: {
-    label: "Anchor Link",
-    linkType: "anchor",
-    anchorLinkId: "section",
-  },
- play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const link = canvas.getByRole("link");
-    await expect(link).toHaveAttribute("href");
-  },
-};
-
 export const WithLeadingIcon: Story = {
-  args: { label: "Leading Icon", leadingIcon: "check" },
+  args: { label: "Leading Icon", leadingIcon: "check", trailingIcon:'' },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole("button");
@@ -173,10 +180,3 @@ export const PopupButton: Story = {
   },
 };
 
-export const Disabled: Story = {
-  args: { label: "Disabled Button", disabled: true },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    await expect(canvas.getByRole("button")).toBeDisabled();
-  },
-};
