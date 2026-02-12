@@ -43,6 +43,15 @@ const meta: Meta<typeof SliderControls> = {
       control: 'text',
       table: { type: { summary: 'string' } },
     },
+    mode: {
+    control: 'radio',
+    options: ['light', 'dark'],
+    table: {
+      type: { summary: "'light' | 'dark'" },
+      defaultValue: { summary: 'light' },
+    },
+  },
+
   },
 };
 
@@ -66,8 +75,6 @@ export const Default: Story = {
   args: {
     totalSlides: 5,
     currentIndex: 2,
-    showDots: true,
-    showArrows: true,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -82,6 +89,7 @@ export const SingleSlide: Story = {
   args: {
     totalSlides: 1,
     currentIndex: 0,
+    showArrows:true
   },
   play: async ({ canvasElement }) => {
     expect(canvasElement).toBeEmptyDOMElement();
@@ -198,5 +206,37 @@ export const CustomStyling: Story = {
     const root = canvasElement.firstElementChild as HTMLElement;
 
     expect(root).toHaveClass('border p-4 rounded-lg');
+  },
+};
+export const DarkMode: Story = {
+  args: {
+    totalSlides: 5,
+    currentIndex: 2,
+    mode: 'dark',
+  },
+
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          background: '#000',
+          height: '200px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const next = canvas.getByLabelText('Next slide');
+    const prev = canvas.getByLabelText('Previous slide');
+
+    expect(next).toBeInTheDocument();
+    expect(prev).toBeInTheDocument();
   },
 };

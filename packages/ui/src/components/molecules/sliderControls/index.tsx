@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button } from '../../atoms';
+import { Button, Icon } from '../../atoms';
 
 export interface SliderControlsProps {
   currentIndex: number;
@@ -10,6 +10,7 @@ export interface SliderControlsProps {
   showDots?: boolean;
   showArrows?: boolean;
   className?: string;
+  mode? : 'dark' | 'light'
 }
 
 export const SliderControls: FC<SliderControlsProps> = ({
@@ -19,8 +20,9 @@ export const SliderControls: FC<SliderControlsProps> = ({
   onNext,
   onGoTo,
   showDots = true,
-  showArrows = true,
+  showArrows = false,
   className = '',
+  mode = 'light'
 }) => {
   if (totalSlides <= 1) return null;
 
@@ -38,8 +40,8 @@ export const SliderControls: FC<SliderControlsProps> = ({
               onClick={() => onGoTo?.(i)}
               className={`h-1.5 rounded-sm transition-all ${
                 i === currentIndex 
-                  ? 'w-56 bg-switcher-active' 
-                  : 'w-16 bg-switcher-progress'
+                  ? `w-56 ${mode === 'dark'? 'bg-(--color-base-white)' : 'bg-(--color-base-black)' }`
+                  : `w-16 opacity-50 ${mode === 'dark'? 'bg-(--color-base-white)' : 'bg-(--color-base-black)'}`
               }`}
             />
           ))}

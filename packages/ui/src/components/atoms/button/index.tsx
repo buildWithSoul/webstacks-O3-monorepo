@@ -198,7 +198,7 @@ const Button: FC<ButtonProps> = ({
           </span>
         )}
         {actualLabel || children}
-        {actualTrailingIcon && actualTrailingIcon !== "None" &&  mode!=='bleed' &&(
+        {actualTrailingIcon && actualTrailingIcon !== "None" &&  mode!=='bleed' && !leadingIcon &&(
           <span>
             <Icon size={20} icon={actualTrailingIcon} aria-hidden={true} />
           </span>
