@@ -1,41 +1,42 @@
-'use client';
+"use client";
 
-import { twMerge } from 'tailwind-merge';
-import Link from 'next/link';
-import { useState } from 'react';
-import { storyblokEditable } from '@storyblok/react';
+import { twMerge } from "tailwind-merge";
+import Link from "next/link";
+import { useState } from "react";
+import { storyblokEditable } from "@storyblok/react";
 
-import { buttonStyles, textStyles } from './Button.styles';
+import { buttonStyles } from "./Button.styles";
 
+import Icon from "../icon/icon";
 
-import Icon from '../icon/icon';
+import type { ComponentPropsWithoutRef, FC, ReactNode } from "react";
+import type { SbBlokData } from "@storyblok/react";
+import { getLinkData, LinkFragment } from "../link";
+import parseUrl, { ensureLeadingSlash } from "../../../utils/parseUrl";
+import { FormModal } from "../../molecules/formModal";
 
-import type { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
-import type { SbBlokData } from '@storyblok/react';
-import { getLinkData, LinkFragment } from '../link';
-import parseUrl, { ensureLeadingSlash } from '../../../utils/parseUrl';
-import { FormModal } from '../../molecules/formModal';
-
-type NativeButtonProps = ComponentPropsWithoutRef<'button'> & ComponentPropsWithoutRef<'a'>;
+type NativeButtonProps = ComponentPropsWithoutRef<"button"> &
+  ComponentPropsWithoutRef<"a">;
 
 type ButtonProps = NativeButtonProps & {
   className?: string;
   label?: string;
   children?: ReactNode;
   link?: string | LinkFragment;
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
   // New props for mode and tone
-  mode?: 'filled' | 'stroke' | 'bleed' | 'link';
-  tone?: 'primary' | 'secondary';
+  mode?: "filled" | "bleed" | "link";
+  tone?: "primary" | "secondary";
+  background? : 'light' | 'dark'
   // Keep variant for backward compatibility
-  variant?: 'primary' | 'secondary' | 'link' | 'bleed';
+  variant?: "primary" | "secondary" | "link" | "bleed";
   leadingIcon?: string;
   trailingIcon?: string;
   fullWidth?: boolean;
   // Force component to render as an anchor
   asLink?: boolean;
   // Storyblok specific props
-  linkType?: 'internal' | 'external' | 'popup' | 'anchor';
+  linkType?: "internal" | "external" | "popup" | "anchor";
   internalLink?: {
     id: string;
     url: string;
@@ -56,10 +57,11 @@ const Button: FC<ButtonProps> = ({
   link,
   mode,
   tone,
+  background,
   variant, // Keep for backward compatibility
   size,
   leadingIcon,
-  trailingIcon,
+  trailingIcon='arrow-up-right',
   fullWidth = false,
   asLink = false,
   // Storyblok specific props
@@ -72,10 +74,10 @@ const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   // console.log('Button received props:', { label, mode, tone, linkType, internalLink, externalUrl, ...props });
-  
+
   // Extract data from nested structure that StoryblokComponent provides
   const actualBlok = (props as any)?.blok || props;
-  
+
   // Use Storyblok props if available, otherwise use direct props
   const actualLabel = label || actualBlok?.label || children;
   const actualLinkType = linkType || actualBlok?.linkType;
@@ -83,91 +85,137 @@ const Button: FC<ButtonProps> = ({
   const actualExternalUrl = externalUrl || actualBlok?.externalUrl;
   const actualAnchorLinkId = anchorLinkId || actualBlok?.anchorLinkId;
   const actualPopupForm = popupForm || actualBlok?.popupForm;
-  const actualOpenInNewTab = openInNewTab !== undefined ? openInNewTab : actualBlok?.openInNewTab;
-  const actualMode = mode || actualBlok?.mode || 'filled';
-  const actualTone = tone || actualBlok?.tone || 'primary';
+  const actualOpenInNewTab =
+    openInNewTab !== undefined ? openInNewTab : actualBlok?.openInNewTab;
+  const actualMode = mode || actualBlok?.mode || "filled";
+  const actualTone = tone || actualBlok?.tone || "primary";
   const actualTrailingIcon = trailingIcon || actualBlok?.trailingIcon;
   const actualLeadingIcon = leadingIcon || actualBlok?.leadingIcon;
-  
+
   // Build link from Storyblok data if available
   let finalLink = link;
-  if (!finalLink && actualLinkType === 'internal' && actualInternalLink?.cached_url) {
+  if (
+    !finalLink &&
+    actualLinkType === "internal" &&
+    actualInternalLink?.cached_url
+  ) {
     finalLink = `/${actualInternalLink.cached_url}`;
-  } else if (!finalLink && actualLinkType === 'external' && actualExternalUrl) {
+  } else if (!finalLink && actualLinkType === "external" && actualExternalUrl) {
     finalLink = actualExternalUrl;
-  } else if (!finalLink && actualLinkType === 'anchor' && actualAnchorLinkId) {
+  } else if (!finalLink && actualLinkType === "anchor" && actualAnchorLinkId) {
     finalLink = `#${actualAnchorLinkId}`;
-  } else if (!finalLink && actualLinkType === 'popup') {
-    finalLink = { linkType: 'popup', popupForm: actualPopupForm, label: actualLabel };
+  } else if (!finalLink && actualLinkType === "popup") {
+    finalLink = {
+      linkType: "popup",
+      popupForm: actualPopupForm,
+      label: actualLabel,
+    };
   }
-  
+
   // console.log('Button final link:', finalLink);
   // console.log('Button actualLabel:', actualLabel);
   // console.log('Button actualMode:', actualMode);
   // console.log('Button actualTone:', actualTone);
-  
+
   // Get the raw link data without modification
   const rawLinkData = getLinkData(finalLink);
-  
+
   // Only add leading slash for internal URLs, not for external URLs or anchor links
   let url = rawLinkData;
-  
+
   // Check if it's an anchor link (starts with # or TEST#)
   const extendedLink = finalLink as any; // Type assertion for extended properties
-  const isAnchorLink = typeof finalLink !== 'string' && extendedLink?.linkType === 'anchor';
-  const isExternalUrl = typeof finalLink !== 'string' && extendedLink?.linkType === 'external';
-  
-  if (isAnchorLink && typeof finalLink !== 'string' && extendedLink?.anchorLinkId) {
+  const isAnchorLink =
+    typeof finalLink !== "string" && extendedLink?.linkType === "anchor";
+  const isExternalUrl =
+    typeof finalLink !== "string" && extendedLink?.linkType === "external";
+
+  if (
+    isAnchorLink &&
+    typeof finalLink !== "string" &&
+    extendedLink?.anchorLinkId
+  ) {
     // Handle anchor links properly - just use #anchorId without TEST prefix
     url = `#${extendedLink.anchorLinkId}`;
-  } else if (url && !isExternalUrl && !url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('#')) {
+  } else if (
+    url &&
+    !isExternalUrl &&
+    !url.startsWith("http://") &&
+    !url.startsWith("https://") &&
+    !url.startsWith("#")
+  ) {
     url = ensureLeadingSlash(url);
   }
-  
-  const finalOpenInNewTab = actualOpenInNewTab || (finalLink && typeof finalLink !== 'string' ? !!extendedLink.openInNewTab : false);
-  const { as, ...urlProps } = parseUrl(url || '', finalOpenInNewTab);
-  
+
+  const finalOpenInNewTab =
+    actualOpenInNewTab ||
+    (finalLink && typeof finalLink !== "string"
+      ? !!extendedLink.openInNewTab
+      : false);
+  const { as, ...urlProps } = parseUrl(url || "", finalOpenInNewTab);
+
   // Determine the component type based on the presence of a link
   // If parseUrl returns 'a' or Link, use 'a' (for proper anchor rendering)
   // Otherwise, if asLink is true, force 'a', else use 'button'
-  const isPopup = actualLinkType === 'popup' || (typeof finalLink !== 'string' && (finalLink as any)?.linkType === 'popup');
-  const Component = isPopup ? 'button' : ((as === 'a' || as === Link || (asLink && urlProps.href)) ? 'a' : 'button');
+  const isPopup =
+    actualLinkType === "popup" ||
+    (typeof finalLink !== "string" && (finalLink as any)?.linkType === "popup");
+  const Component = isPopup
+    ? "button"
+    : as === "a" || as === Link || (asLink && urlProps.href)
+      ? "a"
+      : "button";
 
   // Map old variant to new mode if variant is provided but mode is not
-  const derivedMode = actualMode || (
-    variant === 'primary' || variant === 'secondary' ? 'filled' :
-    variant === 'link' ? 'link' :
-    variant === 'bleed' ? 'bleed' : undefined
-  );
+  const derivedMode =
+    actualMode ||
+    (variant === "primary" || variant === "secondary"
+      ? "filled"
+      : variant === "link"
+        ? "link"
+        : variant === "bleed"
+          ? "bleed"
+          : undefined);
 
   // Map old variant to new tone if variant is provided but tone is not
-  const derivedTone = actualTone || (
-    variant === 'secondary' ? 'secondary' : 'primary'
-  );
+  const derivedTone =
+    actualTone || (variant === "secondary" ? "secondary" : "primary");
 
   const ButtonContent = () => {
     // Determine if we should show the automatic arrow icon for link buttons (both primary and secondary)
-    const shouldShowAutoArrow = (
-      (derivedMode === 'link' && (derivedTone === 'primary' || derivedTone === 'secondary')) ||
-      (variant === 'link')
-    ) && !actualTrailingIcon && !actualLeadingIcon;
+    const shouldShowAutoArrow =
+      ((derivedMode === "link" &&
+        (derivedTone === "primary" || derivedTone === "secondary")) ||
+        variant === "link") &&
+      !actualTrailingIcon &&
+      !actualLeadingIcon;
 
     return (
       <>
-        {actualLeadingIcon && actualLeadingIcon !== 'None' && (
+        {actualLeadingIcon && actualLeadingIcon !== "None" && mode!=='bleed' && (
           <span>
-            <Icon size={16} icon={actualLeadingIcon} aria-hidden={true} />
+            <Icon size={20} icon={actualLeadingIcon} aria-hidden={true} />
           </span>
         )}
         {actualLabel || children}
-        {(actualTrailingIcon && actualTrailingIcon !== 'None') && (
+        {actualTrailingIcon && actualTrailingIcon !== "None" &&  mode!=='bleed' &&(
           <span>
-              <Icon size={16} icon={actualTrailingIcon} aria-hidden={true} />
+            <Icon size={20} icon={actualTrailingIcon} aria-hidden={true} />
+          </span>
+        )}
+        {actualTrailingIcon && actualTrailingIcon !== "None" &&  mode==='bleed' &&(
+          <span>
+            <Icon size={20} icon={'chevron-down'} aria-hidden={true} />
           </span>
         )}
         {shouldShowAutoArrow && (
           <span>
-              <Icon size={20} icon="arrow-right-alt" spriteType="brand" aria-hidden={true} />
+            <Icon
+              size={20}
+              icon="arrow-up-right"
+              spriteType="ui"
+              aria-hidden={true}
+            />
           </span>
         )}
       </>
@@ -181,12 +229,16 @@ const Button: FC<ButtonProps> = ({
     if (props.onClick) {
       props.onClick(e);
     }
-    
+
     // Then handle internal logic
     if (isPopup) {
       e?.preventDefault?.();
       setOpenPopup(true);
-    } else if (isAnchorLink && typeof finalLink !== 'string' && extendedLink?.anchorLinkId) {
+    } else if (
+      isAnchorLink &&
+      typeof finalLink !== "string" &&
+      extendedLink?.anchorLinkId
+    ) {
       // Handle smooth scrolling for anchor links
       e?.preventDefault?.();
       const targetElement = document.getElementById(extendedLink.anchorLinkId);
@@ -194,11 +246,12 @@ const Button: FC<ButtonProps> = ({
         // Account for fixed header height (64px = 16 * 4px in Tailwind)
         const headerOffset = 64;
         const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
       }
     }
@@ -209,14 +262,15 @@ const Button: FC<ButtonProps> = ({
       <Component
         {...storyblokEditable(actualBlok)}
         className={twMerge(
-          buttonStyles({ 
-            mode: derivedMode, 
-            tone: derivedTone, 
+          buttonStyles({
+            mode: derivedMode,
+            tone: derivedTone,
             variant, // Keep for backward compatibility
-            fullWidth, 
-            size 
+            fullWidth,
+            size,
+            background : background? background : 'light'
           }),
-          'group',
+          "group",
           className
         )}
         // Spread user props first so our controlled props take precedence
@@ -226,9 +280,11 @@ const Button: FC<ButtonProps> = ({
         rel={!isPopup ? (urlProps as any)?.rel : undefined}
         onClick={handleClick}
         // Ensure button semantics for popup
-        {...(isPopup ? { role: 'button', type: 'button' } : {})}
+        {...(isPopup ? { role: "button", type: "button" } : {})}
       >
-        <span className={textStyles({ size })}>{ButtonContent()}</span>
+        <span className="flex gap-2 items-center  text-[length:var(--text-jumper-text-class-text-sm)]">
+          {ButtonContent()}
+        </span>
       </Component>
 
       {/* Popup Form Modal */}
@@ -236,8 +292,14 @@ const Button: FC<ButtonProps> = ({
         <FormModal
           isOpen={openPopup}
           onClose={() => setOpenPopup(false)}
-          formId={(typeof finalLink !== 'string' ? (finalLink as any)?.popupForm?.formId : undefined)}
-          title={typeof finalLink !== 'string' ? extendedLink?.label : undefined}
+          formId={
+            typeof finalLink !== "string"
+              ? (finalLink as any)?.popupForm?.formId
+              : undefined
+          }
+          title={
+            typeof finalLink !== "string" ? extendedLink?.label : undefined
+          }
         />
       )}
     </>

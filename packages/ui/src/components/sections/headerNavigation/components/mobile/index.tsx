@@ -66,7 +66,7 @@ const MobileNavigation: FC<MobileNavigationProps> = ({ menuItems }) => {
               dropdownClassName="bg-white ring-border-default shadow-elevation"
             />
           </div> */}
-          <Button label="Sign in" tone="secondary" mode="stroke" size="sm" className="h-12 sm:w-full" />
+          <Button label="Sign in" tone="secondary" mode="filled" size="sm" className="h-12 sm:w-full" />
           <Button label="Book a demo" tone="primary" mode="filled" size="sm" className="h-12 sm:w-full" link="/demo/" />
         </div>
       </div>

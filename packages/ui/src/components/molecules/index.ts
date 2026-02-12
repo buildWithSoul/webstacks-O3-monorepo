@@ -7,7 +7,7 @@
 
 export * from './image';
 export * from './section';
-export { default as Badge } from './badge';
+// export { default as Badge } from './badge';
 export { default as Breadcrumbs } from './breadcrumbs';
 export { default as CodeEmbed } from './codeEmbed';
 export type { CodeEmbedProps } from './codeEmbed';
@@ -34,6 +34,7 @@ export { default as Image } from './image'
 export { default as HubspotForm } from './hubspotForm'
 export { default as GenericForm } from './genericForm'
 export { FormModal } from './formModal'
+export * from './attribution'
 
 // Example:
 // export { default as SearchForm } from './SearchForm';

@@ -58,7 +58,7 @@ export const BlogPagination: FC<{
           type="button"
           onClick={() => onPageChange(currentPage - 1)}
           aria-label="Previous page"
-          mode="stroke"
+          mode="filled"
           tone="secondary"
           size="sm"
           leadingIcon="arrow-left"

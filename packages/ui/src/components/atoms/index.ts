@@ -11,7 +11,13 @@ export { TopicTag } from './topicTag';
 export { Icon } from './icon';
 export { default as Button,  } from './button';
 export {Brand} from './brand'
-export * from './companyBrand'
+export * from './companyBrand';
+export * from './avatar';
+export * from './badge';
+export * from './blanket';
+export * from './videoPlayButton';
+export * from './carouselButton';
+export * from './checkbox'
 
 // Example:
 // 

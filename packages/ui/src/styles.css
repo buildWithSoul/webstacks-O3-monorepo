@@ -1,2 +1,3 @@
 @import "tailwindcss";
-@import './theme/global.css'
+@import './theme/global.css';
+@import './foundation/index.css'
