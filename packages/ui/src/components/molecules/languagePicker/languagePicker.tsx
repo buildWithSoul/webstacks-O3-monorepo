@@ -3,7 +3,7 @@
 import React from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Icon } from '../../atoms';
-import Dropdown, { DropdownItem } from '../dropdown';
+// import Dropdown, { DropdownItem } from '../dropdown';
 
 
 interface Language {
@@ -74,7 +74,7 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
 
   const currentLanguageName = languages.find(lang => lang.code === effectiveCurrentLanguage)?.name || 'English';
 
-  const dropdownItems: DropdownItem[] = languages.map((language) => {
+  const dropdownItems = languages.map((language) => {
     const isActive = effectiveCurrentLanguage === language.code;
     return {
       key: language.code,
@@ -101,15 +101,16 @@ export const LanguagePicker: React.FC<LanguagePickerProps> = ({
   );
 
   return (
-    <Dropdown
-      trigger={trigger}
-      items={dropdownItems}
-      side={dropdownPosition === 'above' ? 'top' : 'bottom'}
-      align="start"
-      sideOffset={8}
-      contentClassName={`w-48 ${dropdownClassName ?? 'bg-primary ring-border-subtle shadow-elevation'}`}
-      modal={false}
-    />
+    // <Dropdown
+    //   trigger={trigger}
+    //   items={dropdownItems}
+    //   side={dropdownPosition === 'above' ? 'top' : 'bottom'}
+    //   align="start"
+    //   sideOffset={8}
+    //   contentClassName={`w-48 ${dropdownClassName ?? 'bg-primary ring-border-subtle shadow-elevation'}`}
+    //   modal={false}
+    // />
+    ''
   );
 };
 
