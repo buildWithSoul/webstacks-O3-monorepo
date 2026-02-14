@@ -19,6 +19,8 @@ export * from './videoPlayButton';
 export * from './carouselButton';
 export * from './checkbox';
 export * from './radio';
+export * from './list';
+export * from './switch'
 
 // Example:
 // 

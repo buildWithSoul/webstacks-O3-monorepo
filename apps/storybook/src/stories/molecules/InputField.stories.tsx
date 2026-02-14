@@ -6,15 +6,15 @@ const meta: Meta<typeof InputField> = {
   component: InputField,
   decorators: [
     (Story) => (
-      <div  style={{
-        background: '#F6F3EF' ,
-        width:'100vw',
-
-        }}>
+      <div
+        style={{
+          background: "#F6F3EF",
+        }}
+      >
         <div
           style={{
-          padding:'24px',
-            width: "300px",
+            padding: "24px",
+            width: "400px",
           }}
         >
           <Story />
@@ -22,14 +22,17 @@ const meta: Meta<typeof InputField> = {
       </div>
     ),
   ],
-    argTypes: {
+  args: {
+    variant: "text",
+  },
+  argTypes: {
     label: {
       control: "text",
-      description: "Label displayed above the input",
+      description: "Label displayed above the field",
     },
     hint: {
       control: "text",
-      description: "Helper text shown below the input",
+      description: "Helper text shown below the field",
     },
     error: {
       control: "text",
@@ -37,26 +40,42 @@ const meta: Meta<typeof InputField> = {
     },
     placeholder: {
       control: "text",
-      description: "Placeholder text inside the input",
+      description: "Placeholder text",
     },
     disabled: {
       control: "boolean",
-      description: "Disables the input field",
+      description: "Disables the field",
     },
-     variant: {
+    variant: {
       control: { type: "radio" },
-      options: ["text", "select"],
-      description: "Visual variant of the input",
+      options: ["text", "select", "textarea"],
+      description: "Input field variant",
+      table: {
+        type: { summary: `"text" | "select" | "textarea"` },
+        defaultValue: { summary: "text" },
+      },
     },
-},
-  parameters:{
-    layout: 'fullscreen'
+    rows: {
+      control: { type: "number", min: 2, max: 10 },
+      description: "Number of rows (textarea only)",
+      if: { arg: "variant", eq: "textarea" },
+      table: {
+        type: { summary: "number" },
+        defaultValue: { summary: '3' },
+      },
+    },
+    className: {
+      control: "text",
+      description: "Optional class overrides",
+    },
   },
-  tags:['autodocs']
+  parameters: {
+    layout: "fullscreen",
+  },
+  tags: ["autodocs"],
 };
 
 export default meta;
-
 type Story = StoryObj<typeof InputField>;
 
 export const Placeholder: Story = {
@@ -74,8 +93,6 @@ export const Filled: Story = {
     hint: "This is a hint text to help user.",
   },
 };
-
-
 
 export const Disabled: Story = {
   args: {
@@ -109,5 +126,25 @@ export const SelectVariant: Story = {
     variant: "select",
     hint: "Choose one option",
     readOnly: true,
+  },
+};
+
+export const Textarea: Story = {
+  args: {
+    label: "DESCRIPTION",
+    placeholder: "Enter description",
+    variant: "textarea",
+    rows: 4,
+    hint: "Max 500 characters",
+  },
+};
+
+export const TextareaError: Story = {
+  args: {
+    label: "DESCRIPTION",
+    placeholder: "Enter description",
+    variant: "textarea",
+    rows: 4,
+    error: "Description is required",
   },
 };

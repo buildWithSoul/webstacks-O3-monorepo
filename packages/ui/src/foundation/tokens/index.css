@@ -1043,7 +1043,8 @@
     line-height: var(--line-height-jumper-rich-text-blockquote);
   }
 
-  .focus-primary, .focus-error {
+  .focus-primary,
+  .focus-error {
     outline: none;
   }
 
@@ -1053,11 +1054,10 @@
   }
   .focus-error:focus {
     border-color: var(--stroke-error);
-   box-shadow: 0 0 0 var(--Scale-4, 4px) var(--Color-Error-500, #FF425F);
-
+    box-shadow: 0 0 0 var(--Scale-4, 4px) var(--Color-Error-500, #ff425f);
   }
 
-   .input-disabled {
+  .input-disabled {
     border: 1px solid var(--stroke-secondary);
     background: var(--surface-disabled);
     box-shadow: var(--shadow-xs);
@@ -1065,7 +1065,14 @@
     cursor: not-allowed;
   }
 
-
-  
+  .list-style {
+    display: flex;
+    flex-direction: column; 
+    gap: 8px; 
+    font-size: var(--text-jumper-text-class-rich-text-body);
+    color: var(--text-body);
+    li::marker {
+      color: var(--text-body);
+    }
+  }
 }
-

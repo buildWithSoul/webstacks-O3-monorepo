@@ -206,10 +206,10 @@ export const ComponentGenerator: FC<componentGeneratorProps> = ({
           <Section
             key={section._uid}
             {...sectionProps}
-            isFirstSection={!skipFirstSectionSpacing && index === 0}
-            sectionType={section.component}
-            prevTheme={prevSection?.theme as any}
-            nextTheme={nextSection?.theme as any}
+            // isFirstSection={!skipFirstSectionSpacing && index === 0}
+            // sectionType={section.component}
+            // prevTheme={prevSection?.theme as any}
+            // nextTheme={nextSection?.theme as any}
             id={section.htmlId as string}
           >
             {getComponent(section, rels)}

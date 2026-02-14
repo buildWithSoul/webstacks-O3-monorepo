@@ -37,6 +37,7 @@ export { FormModal } from './formModal'
 export * from './attribution'
 export * from './drawer'
 export * from './inputField'
+export * from './tab'
 
 // Example:
 // export { default as SearchForm } from './SearchForm';
