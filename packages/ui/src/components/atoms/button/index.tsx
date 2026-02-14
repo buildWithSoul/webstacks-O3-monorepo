@@ -48,6 +48,7 @@ type ButtonProps = NativeButtonProps & {
   anchorLinkId?: string;
   popupForm?: string;
   openInNewTab?: boolean;
+  iconColor?:string
 } & SbBlokData;
 
 const Button: FC<ButtonProps> = ({
@@ -71,6 +72,7 @@ const Button: FC<ButtonProps> = ({
   anchorLinkId,
   popupForm,
   openInNewTab,
+  iconColor,
   ...props
 }) => {
   // console.log('Button received props:', { label, mode, tone, linkType, internalLink, externalUrl, ...props });
@@ -194,23 +196,23 @@ const Button: FC<ButtonProps> = ({
       <>
         {actualLeadingIcon && actualLeadingIcon !== "None" && mode!=='bleed' && (
           <span>
-            <Icon size={20} icon={actualLeadingIcon} aria-hidden={true} />
+            <Icon color={iconColor} size={20} icon={actualLeadingIcon} aria-hidden={true} />
           </span>
         )}
         {actualLabel || children}
-        {actualTrailingIcon && actualTrailingIcon !== "None" &&  mode!=='bleed' &&(
+        {actualTrailingIcon && actualTrailingIcon !== "None" &&  mode!=='bleed' && !leadingIcon &&(
           <span>
-            <Icon size={20} icon={actualTrailingIcon} aria-hidden={true} />
+            <Icon color={iconColor} size={20} icon={actualTrailingIcon} aria-hidden={true} />
           </span>
         )}
         {actualTrailingIcon && actualTrailingIcon !== "None" &&  mode==='bleed' &&(
           <span>
-            <Icon size={20} icon={'chevron-down'} aria-hidden={true} />
+            <Icon color={iconColor} size={20} icon={'chevron-down'} aria-hidden={true} />
           </span>
         )}
         {shouldShowAutoArrow && (
           <span>
-            <Icon
+            <Icon color={iconColor}
               size={20}
               icon="arrow-up-right"
               spriteType="ui"

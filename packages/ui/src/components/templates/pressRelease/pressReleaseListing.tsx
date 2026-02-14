@@ -15,7 +15,7 @@ interface PressReleaseListingProps {
 
 const PressReleaseListing:FC<PressReleaseListingProps> = ({ presses, totalPages }) => (
   <article className="bg-white pb-24">
-    <Section theme="dark">
+    <Section>
       <div className="container mx-auto flex flex-col gap-6 pb-24">
         <Heading 
           as="h1"

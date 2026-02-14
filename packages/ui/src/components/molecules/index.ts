@@ -35,6 +35,9 @@ export { default as HubspotForm } from './hubspotForm'
 export { default as GenericForm } from './genericForm'
 export { FormModal } from './formModal'
 export * from './attribution'
+export * from './drawer'
+export * from './inputField'
+export * from './tab'
 
 // Example:
 // export { default as SearchForm } from './SearchForm';

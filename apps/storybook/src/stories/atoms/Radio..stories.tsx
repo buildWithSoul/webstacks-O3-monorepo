@@ -1,41 +1,37 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Checkbox } from "@repo/ui";
+import { useState } from "react";
+import { Radio } from "@repo/ui";
 
-const meta: Meta<typeof Checkbox> = {
-  title: "Atoms/Checkbox",
-  component: Checkbox,
+const meta: Meta<typeof Radio> = {
+  title: "Atoms/Radio",
+  component: Radio,
   args: {
     label: "Remember me",
     disabled: false,
     error: false,
-    indeterminate: false,
     size: "sm",
   },
   argTypes: {
     checked: {
       control: "boolean",
-      description: "Controls the checked state of the checkbox",
+      description: "Controls the checked state of the radio",
     },
     disabled: {
       control: "boolean",
-      description: "Disables the checkbox",
+      description: "Disables the radio",
     },
     error: {
       control: "boolean",
-      description: "Shows the checkbox in an error state",
-    },
-    indeterminate: {
-      control: "boolean",
-      description: "Shows the checkbox in an indeterminate state",
+      description: "Shows the radio in an error state",
     },
     size: {
       control: { type: "radio" },
       options: ["sm", "md"],
-      description: "Controls the size of the checkbox",
+      description: "Controls the size of the radio",
     },
     label: {
       control: "text",
-      description: "Label displayed next to the checkbox",
+      description: "Label displayed next to the radio",
     },
     labelClassName: {
       control: "text",
@@ -43,7 +39,7 @@ const meta: Meta<typeof Checkbox> = {
     },
     className: {
       control: "text",
-      description: "Additional classes for the checkbox input",
+      description: "Additional classes for the radio input",
     },
     id: {
       control: "text",
@@ -62,7 +58,7 @@ const meta: Meta<typeof Checkbox> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Checkbox>;
+type Story = StoryObj<typeof Radio>;
 
 export const Default: Story = {};
 
@@ -98,12 +94,6 @@ export const ErrorChecked: Story = {
   },
 };
 
-export const Indeterminate: Story = {
-  args: {
-    indeterminate: true,
-  },
-};
-
 export const WithoutLabel: Story = {
   args: {
     label: undefined,
@@ -113,9 +103,10 @@ export const WithoutLabel: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-col gap-4">
-      <Checkbox {...args} size="sm" label="Small checkbox" />
-      <Checkbox {...args} size="md" label="Medium checkbox" />
+      <Radio {...args} size="sm" label="Small radio" />
+      <Radio {...args} size="md" label="Medium radio" />
     </div>
   ),
 };
+
 

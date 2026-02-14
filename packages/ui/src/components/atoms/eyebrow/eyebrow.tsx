@@ -14,7 +14,7 @@ export const Eyebrow: FC<EyebrowProps> = ({
   const Component = as;
   
   return (
-    <span className={`text-md font-semibold text-eyebrow font-ui uppercase ${className || ''}`} {...props}>
+    <span className={`text-mono-xs font-semibold text-eyebrow  uppercase ${className || ''}`} {...props}>
       <Component className="">{text}</Component>
     </span>
   );
