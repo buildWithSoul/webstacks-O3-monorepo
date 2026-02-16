@@ -1,0 +1,1 @@
+export {Accordion as AccordionItem} from './accordion'

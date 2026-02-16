@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { expect, within } from "@storybook/test";
-import { IconTextCard } from "@repo/ui";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite"
+import { expect, within } from "@storybook/test"
+import { IconTextCard } from "@repo/ui"
 
 const meta: Meta<typeof IconTextCard> = {
   title: "Molecules/Cards/IconTextCard",
@@ -25,7 +25,7 @@ const meta: Meta<typeof IconTextCard> = {
     body: {
       control: false,
       table: {
-        type: { summary: "Rich text content" },
+        type: { summary: "Storyblok RichText" },
       },
     },
     button: {
@@ -36,93 +36,209 @@ const meta: Meta<typeof IconTextCard> = {
     },
     theme: {
       control: "select",
-      options: ["light", "dark", "sugar", "bright"],
+      options: ["light", "dark"],
       table: {
-        type: { summary: "'light' | 'dark' | 'sugar' | 'bright'" },
+        type: { summary: "'light' | 'dark'" },
       },
     },
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof IconTextCard>;
+export default meta
+type Story = StoryObj<typeof IconTextCard>
+
+const mockBody = {
+        "type": "doc",
+        "content": [
+          {
+            "type": "paragraph",
+            "attrs": {
+              "textAlign": null
+            },
+            "content": [
+              {
+                "text": "A design system creates order out of complexity. It ensures every component—from buttons to banners—works together seamlessly and reflects a unified brand language.",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "textAlign": null
+            }
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "textAlign": null
+            },
+            "content": [
+              {
+                "text": "Includes:",
+                "type": "text",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "textAlign": null
+            }
+          },
+          {
+            "type": "ordered_list",
+            "attrs": {
+              "order": 1
+            },
+            "content": [
+              {
+                "type": "list_item",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "textAlign": null
+                    },
+                    "content": [
+                      {
+                        "text": "Lorem ipsum dolor sit amet, consectetur",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "textAlign": null
+                    },
+                    "content": [
+                      {
+                        "text": "Lorem ipsum dolor sit amet, consectetur",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "textAlign": null
+                    },
+                    "content": [
+                      {
+                        "text": "Lorem ipsum dolor sit amet, consectetur",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "list_item",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "attrs": {
+                      "textAlign": null
+                    },
+                    "content": [
+                      {
+                        "text": "Lorem ipsum dolor sit amet, consectetur",
+                        "type": "text"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]}
+
 
 
 export const WithIconOnly: Story = {
   args: {
     _key: "icon-text-card-icon",
     icon: "rocket",
-    heading: "Fast Setup",
+    heading: "Building Consistency Into Every Website Experience",
   },
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+    const canvas = within(canvasElement)
 
-    await expect(
-      canvas.getByText("Fast Setup")
-    ).toBeInTheDocument();
+    await expect(canvas.getByText("Fast Setup")).toBeInTheDocument()
 
-    const svg = canvasElement.querySelector("svg");
-    await expect(svg).toBeInTheDocument();
+    const svg = canvasElement.querySelector("svg")
+    await expect(svg).toBeInTheDocument()
 
-    await expect(
-      canvasElement.querySelector("button")
-    ).toBeNull();
+    await expect(canvasElement.querySelector("button")).toBeNull()
   },
-};
+}
+export const WithBody: Story = {
+  args: {
+    _key: "icon-text-card-body",
+    icon: "rocket",
+    heading: "Building Consistency Into Every Website Experience",
+    body: mockBody as any,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
 
+    await expect(
+      canvas.getByText("Powerful Features")
+    ).toBeInTheDocument()
+
+    await expect(
+      canvas.getByText("bold")
+    ).toBeInTheDocument()
+  },
+}
 
 export const WithButton: Story = {
   args: {
     _key: "icon-text-card-button",
     icon: "rocket",
-    heading: "Launch Faster",
-    body: [{ _type: "block" }],
+    heading: "Building Consistency Into Every Website Experience",
+    body: mockBody as any,
     button: [
       {
         label: "Get Started",
-        variant: "primary",
-        size: "md",
+        trailingIcon: "arrow-right",
+      },
+      {
+        label: "Learn more",
         trailingIcon: "arrow-right",
       },
     ],
   },
   play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
+    const canvas = within(canvasElement)
 
     await expect(
       canvas.getByText("Launch Faster")
-    ).toBeInTheDocument();
+    ).toBeInTheDocument()
 
     const button = canvas.getByRole("button", {
       name: "Get Started",
-    });
-    await expect(button).toBeInTheDocument();
+    })
+    await expect(button).toBeInTheDocument()
 
-    const card = canvasElement.firstElementChild as HTMLElement;
-    await expect(card.className).toContain("group");
-    const use = canvasElement.querySelector("use");
-    await expect(use).toBeInTheDocument();
+    const card = canvasElement.firstElementChild as HTMLElement
+    await expect(card.className).toContain("group")
   },
-};
+}
 
-
-
-export const ThemeSugar: Story = {
-  args: {
-    _key: "icon-text-card-theme-sugar",
-    heading: "Sugar Theme",
-    theme: "sugar",
-    button: [
-      {
-        label: "Explore",
-        variant: "primary",
-      },
-    ],
-  },
-  play: async ({ canvasElement }) => {
-    const card = canvasElement.firstElementChild as HTMLElement;
-
-    await expect(card).toBeInTheDocument();
-    await expect(card.className).toContain("hover:bg-white");
-  },
-};

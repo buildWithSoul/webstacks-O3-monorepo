@@ -284,7 +284,7 @@ const Button: FC<ButtonProps> = ({
         // Ensure button semantics for popup
         {...(isPopup ? { role: "button", type: "button" } : {})}
       >
-        <span className="flex gap-2 items-center  text-[length:var(--text-jumper-text-class-text-sm)]">
+        <span className="flex gap-2 items-center  text-sm">
           {ButtonContent()}
         </span>
       </Component>

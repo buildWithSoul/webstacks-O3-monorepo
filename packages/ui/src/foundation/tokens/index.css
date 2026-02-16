@@ -160,6 +160,7 @@
   /* Mapped O3 */
   --text-headings: var(--color-neutral-900---p-dark);
   --text-body: var(--color-neutral-700---body);
+  --text-body-dark: var(--color-neutral-700---body);
   --text-eyebrow: var(--color-navy-primary-900---p);
   --text-link: var(--color-navy-primary-900---p);
   --text-link-hover: var(--color-navy-primary-700);
@@ -914,29 +915,54 @@
     box-shadow: 0 32px 64px -12px rgba(18, 14, 34, 0.2);
   }
 
+  .blur-sm {
+    border-radius: 8px;
+    background: var(--Alpha-Colors-Blue, rgba(42, 138, 198, 0.2));
+    backdrop-filter: blur(5px);
+  }
+  .blur-md {
+    border-radius: 8px;
+    background: var(--Alpha-Colors-Blue, rgba(42, 138, 198, 0.2));
+    backdrop-filter: blur(8px);
+  }
+  .blur-lg {
+    border-radius: 8px;
+    background: var(--Alpha-Colors-Blue, rgba(42, 138, 198, 0.2));
+    backdrop-filter: blur(12px);
+  }
+  .blur-xl {
+    border-radius: 8px;
+    background: var(--Alpha-Colors-Blue, rgba(42, 138, 198, 0.2));
+    backdrop-filter: blur(20px);
+  }
   .text-2xs {
     font-size: var(--text-jumper-text-class-text-2xs);
     line-height: var(--line-height-jumper-text-2xs);
+    font-family: var(--type-font-family-text);
   }
 
   .text-xs {
     font-size: var(--text-jumper-text-class-text-xs);
     line-height: var(--line-height-jumper-text-xs);
+    font-family: var(--type-font-family-text);
   }
 
   .text-sm {
     font-size: var(--text-jumper-text-class-text-sm);
     line-height: var(--line-height-jumper-text-sm);
+    font-family: var(--type-font-family-text);
   }
 
   .text-md {
     font-size: var(--text-jumper-text-class-text-md);
     line-height: var(--line-height-jumper-text-md);
+    font-family: var(--type-font-family-text);
   }
 
   .text-lg {
     font-size: var(--text-jumper-text-class-text-lg);
     line-height: var(--line-height-jumper-text-lg);
+    font-family: var(--type-font-family-text);
   }
 
   .text-mono-xs {
@@ -966,36 +992,43 @@
   .text-display-xl {
     font-size: var(--text-jumper-text-class-display-xl);
     line-height: var(--line-height-jumper-display-xl);
+    font-family: var(--type-font-family-display);
   }
 
   .text-display-2xl {
     font-size: var(--text-jumper-text-class-display-2xl);
     line-height: var(--line-height-jumper-display-2xl);
+    font-family: var(--type-font-family-display);
   }
 
   .text-display-3xl {
     font-size: var(--text-jumper-text-class-display-3xl);
     line-height: var(--line-height-jumper-display-3xl);
+    font-family: var(--type-font-family-display);
   }
 
   .text-display-4xl {
     font-size: var(--text-jumper-text-class-display-4xl);
     line-height: var(--line-height-jumper-display-4xl);
+    font-family: var(--type-font-family-display);
   }
 
   .text-display-5xl {
     font-size: var(--text-jumper-text-class-display-5xl);
     line-height: var(--line-height-jumper-display-5xl);
+    font-family: var(--type-font-family-display);
   }
 
   .text-display-6xl {
     font-size: var(--text-jumper-text-class-display-6xl);
     line-height: var(--line-height-jumper-display-6xl);
+    font-family: var(--type-font-family-display);
   }
 
   .text-display-7xl {
     font-size: var(--text-jumper-text-class-display-7xl);
     line-height: var(--line-height-jumper-display-7xl);
+    font-family: var(--type-font-family-display);
   }
 
   .text-rich-h1 {
@@ -1067,8 +1100,8 @@
 
   .list-style {
     display: flex;
-    flex-direction: column; 
-    gap: 8px; 
+    flex-direction: column;
+    gap: 8px;
     font-size: var(--text-jumper-text-class-rich-text-body);
     color: var(--text-body);
     li::marker {

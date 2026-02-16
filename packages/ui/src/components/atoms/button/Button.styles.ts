@@ -12,7 +12,7 @@ export const buttonStyles = cva(
         stroke: [], // Base styles for stroke mode, tone will determine specific styles
         bleed: [
           // default - minimal styling, no border, minimal padding for better UX
-          "bg-transparent border-0 font-semibold text-sm md:text-md cursor-pointer h-auto",
+          "bg-transparent border-0 font-medium text-sm md:text-md cursor-pointer h-auto",
           // hover - very light background
           "hover:bg-emphasis",
           // disabled
@@ -20,7 +20,7 @@ export const buttonStyles = cva(
         ],
         link: [
           // default
-          "font-semibold text-sm md:text-md h-auto",
+          "font-medium text-sm md:text-md h-auto",
           // disabled
           "disabled:cursor-not-allowed",
         ],
@@ -64,7 +64,7 @@ export const buttonStyles = cva(
         mode: "filled",
         tone: "primary",
         className: [
-          "bg-[var(--surface-button)] font-semibold text-[var(--text-button)]",
+          "bg-[var(--surface-button)] font-medium text-[var(--text-button)]",
           "rounded-[4px]",
           "disabled:bg-[var(--surface-button)] disabled:opacity-70 disabled:text-white dark:disabled:bg-neutral-600 dark:disabled:text-neutral-400 disabled:cursor-not-allowed",
           "hover:bg-[var(--surface-button-hover)]",
@@ -77,7 +77,7 @@ export const buttonStyles = cva(
         mode: "filled",
         tone: "secondary",
         className: [
-          "bg-[var(--surface-secondary-button)] font-semibold text-[var(--text-secondary-button)]",
+          "bg-[var(--surface-secondary-button)] font-medium text-[var(--text-secondary-button)]",
           "rounded-[4px]",
           "border-[1.5px] border-[var(--stroke-secondary-button)]",
           "disabled:bg-[var(--surface-secondary-button)] disabled:opacity-70 disabled:cursor-not-allowed",
@@ -131,7 +131,7 @@ export const buttonStyles = cva(
       {
         variant: "primary",
         className: [
-          "bg-button-primary font-semibold text-button border-button-primary px-6 md:px-8",
+          "bg-button-primary font-medium text-button border-button-primary px-6 md:px-8",
           "[border-radius:var(--Border-Radius-round,96px)]",
           "disabled:bg-neutral-300 disabled:text-white dark:disabled:bg-neutral-600 dark:disabled:text-neutral-400 disabled:cursor-not-allowed",
         ],
@@ -140,7 +140,7 @@ export const buttonStyles = cva(
       {
         variant: "secondary",
         className: [
-          "bg-button-secondary font-semibold button-text-secondary border-button-secondary px-6 md:px-8",
+          "bg-button-secondary font-medium button-text-secondary border-button-secondary px-6 md:px-8",
           "[border-radius:var(--Border-Radius-round,96px)]",
           "disabled:bg-white disabled:text-neutral-400 dark:disabled:bg-button-secondary dark:disabled:text-neutral-500 disabled:cursor-not-allowed",
         ],

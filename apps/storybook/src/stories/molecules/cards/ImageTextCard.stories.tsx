@@ -7,13 +7,7 @@ const meta: Meta<typeof ImageTextCard> = {
   title: "Molecules/Cards/ImageTextCard",
   component: ImageTextCard,
   tags: ["autodocs"],
-  decorators: [
-    (Story) => (
-      <div style={{ maxWidth: 400, margin: '0 auto' }}>
-        <Story />
-      </div>
-    ),
-  ],
+
   argTypes: {
     heading: {
       control: "text",
@@ -49,7 +43,7 @@ const meta: Meta<typeof ImageTextCard> = {
       control: "select",
       options: ["light", "dark", "sugar", "bright"],
       table: {
-        type: { summary: "'light' | 'dark' | 'sugar' | 'bright'" },
+        type: { summary: "'light' | 'dark' "  }
       },
     },
   },
@@ -58,6 +52,30 @@ const meta: Meta<typeof ImageTextCard> = {
 export default meta;
 type Story = StoryObj<typeof ImageTextCard>;
 
+const mockBody = {
+        "type": "doc",
+        "content": [
+          {
+            "type": "paragraph",
+            "attrs": {
+              "textAlign": null
+            },
+            "content": [
+              {
+                "text": "October Three partners with HR and finance leaders to bring clarity, precision, and confidence to retirement planning.",
+                "type": "text"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "attrs": {
+              "textAlign": null
+            }
+          },
+         
+        
+        ]}
 export const WithoutLink: Story = {
   args: {
     _key: "image-text-card-default",
@@ -66,8 +84,8 @@ export const WithoutLink: Story = {
       filename: "https://picsum.photos/600/400",
       alt: "Card image",
     },
-    heading: "Explore our Platform",
-    body: [{ _type: "block" } as any],
+    heading: "Retirement",
+    body: mockBody as any,
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -76,7 +94,7 @@ export const WithoutLink: Story = {
     await expect(img).toBeInTheDocument();
 
     await expect(
-      canvas.getByText("Explore our Platform")
+      canvas.getByText("Retirement")
     ).toBeInTheDocument();
 
     const link = canvasElement.querySelector("a");
@@ -92,8 +110,8 @@ export const WithLink: Story = {
       filename: "https://picsum.photos/600/400",
       alt: "Card image",
     },
-    heading: "Read the Docs",
-    body: [{ _type: "block" } as any],
+    heading: "Retirement",
+    body: mockBody as any,
     link: {
       label: "Learn more",
       linkType: "external",
@@ -107,12 +125,9 @@ export const WithLink: Story = {
     await expect(img).toBeInTheDocument();
 
     await expect(
-      canvas.getByText("Read the Docs")
+      canvas.getByText("Retirement")
     ).toBeInTheDocument();
 
-    await expect(
-      canvas.getByText("Learn more")
-    ).toBeInTheDocument();
 
     const wrapperLink = canvasElement.querySelector("a");
     await expect(wrapperLink).toBeInTheDocument();

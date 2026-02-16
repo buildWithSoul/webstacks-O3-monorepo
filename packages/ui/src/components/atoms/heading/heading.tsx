@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 const HeadingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
 type HeadingTag = typeof HeadingTags[number];
 
-export const headingVariants = cva('relative font-medium text-heading', {
+export const headingVariants = cva('relative font-medium text-(--text-headings-dark)', {
   variants: {
     size: {
       '2xs': 'text-display-2xs',
@@ -30,7 +30,7 @@ export const headingVariants = cva('relative font-medium text-heading', {
     fontFamily: {
       display: 'font-heading-display',
       accent: 'font-heading-accent',
-      body: 'font-body',
+      body: 'font-body=',
       eyebrow: 'font-eyebrow',
     },
     textTransform: {

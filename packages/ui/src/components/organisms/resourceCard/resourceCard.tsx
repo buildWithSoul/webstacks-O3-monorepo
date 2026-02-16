@@ -34,7 +34,7 @@ export interface ResourceCardProps {
 }
 
 // Helper function to extract plain text from portable text body
-const extractPlainText = (body: any[]): string => {
+export const extractPlainText = (body: any[]): string => {
   if (!body || !Array.isArray(body)) return '';
   
   let text = '';

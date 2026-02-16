@@ -38,6 +38,8 @@ export * from './attribution'
 export * from './drawer'
 export * from './inputField'
 export * from './tab'
+export * from './toast'
+export * from './tooltip'
 
 // Example:
 // export { default as SearchForm } from './SearchForm';
