@@ -17,12 +17,15 @@ export const RichText: FC<RichTextProps> = ({ doc, className }) => {
     <div
       className={twMerge(
         `
-        text-(--text-body-dark)
+        text-(--text-body-dark)!
+        text-rich-body
         /* spacing between blocks */
         [&_p]:mb-4!
         [&_h1]:mb-4 [&_h2]:mb-4 [&_h3]:mb-3 [&_h4]:mb-3
         [&_ul]:mb-4 [&_ol]:mb-4
-        [&_li]:mb-2
+        [&_li]:mb-1.5 
+        [&_li_p]:mb-0!
+
 
         /* list styles */
         [&_ul]:list-disc

@@ -2,4 +2,5 @@ export * from "./atoms";
 export * from "./molecules";
 export * from "./sections";
 export * from "./templates";
-export * from './organisms'
+export * from './organisms';
+export * from './modules'

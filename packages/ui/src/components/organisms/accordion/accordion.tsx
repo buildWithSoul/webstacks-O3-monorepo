@@ -7,11 +7,11 @@ import type { SbBlokData } from "@storyblok/react";
 import { storyblokEditable } from "@storyblok/react";
 import { Button, Icon } from "../../atoms";
 
-type StoryblokImage ={
+type StoryblokImage = {
   id: string;
   filename: string;
   alt?: string;
-}
+};
 type AccordionItem = {
   _uid: string;
   title: string;
@@ -20,7 +20,7 @@ type AccordionItem = {
     label: string;
     href: string;
   };
-  icon?: StoryblokImage
+  icon?: StoryblokImage;
 };
 
 export interface AccordionProps extends SbBlokData {
@@ -61,21 +61,20 @@ export function Accordion({
             >
               <div className="flex items-center gap-4">
                 {item.icon && (
-  <span
-    className="
+                  <span
+                    className="
       shrink-0 transition-opacity
       opacity-50
       group-data-[state=open]:opacity-100
     "
-  >
-    <img
-      src={item.icon.filename}
-      alt={item.icon.alt || ''}
-      className="h-6 w-6 object-contain"
-    />
-  </span>
-)}
-
+                  >
+                    <img
+                      src={item.icon.filename}
+                      alt={item.icon.alt || ""}
+                      className="h-6 w-6 object-contain"
+                    />
+                  </span>
+                )}
 
                 <span className="text-display-xl">{item.title}</span>
               </div>
@@ -92,11 +91,16 @@ export function Accordion({
   "
                 aria-hidden
               >
-              
-                <Icon size={24}  className="text-neutral-600 group-data-[state=open]:hidden" icon="plus"/>
-                <Icon size={24}  className="text-(--icon-button) hidden group-data-[state=open]:block" icon="minus"/>
-
-
+                <Icon
+                  size={24}
+                  className="text-neutral-600 group-data-[state=open]:hidden"
+                  icon="plus"
+                />
+                <Icon
+                  size={24}
+                  className="text-(--icon-button) hidden group-data-[state=open]:block"
+                  icon="minus"
+                />
               </div>
             </AccordionPrimitive.Trigger>
           </AccordionPrimitive.Header>
@@ -116,7 +120,11 @@ export function Accordion({
               <div>{item.content}</div>
 
               {item.cta && (
-                <Button mode="link" label={item.cta.label} href={item.cta.href} />
+                <Button
+                  mode="link"
+                  label={item.cta.label}
+                  href={item.cta.href}
+                />
               )}
             </div>
           </AccordionPrimitive.Content>

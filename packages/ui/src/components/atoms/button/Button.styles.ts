@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 export const buttonStyles = cva(
   [
-    "flex w-full items-center justify-center whitespace-nowrap transition-colors cursor-pointer outline-none",
+    "flex  items-center justify-center whitespace-nowrap transition-colors cursor-pointer outline-none",
   ],
   {
     // Note: Border radius is set via custom property in compound variants
@@ -37,7 +37,7 @@ export const buttonStyles = cva(
         bleed: [],
       },
       fullWidth: {
-        true: "",
+        true: "w-full",
         false: "sm:w-fit",
       },
       size: {
