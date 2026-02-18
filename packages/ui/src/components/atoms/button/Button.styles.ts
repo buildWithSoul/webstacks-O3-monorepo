@@ -111,7 +111,7 @@ export const buttonStyles = cva(
         mode: "link",
         tone: "primary",
         className: [
-          "text-(--text-link) hover:text-(--text-link-hover) disabled:text-(--text-link-disabled)",
+          "h-fit! text-(--text-link) hover:text-(--text-link-hover) disabled:text-(--text-link-disabled)",
           "focus:rounded-[4px] focus:text-(--text-link-active) focus:border-[var(--stroke-secondary-button-hover)] focus:shadow-[0_0_0_4px_var(--color-navy-primary-900---p)] focus:outline-none",
         ],
       },

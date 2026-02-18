@@ -1026,7 +1026,7 @@
   }
 
   .text-display-7xl {
-    font-size: var(--text-jumper-text-class-display-7xl);
+    font-size: var(--text-jumper-text-class-display-7xl); 
     line-height: var(--line-height-jumper-display-7xl);
     font-family: var(--type-font-family-display);
   }
@@ -1059,13 +1059,13 @@
   .text-rich-body {
     font-size: var(--text-jumper-text-class-rich-text-body);
     line-height: var(--line-height-jumper-rich-text-body);
-        font-family: var(--type-font-family-text);
-
+    font-family: var(--type-font-family-text);
   }
 
   .text-rich-image-caption {
     font-size: var(--text-jumper-text-class-rich-text-image-caption);
     line-height: var(--line-height-jumper-rich-text-image-caption);
+    font-family: var(--type-font-family-text);
   }
 
   .text-rich-hyperlink {
