@@ -7,7 +7,7 @@ const meta: Meta<typeof BlogPagination> = {
   title: 'Molecules/BlogPagination',
   component: BlogPagination,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
   argTypes: {
