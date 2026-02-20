@@ -1,16 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { AccordionItem } from '@repo/ui'
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { AccordionItem } from "@repo/ui";
 
 const meta: Meta<typeof AccordionItem> = {
-  title: 'Organisms/AccordionItem',
+  title: "Organisms/AccordionItem",
   component: AccordionItem,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   parameters: {
     docs: {
       description: {
-        component:
-          'AccordionItem is a collapsible content component.'
-         
+        component: "AccordionItem is a collapsible content component.",
       },
     },
   },
@@ -18,7 +16,7 @@ const meta: Meta<typeof AccordionItem> = {
     (Story) => (
       <div
         style={{
-          background: '#f8f8f8',
+          background: "#f8f8f8",
         }}
       >
         <Story />
@@ -28,47 +26,67 @@ const meta: Meta<typeof AccordionItem> = {
   argTypes: {
     items: {
       control: false,
-      description: 'AccordionItem items (Storyblok mapped data)',
+      description: "AccordionItem items (Storyblok mapped data)",
     },
     colorMode: {
-      control: 'select',
-      options: ['light', 'dark'],
-      description: 'light  | dark',
+      control: "select",
+      options: ["light", "dark"],
+      description: "light  | dark",
     },
-  
   },
-}
+};
 
-export default meta
-type Story = StoryObj<typeof AccordionItem>
+export default meta;
+type Story = StoryObj<typeof AccordionItem>;
 export const Default: Story = {
   args: {
     items: [
       {
-        _uid: 'item-1',
-        title: 'Design Sytems',
-         icon: {
-          id: 'icon-1',
-          filename: 'https://cdn-icons-png.flaticon.com/512/3524/3524636.png',
-          alt: 'Settings icon',
+        _uid: "item-1",
+        title: "Design Systems",
+        icon: {
+          id: "icon-1",
+          filename: "https://cdn-icons-png.flaticon.com/512/3524/3524636.png",
+          alt: "Settings icon",
         },
-        content: <p>A design system creates order out of complexity. It ensures every component—from buttons to banners—works together seamlessly and reflects a unified brand language.</p>,
+
+        content: [
+          {
+            type: "paragraph",
+            content: [
+              {
+                type: "text",
+                text: "A design system creates order out of complexity. It ensures every component—from buttons to banners—works together seamlessly and reflects a unified brand language.",
+              },
+            ],
+          },
+        ],
+
         cta: {
-          label: 'Go to settings',
-          href: '#',
+          label: "Go to settings",
+          href: "/settings",
         },
       },
       {
-        _uid: 'item-2',
-        title: 'Billing & invoices',
-        content: <p>View invoices, update payment methods, and more.</p>,
-         icon: {
-          id: 'icon-2',
-          filename: 'https://cdn-icons-png.flaticon.com/512/3524/3524659.png',
-          alt: 'Billing icon',
+        _uid: "item-2",
+        title: "Billing & invoices",
+        icon: {
+          id: "icon-2",
+          filename: "https://cdn-icons-png.flaticon.com/512/3524/3524659.png",
+          alt: "Billing icon",
         },
-      
+         content: [
+          {
+            type: "paragraph",
+            content: [
+              {
+                type: "text",
+                text: "View invoices, update payment methods, and more.",
+              },
+            ],
+          } 
+        ],
       },
     ],
-  },
-}
+  } as any,
+};

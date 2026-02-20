@@ -1026,7 +1026,7 @@
   }
 
   .text-display-7xl {
-    font-size: var(--text-jumper-text-class-display-7xl); 
+    font-size: var(--text-jumper-text-class-display-7xl);
     line-height: var(--line-height-jumper-display-7xl);
     font-family: var(--type-font-family-display);
   }
@@ -1077,6 +1077,12 @@
     font-size: var(--text-jumper-text-class-rich-text-blockquote);
     line-height: var(--line-height-jumper-rich-text-blockquote);
   }
+  .font-heading-display {
+    font-family: var(--type-font-family-display);
+  }
+  .font-heading-accent{
+    font-family: var(--type-font-family-text);
+  }
 
   .focus-primary,
   .focus-error {
@@ -1110,4 +1116,19 @@
       color: var(--text-body);
     }
   }
+
+   .section-padding-xl {
+    padding-top: var(--padding-top-down-sectional-96-72-48-xl);
+    padding-bottom: var(--padding-top-down-sectional-96-72-48-xl);
+    padding-left: var(--padding-side-sectional-80-64-16);
+    padding-right: var(--padding-side-sectional-80-64-16);
+  }
+  .section-padding-xl-top-bottom{
+     padding-top: var(--padding-top-down-sectional-96-72-48-xl);
+    padding-bottom: var(--padding-top-down-sectional-96-72-48-xl);
+  }
+  .section-padding-md {
+    padding: var(--padding-56-48-48) var(--padding-32-24-24);
+  }
+
 }

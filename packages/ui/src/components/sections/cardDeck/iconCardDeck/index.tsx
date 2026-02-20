@@ -29,21 +29,11 @@ export interface IconCardDeckProps extends SbBlokData {
 
 export const IconCardDeck: FC<IconCardDeckProps> = ({ heading, eyebrow, body, rows, theme, ...blok }) => {
   return (
-    <div {...storyblokEditable(blok)} className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+    <div {...storyblokEditable(blok)} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="flex flex-col gap-12 sm:gap-16">
       {(heading?.heading || eyebrow?.eyebrow || (body && body.length > 0)) &&
-        <div className="max-w-[1008px] mx-auto">
+        <div className="max-w-252 mx-auto">
           <div className="flex flex-col items-center gap-4">
-            {Array.isArray(eyebrow) && eyebrow.length > 0 ? (
-              <div {...storyblokEditable(eyebrow[0])}>{renderEyebrow(eyebrow[0])}</div>
-            ) : (
-              eyebrow?.eyebrow && (
-                <Eyebrow
-                  text={eyebrow.eyebrow} 
-                  as={(eyebrow.elementType || 'h6') as 'h6' | 'span' | 'div'}
-                />
-              )
-            )}
             {Array.isArray(heading) && heading.length > 0 ? (
               <div {...storyblokEditable(heading[0])}>{renderHeading(heading)}</div>
             ) : (

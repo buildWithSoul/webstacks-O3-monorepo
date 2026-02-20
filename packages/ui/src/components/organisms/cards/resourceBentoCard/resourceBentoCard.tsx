@@ -85,10 +85,12 @@ export const ResourceBentoCard: FC<ResourceBentoCardProps> = ({
 
         {title && (
           <Heading as='h3' className={twMerge(
-            'text-(--text-headings-dark)',
             size==='sm' ? 
             'text-display-xl mb-2' : 'text-display-2xl mb-4'
-            )} >{title}</Heading>
+            )} 
+            heading={title}
+
+            ></Heading>
         )}
        
 

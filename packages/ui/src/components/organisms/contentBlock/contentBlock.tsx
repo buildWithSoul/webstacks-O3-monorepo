@@ -1,35 +1,36 @@
 import { storyblokEditable, SbBlokData } from "@storyblok/react";
 import { RichText } from "../../molecules/richText/richText";
 import { twMerge } from "tailwind-merge";
-import { Eyebrow, Heading, Button } from "../../atoms";
+import { Eyebrow, Heading, Button, EyebrowBlockProps } from "../../atoms";
 import { RichTextContent } from "../../../types/storyblok";
+import { ButtonProps } from "../../atoms/button";
 
 interface ContentBlockProps extends SbBlokData {
   blok: {
-    _uid: string;
-    component: string;
-    eyebrow?: string;
-    headline?: string;
+    eyebrow?: EyebrowBlockProps[];
+    heading?:string;
     content?: RichTextContent;
     subheading?: string;
-    buttons?: {
-      _uid: string;
-      label: string;
-      href?: string;
-      variant?: "primary" | "secondary";
-      target?: string;
-    }[];
+    buttons?: ButtonProps[];
     layout?: "stacked" | "leading" | "split";
   };
 }
 
 export function ContentBlock({ blok }: ContentBlockProps) {
-  const { eyebrow, headline, content, buttons, subheading, layout = "stacked" } = blok;
+  const {
+    eyebrow,
+    heading,
+    content,
+    buttons,
+    subheading,
+    layout = "stacked",
+  } = blok;
 
   const layoutClasses = {
-    stacked: "max-w-3xl mx-auto text-center",
-    leading: "max-w-4xl",
-    split: "grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center max-w-6xl mx-auto",
+    stacked: "mx-auto text-center",
+    leading: "",
+    split:
+      "grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center",
   };
 
   const buttonContainerClasses = {
@@ -39,29 +40,24 @@ export function ContentBlock({ blok }: ContentBlockProps) {
   };
 
   return (
-    <section {...storyblokEditable(blok)}>
-      <div className={twMerge(layoutClasses[layout])}>
+    <div {...storyblokEditable(blok)}>
+      <div className={twMerge(layoutClasses[layout], 'max-w-(--widths-1280-704-343) mx-auto')}>
         <div>
-          {eyebrow && <Eyebrow text={eyebrow} />}
+          {eyebrow && eyebrow.length > 0 && <Eyebrow {...eyebrow[0]} />}
 
-          {headline && (
-            <Heading as="h1" className="text-display-5xl mb-4">
-              {headline}
-            </Heading>
+          {heading && (
+            <Heading as="h1" heading={heading} className="text-display-5xl mb-4"/>
+             
           )}
 
           {layout !== "split" && subheading && (
-            <p className="text-sm mb-4 text-(--text-body-dark)">
-              {subheading}
-            </p>
+            <p className="text-sm mb-4 text-(--text-body-dark)">{subheading}</p>
           )}
         </div>
 
         <div>
           {layout === "split" && subheading && (
-            <p className="text-sm mb-4 text-(--text-body-dark)">
-              {subheading}
-            </p>
+            <p className="text-sm mb-4 text-(--text-body-dark)">{subheading}</p>
           )}
 
           {content && (
@@ -91,6 +87,6 @@ export function ContentBlock({ blok }: ContentBlockProps) {
           )}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

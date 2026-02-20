@@ -1,21 +1,27 @@
-import type { FC, HTMLAttributes } from 'react';
+import { storyblokEditable, SbBlokData } from "@storyblok/react";
+import type { FC } from "react";
 
-export interface EyebrowProps extends HTMLAttributes<HTMLSpanElement> {
-  text: string;
-  as?: 'h6' | 'span' | 'div';
+
+export interface EyebrowBlockProps extends SbBlokData {
+  component: "eyebrow";
+  eyebrow: string;
+  elementType?: "h6" | "span" | "div" | 'p' | 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
 }
 
-export const Eyebrow: FC<EyebrowProps> = ({ 
-  text, 
-  as = 'h6', 
-  className, 
-  ...props 
+export const Eyebrow: FC<EyebrowBlockProps> = ({
+  eyebrow,
+  elementType = "h6",
+  ...blok
 }) => {
-  const Component = as;
-  
+  const Component = elementType;
+console.log(eyebrow, "came here")
   return (
-    <span className={`text-mono-xs font-medium text-(--text-eyebrow)  uppercase ${className || ''}`} {...props}>
-      <Component className="">{text}</Component>
+    <span
+      {...storyblokEditable(blok)}
+      className={
+        "text-mono-xs font-medium text-(--text-eyebrow) uppercase"}
+    >
+      <Component>{eyebrow}</Component>
     </span>
   );
 };

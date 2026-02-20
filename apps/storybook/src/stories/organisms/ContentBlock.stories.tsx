@@ -28,8 +28,15 @@ type Story = StoryObj<typeof ContentBlock>
 const baseBlok = {
   _uid: 'content-block-uid',
   component: 'content_block',
-  eyebrow: 'Eyebrow Example',
-  headline: 'Where performance meets possibility',
+  eyebrow:  [
+    {
+    _uid: 'eyebrow-1',
+    component: 'eyebrow',
+    eyebrow: 'Eyebrow example',
+    elementType: 'h6',
+  }
+  ],
+  heading: 'Where performance meets possibility',
   subheading:
     'Every website should be built to evolve. From the first line of code to the final interaction, it’s a living product designed to adapt, scale, and drive growth over time.',
   content: {

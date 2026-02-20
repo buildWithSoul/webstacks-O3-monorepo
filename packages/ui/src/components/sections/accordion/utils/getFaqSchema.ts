@@ -1,10 +1,10 @@
-import { AccordionItemProps } from "../../../molecules/accordion";
+import { AccordionItem } from "../../../organisms/accordion/accordion";
 
 
-export const getFaqSchema = (accordionItems: AccordionItemProps[], schemaName?: string | null) => {
+export const getFaqSchema = (accordionItems: AccordionItem[], schemaName?: string | null) => {
   const Accordion = accordionItems.map(item => ({
     '@type': 'Question',
-    name: item?.label || '',
+    name: item?.title || '',
     acceptedAnswer: {
       '@type': 'Answer',
       text: item.content ,

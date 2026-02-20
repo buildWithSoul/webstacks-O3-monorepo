@@ -1,1 +1,1 @@
-export {Accordion as AccordionItem} from './accordion'
+export { AccordionItem} from './accordion'

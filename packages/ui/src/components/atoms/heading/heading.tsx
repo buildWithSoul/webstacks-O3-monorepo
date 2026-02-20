@@ -1,25 +1,28 @@
 import React, { forwardRef, Ref } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { storyblokEditable, SbBlokData } from "@storyblok/react";
+import { RichTextContent } from '../../../types/storyblok';
+import { RichText } from '../../molecules/richText/richText';
 
 // Valid heading tags
 const HeadingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
 type HeadingTag = typeof HeadingTags[number];
 
-export const headingVariants = cva('relative font-medium text-(--text-headings-dark)', {
+export const headingVariants = cva('relative font-medium text-(--text-headings)', {
   variants: {
     size: {
       '2xs': 'text-display-2xs',
       xs: 'text-display-xs',
-      sm: 'text-display-2xs sm:text-display-xs md:text-display-sm',
-      md: 'text-display-xs sm:text-display-sm md:text-display-md',
-      lg: 'text-display-sm sm:text-display-md md:text-display-lg',
-      xl: 'text-display-sm sm:text-display-md lg:text-display-lg xl:text-display-xl',
-      '2xl': 'text-display-md sm:text-display-lg lg:text-display-xl xl:text-display-2xl',
-      '3xl': 'text-display-lg sm:text-display-xl lg:text-display-2xl xl:text-display-3xl',
-      '4xl': 'text-display-xl sm:text-display-2xl lg:text-display-3xl xl:text-display-4xl',
-      '5xl': 'text-display-2xl sm:text-display-3xl lg:text-display-4xl xl:text-display-5xl',
-      '6xl': 'text-display-3xl sm:text-display-4xl lg:text-display-5xl xl:text-display-6xl',
-      '7xl': 'text-display-4xl sm:text-display-5xl lg:text-display-6xl xl:text-display-7xl',
+      sm: 'text-display-sm',
+      md: 'text-display-md',
+      lg: 'text-display-lg',
+      xl: 'text-display-xl',
+      '2xl': 'text-display-2xl',
+      '3xl': 'text-display-3xl',
+      '4xl': 'text-display-4xl',
+      '5xl': 'text-display-5xl',
+      '6xl': 'text-display-6xl',
+      '7xl': 'text-display-7xl',
     },
     weight: {
       normal: 'font-normal',
@@ -49,10 +52,11 @@ export const headingVariants = cva('relative font-medium text-(--text-headings-d
 
 interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement>, VariantProps<typeof headingVariants> {
   as?: HeadingTag;
-  children: React.ReactNode;
+  heading?: string
   headingSize?: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl';
   fontFamily?: 'display' | 'accent' | 'body' | 'eyebrow';
   textTransform?: 'none' | 'uppercase' | 'lowercase' | 'capitalize';
+  children?:React.ReactNode
 }
 
 export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
@@ -65,6 +69,7 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
       fontFamily,
       textTransform,
       className = '',
+      heading,
       children,
       ...rest
     },
@@ -80,11 +85,11 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
     
     return (
       <HeadingComponent
-        className={`${headingVariants({ size: finalSize, weight, fontFamily })} ${className}`}
+        className={`${headingVariants({ size: finalSize, weight, fontFamily })} ${className} `}
         ref={ref}
         {...rest}
       >
-        {children}
+        {heading || children}
       </HeadingComponent>
     );
   }

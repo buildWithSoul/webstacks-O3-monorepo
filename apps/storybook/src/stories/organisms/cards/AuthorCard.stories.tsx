@@ -12,18 +12,7 @@ const meta: Meta<typeof AuthorCard> = {
           'AuthorCard displays author information including name, company, bio, and social links. '      },
     },
   },
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          padding: '24px',
-          background: '#f8f8f8',
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
+ 
   argTypes: {
     name: {
       control: 'text',

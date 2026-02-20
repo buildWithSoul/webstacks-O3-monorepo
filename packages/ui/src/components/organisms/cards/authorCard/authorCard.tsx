@@ -31,8 +31,7 @@ export const AuthorCard: FC<AuthorCardProps> = ({
     >
       <div className="flex flex-col ">
       
-        <Heading className='text-display-2xl  text-(--text-headings-dark)"'>
-            {name}
+        <Heading heading={name} headingSize='2xl' className='text-display-2xl  text-(--text-headings-dark)"'>
         </Heading>
 
         {company && (

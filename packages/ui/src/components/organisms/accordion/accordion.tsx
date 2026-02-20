@@ -6,16 +6,18 @@ import { twMerge } from "tailwind-merge";
 import type { SbBlokData } from "@storyblok/react";
 import { storyblokEditable } from "@storyblok/react";
 import { Button, Icon } from "../../atoms";
+import { RichTextContent } from "../../../types/storyblok";
+import { RichText } from "../../molecules/richText/richText";
 
 type StoryblokImage = {
   id: string;
   filename: string;
   alt?: string;
 };
-type AccordionItem = {
+export type AccordionItem = {
   _uid: string;
   title: string;
-  content: React.ReactNode;
+  content: RichTextContent;
   cta?: {
     label: string;
     href: string;
@@ -23,18 +25,18 @@ type AccordionItem = {
   icon?: StoryblokImage;
 };
 
-export interface AccordionProps extends SbBlokData {
+export interface AccordionItemProps extends SbBlokData {
   items: AccordionItem[];
   colorMode?: "light" | "dark";
   className?: string;
 }
 
-export function Accordion({
+export function AccordionItem({
   items,
   colorMode = "light",
   className,
   ...blok
-}: AccordionProps) {
+}: AccordionItemProps) {
   return (
     <AccordionPrimitive.Root
       type="single"
@@ -117,15 +119,16 @@ export function Accordion({
               data-blok-field="content"
               className=" text-(--text-body-dark) text-sm flex flex-col gap-(--gaps-16-12-12)"
             >
-              <div>{item.content}</div>
+             <RichText doc={item.content}/>
 
-              {item.cta && (
+              {/* {item.cta && (
                 <Button
                   mode="link"
                   label={item.cta.label}
                   href={item.cta.href}
+                  className="w-fit"
                 />
-              )}
+              )} */}
             </div>
           </AccordionPrimitive.Content>
         </AccordionPrimitive.Item>

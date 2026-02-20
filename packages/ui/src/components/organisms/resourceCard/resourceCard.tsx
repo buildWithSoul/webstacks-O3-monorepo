@@ -130,9 +130,9 @@ export const ResourceCard: FC<ResourceCardProps> = (props) => {
           as="h3" 
           size="lg" 
           weight="bold" 
+          heading={title}
           className="text-display-xl text-(--text-headings-dark) mb-2 group-hover:text-link-hover transition-colors duration-200 font-serif"
         >
-          {title}
         </Heading>
       )}
       
