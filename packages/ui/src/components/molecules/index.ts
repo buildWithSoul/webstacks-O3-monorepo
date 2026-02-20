@@ -11,7 +11,7 @@ export * from './section';
 export { default as Breadcrumbs } from './breadcrumbs';
 export { default as CodeEmbed } from './codeEmbed';
 export type { CodeEmbedProps } from './codeEmbed';
-export { default as CTABar } from './ctaBar';
+export { default as CTABar } from '../modules/ctaBar';
 export * from './cards';
 export * from './dropdown';
 export { VideoModal } from './videoModal';
@@ -38,6 +38,8 @@ export * from './attribution'
 export * from './drawer'
 export * from './inputField'
 export * from './tab'
+export * from './toast'
+export * from './tooltip'
 
 // Example:
 // export { default as SearchForm } from './SearchForm';

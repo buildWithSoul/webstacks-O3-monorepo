@@ -10,10 +10,11 @@ type BaseProps = {
   rows?: number;
 };
 
-type InputFieldProps = BaseProps & (
-  | (InputHTMLAttributes<HTMLInputElement> & { variant?: "text" | "select" })
-  | (TextareaHTMLAttributes<HTMLTextAreaElement> & { variant: "textarea" })
-);
+type InputFieldProps = BaseProps &
+  (
+    | (InputHTMLAttributes<HTMLInputElement> & { variant?: "text" | "select" })
+    | (TextareaHTMLAttributes<HTMLTextAreaElement> & { variant: "textarea" })
+  );
 
 export function InputField({
   label,
@@ -54,7 +55,13 @@ export function InputField({
           id={inputId}
           disabled={disabled}
           rows={rows}
-          className={twMerge(commonClasses, 'rounded', 'py-3', 'px-3.5', 'resize-none')}
+          className={twMerge(
+            commonClasses,
+            "rounded",
+            "py-3",
+            "px-3.5",
+            "resize-none"
+          )}
           {...(props as TextareaHTMLAttributes<HTMLTextAreaElement>)}
         />
       );
@@ -86,10 +93,9 @@ export function InputField({
       {label && (
         <label
           htmlFor={inputId}
-          className={twMerge(
-            "text-sm font-medium tracking-wide",
-            error ? "text-(--text-error)" : "text-(--text-primary)"
-          )}
+          className={`text-mono-sm font-medium tracking-wide ${
+            error ? "text-(--text-error)" : "text-(--text-headings)"
+          }`}
         >
           {label}
         </label>

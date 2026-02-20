@@ -27,31 +27,52 @@ const Pagination:FC<PaginationProps> = ({ totalPages, baseUrl }) => {
   }
 
   return (
-    <div className="flex gap-6 items-center justify-center">
+    <div className="flex w-full items-center justify-between gap-4 md:gap-8">
       <Button
-        className=""
-        variant="primary"
+        mode="link"
+        size="sm"
         leadingIcon="chevron-left"
-        disabled={currentPage===1}
+        disabled={currentPage === 1}
         onClick={() => handlePage(currentPage - 1)}
       >
-        Prev
+        <span>Back</span>
       </Button>
-      {Array(totalPages).fill(null).map((_, index) => (
-        <button
-          key={`page-item-${index + 1}`}
-          className={twMerge('size-10 rounded-md cursor-pointer', index + 1 === currentPage ? 'bg-neutral-900 text-white' : 'bg-transparent text-neutral-900')}
-          onClick={() => handlePage(index + 1)}
-        >{index + 1}</button>
-      ))}
+
+      <div className="flex items-center gap-3">
+        <span className="text-sm font-medium text-(--text-link) md:hidden">
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <div className="hidden items-center gap-3 md:flex">
+          {Array(totalPages).fill(null).map((_, index) => (
+            <button
+              key={`page-item-${index + 1}`}
+              className={twMerge(
+                'flex focus:focus-primary size-10 cursor-pointer items-center justify-center rounded-md border text-md font-semibold transition-all',
+                index + 1 === currentPage
+                  ? 'border-(--stroke-secondary-button-hover) bg-(--surface-pagination) text-button-secondary'
+                  : 'border-(--stroke-pagination) text-body hover:bg-(--surface-pagination)'
+              )}
+              onClick={() => handlePage(index + 1)}
+              aria-current={index + 1 === currentPage ? 'page' : undefined}
+            >
+              <span className="text-(--text-link) text-sm font-medium mt-0.5">
+                {index + 1}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       <Button
-        className=""
-        variant="primary"
+        mode="link"
+        tone="primary"
+        size="sm"
         trailingIcon="chevron-right"
-        disabled={currentPage===totalPages}
+        disabled={currentPage === totalPages}
         onClick={() => handlePage(currentPage + 1)}
       >
-        Next
+        <span>Next</span>
       </Button>
     </div>
   )

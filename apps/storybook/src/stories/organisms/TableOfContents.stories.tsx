@@ -34,7 +34,7 @@ const meta: Meta<typeof TableOfContents> = {
   title: 'Organisms/TableOfContents',
   component: TableOfContents,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
   argTypes: {

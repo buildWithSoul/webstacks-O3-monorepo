@@ -13,6 +13,7 @@ export * from './switchback';
 export * from './accordion';
 export * from './awardsBlade';
 export * from './formBlock';
-export * from './cardDeck'
+export * from './cardDeck';
+export * from './conversionPanel'
 
 

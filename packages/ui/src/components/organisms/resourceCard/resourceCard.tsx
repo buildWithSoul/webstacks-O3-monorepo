@@ -1,9 +1,6 @@
-
-
-
 import type { FC } from 'react';
 import { getResourceRoute, RESOURCE_TYPE_LABELS } from '../../../lib';
-import { Heading, Link } from '../../atoms';
+import { Button, Heading, Link } from '../../atoms';
 import Image from '../../molecules/image';
 
 // Universal resource type that handles blogs, case studies, webinars, and press releases
@@ -34,7 +31,7 @@ export interface ResourceCardProps {
 }
 
 // Helper function to extract plain text from portable text body
-const extractPlainText = (body: any[]): string => {
+export const extractPlainText = (body: any[]): string => {
   if (!body || !Array.isArray(body)) return '';
   
   let text = '';
@@ -106,10 +103,10 @@ export const ResourceCard: FC<ResourceCardProps> = (props) => {
   const resourceUrl = `${getResourceRoute(_type)}/${resourceSlug}`;
   
   return (
-    <Link href={resourceUrl} className="group relative flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-200 hover:shadow-lg">
+    <Link href={resourceUrl} className="group max-w-85.75 md:max-w-84.25 lg:max-w-101.25 relative flex h-full flex-col overflow-hidden transition-all duration-200 hover:border-(--stroke-card-hover) bg-(--surface-card) border  border-(--stroke-card)">
       {/* Featured Image */}
       {displayImage && (
-        <div className="relative aspect-[16/9] overflow-hidden">
+        <div className="relative aspect-video overflow-hidden">
           <Image
             {...displayImage} 
             alt={displayImage?.alt || title || 'Resource'} 
@@ -117,29 +114,15 @@ export const ResourceCard: FC<ResourceCardProps> = (props) => {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" 
             aspectRatio="16/9" 
           />
-          {/* Badge */}
-          {showBadge && (
-            <div className="absolute top-4 left-4 px-3 py-1.5 bg-background/90 backdrop-blur-sm rounded-full">
-              <span className="text-xs font-semibold text-heading uppercase tracking-wide">
-                {badgeLabel}
-              </span>
-            </div>
-          )}
         </div>
       )}
       
       {/* Content */}
-      <div className="flex flex-col flex-grow bg-secondary-background p-4.5 lg:p-6">
-        {/* Date and Category */}
-        {/* <div className="flex dark items-center gap-2 text-sm font-medium text-heading mb-6">
-          {publishedDate && (
-            <>
-              <span>{formatDate(publishedDate)}</span>
-              <span className="text-body">|</span>
-            </>
-          )}
-          <span className="text-accent">{category}</span>
-        </div> */}
+      <div className="flex flex-col grow p-6">
+        {/* Category */}
+        <span className="text-xs font-medium text-(--text-link) uppercase tracking-wide mb-2">
+          {category}
+        </span>
       
       {/* Title */}
       {title && (
@@ -147,30 +130,22 @@ export const ResourceCard: FC<ResourceCardProps> = (props) => {
           as="h3" 
           size="lg" 
           weight="bold" 
-          className="dark text-heading leading-tight mb-6 group-hover:text-link-hover transition-colors duration-200"
+          heading={title}
+          className="text-display-xl text-(--text-headings-dark) mb-2 group-hover:text-link-hover transition-colors duration-200 font-serif"
         >
-          {title}
         </Heading>
       )}
       
       {/* Description */}
       {displayText && (
-        <p className="dark text-md text-body leading-relaxed line-clamp-3 flex-grow mb-8">
+        <p className="text-sm text-(--text-body-dark) line-clamp-4 grow mb-4 ">
           {displayText}
         </p>
       )}
       
         {/* Learn More Link */}
-        <div className="mt-auto">
-          <span className="inline-flex items-center gap-2 text-md font-medium text-link hover:text-link-hover transition-colors dark">
-            Learn More
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-              <path d="M4.66667 11.3333L11.3333 4.66667M11.3333 4.66667H4.66667M11.3333 4.66667V11.3333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </span>
-        </div>
+        <Button className='w-fit' mode='link' label='Learn more'/>
       </div>
     </Link>
   );
 };
-

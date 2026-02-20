@@ -1,26 +1,36 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { within, expect } from '@storybook/test';
-import { ImageCardDeck } from '@repo/ui';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { within, expect } from "@storybook/test";
+import { ImageCardDeck } from "@repo/ui";
 
-const mockEyebrow = {
-  eyebrow: 'Use cases',
-  elementType: 'h6',
-};
+const mockEyebrow = [
+  {
+    _uid: "eyebrow-1",
+    component: "eyebrow",
+    eyebrow: "Use cases",
+    elementType: "h6",
+  },
+];
 
-const mockHeading = {
-  heading: 'Designed for every team',
-  elementType: 'h2',
-};
+const mockHeading = [
+  {
+    _uid: "heading-1",
+    component: "heading",
+    heading: "Designed for every team",
+    elementType: "h2",
+    headingSize: "4xl",
+    fontFamily: "display",
+  },
+];
 
 const mockBody = {
-  type: 'doc',
+  type: "doc",
   content: [
     {
-      type: 'paragraph',
+      type: "paragraph",
       content: [
         {
-          type: 'text',
-          text: 'Explore how different teams use our platform to move faster.',
+          type: "text",
+          text: "Explore how different teams use our platform to move faster.",
         },
       ],
     },
@@ -36,52 +46,54 @@ const image = (src: string, alt: string) => ({
 });
 
 const card = (title: string, description: string, img: string) => ({
-  _key: crypto.randomUUID(),
+  _uid: crypto.randomUUID(),
   heading: title,
-  body: [
-    {
-      _type: 'block',
-      children: [{ _type: 'span', text: description }],
-    },
-  ],
+  body: {
+    type: "doc",
+    content: [
+      {
+        type: "paragraph",
+        content: [{ type: "text", text: description }],
+      },
+    ],
+  },
   ...image(img, title),
 });
 
 const rows2 = [
   {
-    cardsPerRow: '2',
+    cardsPerRow: "2",
     cards: [
       card(
-        'Engineering teams',
-        'Ship features faster with confidence.',
-        'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop'
+        "Engineering teams",
+        "Ship features faster with confidence.",
+        "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop"
       ),
       card(
-        'Product teams',
-        'Align strategy with execution.',
-        'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop'
+        "Product teams",
+        "Align strategy with execution.",
+        "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop"
       ),
     ],
   },
 ];
 
-
-const basePlay: Story['play'] = async ({ canvasElement }) => {
+const basePlay: Story["play"] = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   await expect(
-    canvas.getByText('Designed for every team'),
+    canvas.getByText("Designed for every team")
   ).toBeInTheDocument();
 
   await expect(
-    canvas.getByText('Use cases'),
+    canvas.getByText("Use cases")
   ).toBeInTheDocument();
 
   await expect(
-    canvas.getByText(/explore how different teams/i),
+    canvas.getByText(/explore how different teams/i)
   ).toBeInTheDocument();
 
-  const images = canvasElement.querySelectorAll('img');
+  const images = canvasElement.querySelectorAll("img");
   await expect(images.length).toBeGreaterThan(0);
 
   const grid = canvasElement.querySelector('[class*="grid"]');
@@ -89,19 +101,18 @@ const basePlay: Story['play'] = async ({ canvasElement }) => {
 };
 
 const meta: Meta<typeof ImageCardDeck> = {
-  title: 'Sections/ImageCardDeck',
+  title: "Sections/ImageCardDeck",
   component: ImageCardDeck,
-
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     heading: { control: false },
     eyebrow: { control: false },
     body: { control: false },
     rows: { control: false },
     theme: {
-      control: 'select',
-      options: ['light', 'dark', 'sugar', 'bright'],
-      table: { category: 'Appearance' },
+      control: "select",
+      options: ["light", "dark", "sugar", "bright"],
+      table: { category: "Appearance" },
     },
   },
 };
@@ -115,9 +126,7 @@ export const TwoCard: Story = {
     heading: mockHeading,
     body: mockBody,
     rows: rows2,
-    theme: 'light',
-  },
+    theme: "light",
+  } as any,
   play: basePlay,
 };
-
-
