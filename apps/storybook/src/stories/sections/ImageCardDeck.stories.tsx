@@ -1,41 +1,59 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { within, expect } from "@storybook/test";
-import { ImageCardDeck } from "@repo/ui";
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { within, expect } from '@storybook/test'
+import { ImageCardDeck } from '@repo/ui'
+import type { ContentBlockBlok } from '@repo/ui'
 
-const mockEyebrow = [
-  {
-    _uid: "eyebrow-1",
-    component: "eyebrow",
-    eyebrow: "Use cases",
-    elementType: "h6",
-  },
-];
-
-const mockHeading = [
-  {
-    _uid: "heading-1",
-    component: "heading",
-    heading: "Designed for every team",
-    elementType: "h2",
-    headingSize: "4xl",
-    fontFamily: "display",
-  },
-];
-
-const mockBody = {
-  type: "doc",
-  content: [
+const contentBlockBlok: ContentBlockBlok = {
+  _uid: 'content-block-1',
+  component: 'content_block',
+  eyebrow: [
     {
-      type: "paragraph",
-      content: [
+      _uid: 'eyebrow-1',
+      component: 'eyebrow',
+      eyebrow: 'Use cases',
+      elementType: 'h6',
+    },
+  ],
+  heading: 'Conservative by design, dependable by nature',
+  layout:'leading',
+   ctaBar: [
+    {
+      _uid: 'cta-bar-1',
+      component: 'cta_bar',
+      type: 'button',
+      buttons: [
         {
-          type: "text",
-          text: "Explore how different teams use our platform to move faster.",
+          _uid: 'btn-1',
+          label: 'Get started',
+          href: '#',
+          target: '_self',
+        },
+        {
+          _uid: 'btn-2',
+          label: 'Learn more',
+          href: '#',
+          target: '_self',
+          tone:'secondary'
         },
       ],
     },
   ],
-};
+  content: {
+    type: 'doc',
+    content: [
+      {
+        type: 'paragraph',
+        content: [
+          {
+            type: 'text',
+            text:
+              'We believe retirement strategy demands care and consistency. October Three focuses on getting the details right—delivering guidance you can trust over the long term.',
+          },
+        ],
+      },
+    ],
+  } as any,
+}
 
 const image = (src: string, alt: string) => ({
   image: {
@@ -43,90 +61,90 @@ const image = (src: string, alt: string) => ({
     filename: src,
     alt,
   },
-});
+})
 
 const card = (title: string, description: string, img: string) => ({
   _uid: crypto.randomUUID(),
+  component: 'imageTextCard',
   heading: title,
   body: {
-    type: "doc",
+    type: 'doc',
     content: [
       {
-        type: "paragraph",
-        content: [{ type: "text", text: description }],
+        type: 'paragraph',
+        content: [{ type: 'text', text: description }],
       },
     ],
   },
   ...image(img, title),
-});
+})
 
-const rows2 = [
+const rows = [
   {
-    cardsPerRow: "2",
+    cardsPerRow: '3',
     cards: [
       card(
-        "Engineering teams",
-        "Ship features faster with confidence.",
-        "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop"
+        'Engineering teams',
+        'Ship features faster with confidence.',
+        'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop'
       ),
       card(
-        "Product teams",
-        "Align strategy with execution.",
-        "https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop"
+        'Product teams',
+        'Align strategy with execution.',
+        'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop'
+      ),
+      card(
+        'Design teams',
+        'Create consistent, scalable experiences.',
+        'https://images.unsplash.com/photo-1531297484001-80022131f5a1?q=80&w=2020&auto=format&fit=crop'
       ),
     ],
   },
-];
+]
 
-const basePlay: Story["play"] = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+const meta: Meta<typeof ImageCardDeck> = {
+  title: 'Sections/ImageCardDeck',
+  component: ImageCardDeck,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: {
+    content: { control: false },
+    rows: { control: false },
+ 
+  },
+}
+
+export default meta
+type Story = StoryObj<typeof ImageCardDeck>
+
+const basePlay: Story['play'] = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
 
   await expect(
-    canvas.getByText("Designed for every team")
-  ).toBeInTheDocument();
+    canvas.getByText('Designed for every team')
+  ).toBeInTheDocument()
 
   await expect(
-    canvas.getByText("Use cases")
-  ).toBeInTheDocument();
+    canvas.getByText('Use cases')
+  ).toBeInTheDocument()
 
   await expect(
     canvas.getByText(/explore how different teams/i)
-  ).toBeInTheDocument();
+  ).toBeInTheDocument()
 
-  const images = canvasElement.querySelectorAll("img");
-  await expect(images.length).toBeGreaterThan(0);
+  const images = canvasElement.querySelectorAll('img')
+  await expect(images.length).toBeGreaterThan(0)
 
-  const grid = canvasElement.querySelector('[class*="grid"]');
-  await expect(grid).toBeInTheDocument();
-};
+  const grid = canvasElement.querySelector('[class*="grid"]')
+  await expect(grid).toBeInTheDocument()
+}
 
-const meta: Meta<typeof ImageCardDeck> = {
-  title: "Sections/ImageCardDeck",
-  component: ImageCardDeck,
-  tags: ["autodocs"],
-  argTypes: {
-    heading: { control: false },
-    eyebrow: { control: false },
-    body: { control: false },
-    rows: { control: false },
-    theme: {
-      control: "select",
-      options: ["light", "dark", "sugar", "bright"],
-      table: { category: "Appearance" },
-    },
-  },
-};
-
-export default meta;
-type Story = StoryObj<typeof ImageCardDeck>;
-
-export const TwoCard: Story = {
+export const Default: Story = {
   args: {
-    eyebrow: mockEyebrow,
-    heading: mockHeading,
-    body: mockBody,
-    rows: rows2,
-    theme: "light",
+    content: [contentBlockBlok],
+    rows,
   } as any,
   play: basePlay,
-};
+}

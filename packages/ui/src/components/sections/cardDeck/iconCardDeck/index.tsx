@@ -1,80 +1,92 @@
+'use client'
 
-import { storyblokEditable } from '@storyblok/react';
+import { storyblokEditable } from '@storyblok/react'
+import type { FC } from 'react'
+import type { SbBlokData } from '@storyblok/react'
 
-import type { FC } from 'react';
-import type { SbBlokData } from '@storyblok/react';
-import { IconTextCard, IconTextCardProps } from '../../../molecules';
-import { Eyebrow } from '../../../atoms';
-import { RichText } from '../../../molecules/richText/richText';
-import { renderEyebrow, renderHeading } from '../../../../utils/headingUtils';
+import { IconTextCard, IconTextCardProps } from '../../../molecules'
+import { ContentBlock, ContentBlockBlok } from '../../../organisms'
 
 interface IconCardRow {
-  cardsPerRow?: string;
-  cards?: IconTextCardProps[];
+  cardsPerRow?: string
+  cards?: IconTextCardProps[]
 }
 
-// Storyblok-native props interface
 export interface IconCardDeckProps extends SbBlokData {
-  component: 'iconCardDeck';
-  heading?: any;
-  eyebrow?: any;
-  body?: any;
-  rows?: IconCardRow[];
-  theme?: 'light' | 'dark';
-  responsivePadding?: any;
-  htmlId?: string;
-  backgroundImage?: any;
-  minHeight?: 'none' | 'sm' | 'md' | 'lg';
+  content?: ContentBlockBlok[]
+  rows?: IconCardRow[]
+  htmlId?: string
+  minHeight?: 'none' | 'sm' | 'md' | 'lg'
 }
 
-export const IconCardDeck: FC<IconCardDeckProps> = ({ heading, eyebrow, body, rows, theme, ...blok }) => {
+export const IconCardDeck: FC<IconCardDeckProps> = ({
+  content,
+  rows,
+  htmlId,
+  ...blok
+}) => {
   return (
-    <div {...storyblokEditable(blok)} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex flex-col gap-12 sm:gap-16">
-      {(heading?.heading || eyebrow?.eyebrow || (body && body.length > 0)) &&
-        <div className="max-w-252 mx-auto">
-          <div className="flex flex-col items-center gap-4">
-            {Array.isArray(heading) && heading.length > 0 ? (
-              <div {...storyblokEditable(heading[0])}>{renderHeading(heading)}</div>
-            ) : (
-              heading?.heading && renderHeading(heading)
-            )}
-            {body && (
-              <div {...storyblokEditable(blok)} data-blok-field="body">
-                <RichText doc={body}/>
-              </div>
-            )}
-          </div>
-        </div>
-      }
-      {rows && (
-        <div {...storyblokEditable(blok)} data-blok-field="rows" className="flex flex-col gap-8">
-          {rows.map((row, rowIndex) => (
-            <div 
-              key={rowIndex}
-              className={`grid w-full grid-cols-1 gap-8 justify-items-center ${
-                row.cardsPerRow === '2' ? 'sm:grid-cols-2' :
-                row.cardsPerRow === '3' ? 'sm:grid-cols-2 lg:grid-cols-3' :
-                'sm:grid-cols-2 lg:grid-cols-4'
-              }`}
-            >
-              {row.cards?.map((item, i) => {
-                const key = (item as any)?._uid || (item as any)?._key || i;
-                const card = <IconTextCard {...(item as any)} theme={theme} />;
-                return ((item as any) && typeof item === 'object' && 'component' in (item as any)) ? (
-                  <div key={key} {...storyblokEditable(item as any)} className="w-full h-full">
-                    {card}
-                  </div>
-                ) : (
-                  <div key={key} className="w-full h-full">{card}</div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-    </div>
-  );
-};
+    <section
+      {...storyblokEditable(blok)}
+      id={htmlId}
+      className="section-padding-xl bg-(--surface-background)"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-12 sm:gap-16">
 
+          {content?.length ? (
+            <div className="flex flex-col gap-8">
+              {content.map((nestedBlok) => (
+                <ContentBlock
+                  key={nestedBlok._uid}
+                  blok={nestedBlok}
+                />
+              ))}
+            </div>
+          ) : null}
+
+          {rows && (
+            <div
+              {...storyblokEditable(blok)}
+              data-blok-field="rows"
+              className="flex flex-col gap-8)"
+            >
+              {rows.map((row, rowIndex) => (
+                <div
+                  key={rowIndex}
+                  className={`grid w-full grid-cols-1 gap-(--scale-32) justify-items-center ${
+                    row.cardsPerRow === '2'
+                      ? 'sm:grid-cols-2'
+                      : row.cardsPerRow === '3'
+                      ? 'sm:grid-cols-2 lg:grid-cols-3'
+                      : 'sm:grid-cols-2 lg:grid-cols-4'
+                  }`}
+                >
+                  {row.cards?.map((item, i) => {
+                    const key =
+                      (item as any)?._uid ||
+                      (item as any)?._key ||
+                      i
+
+                    return (
+                      <div
+                        key={key}
+                        {...((item as any)?.component
+                          ? storyblokEditable(item as any)
+                          : {})}
+                        className="w-full h-full"
+                      >
+                        <IconTextCard {...(item as any)} />
+                      </div>
+                    )
+                  })}
+                </div>
+              ))}
+            </div>
+          )}
+
+        </div>
+      </div>
+    </section>
+  )
+}

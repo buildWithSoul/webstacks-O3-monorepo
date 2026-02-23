@@ -14,7 +14,7 @@ interface ImageProps {
   className?: string
 }
 
-export const ImageWithCaption: FC<ImageProps> = ({ blok, className }) => {
+export const ImageWithDesc: FC<ImageProps> = ({ blok, className }) => {
   if (!blok?.image?.asset?.url) return null
 
   return (

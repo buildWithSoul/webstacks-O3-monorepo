@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { ImageWithCaption } from '@repo/ui'
+import { ImageWithDesc } from '@repo/ui'
 
-const meta: Meta<typeof ImageWithCaption> = {
+const meta: Meta<typeof ImageWithDesc> = {
   title: 'Modules/Image',
-  component: ImageWithCaption,
+  component: ImageWithDesc,
   tags: ['autodocs'],
   decorators: [
     (Story) => (
@@ -25,7 +25,7 @@ const meta: Meta<typeof ImageWithCaption> = {
 
 export default meta
 
-type Story = StoryObj<typeof ImageWithCaption>
+type Story = StoryObj<typeof ImageWithDesc>
 
 export const Default: Story = {
   args: {

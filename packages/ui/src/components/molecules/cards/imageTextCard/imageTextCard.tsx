@@ -1,13 +1,10 @@
-import React from "react";
-import Image from "next/image";
-
 import type { FC } from "react";
 
-import type { PortableTextBlock } from "@portabletext/types";
 import { getLinkData, Link, LinkFragment } from "../../../atoms/link";
 import { RichTextContent } from "../../../../types/storyblok";
 import { twMerge } from "tailwind-merge";
 import { RichText } from "../../richText/richText";
+import Image from "../../image";
 
 interface StoryblokImage {
   id: string;
@@ -21,7 +18,7 @@ export interface ImageTextCardProps {
   heading?: string;
   body?: RichTextContent;
   link?: LinkFragment;
-  button?: any[]; // Storyblok button block
+  button?: any[];
   theme?: "light" | "dark";
 }
 
@@ -31,77 +28,71 @@ export const ImageTextCard: FC<ImageTextCardProps> = ({
   body,
   link,
   button,
-  theme,
 }) => {
   const url = getLinkData(link);
-  const linkData = link as any; // Type assertion for union type
+  const linkData = link as any;
   const hasLink = link && linkData.label && url !== "";
 
-  // Check if card has buttons
-  const hasButtons = button && button.length > 0;
-
   const CardContent = (
-    <>
+    <div className="relative w-full h-[430px] overflow-hidden ">
       {image && (
-        <div className="relative w-full lg:aspect-3/3 aspect-video overflow-hidden shrink-0">
-          <Image
-            src={image.filename}
-            alt={image.alt || ""}
-            width={592}
-            height={475}
-            className="absolute inset-0 size-full object-cover transition-transform duration-300 group-hover:scale-105 will-change-transform"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={false}
-          />
-        </div>
+        <div
+          className="absolute inset-0 w-full h-full bg-center bg-cover transition-transform duration-300"
+          style={{ backgroundImage: `url(${image.filename})` }}
+        />
       )}
-      <div className="flex w-full flex-col gap-4 grow p-(--padding-24-18-18) bg-(--surface-image-card)">
-        <div className="w-full flex flex-col">
-          {heading && (
-            <span
-              className={twMerge(
-                "text-(--color-base-white)! text-display-2xl",
-                (hasLink || hasButtons) &&
-                  "group-hover:text-link-hover transition-colors duration-200"
-              )}
-            >
-              {heading}
-            </span>
-          )}
 
-          {body && (
-            <div className="overflow-hidden transition-all duration-300 ease-in-out max-h-0 group-hover:mt-4 group-hover:max-h-96 opacity-0 group-hover:opacity-100 will-change-[max-height,opacity]">
-              <RichText doc={body} className="text-(--color-base-white)! text-lg" />
+      <div className="absolute w-full flex flex-col justify-end bg-(--color-navy-primary-900---p) h-fit bottom-0 p-(--padding-24-18-18)">
+        {heading && (
+          <span
+            className={twMerge(
+              "text-(--color-base-white)! text-display-2xl",
+              "transition-colors duration-200 group-hover:text-link-hover"
+            )}
+          >
+            {heading}
+          </span>
+        )}
+
+        {body && (
+          <div
+            className="
+      max-h-0
+      overflow-hidden
+      transition-[max-height]
+      duration-300
+      ease-out
+      group-hover:max-h-[200px]
+    "
+          >
+            <div className="pt-4 opacity-0 transition-opacity duration-200 delay-150 group-hover:opacity-100">
+              <RichText
+                doc={body}
+                className="text-(--color-base-white)! text-lg"
+              />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 
-  // Common wrapper classes with group - optimized transitions
-  const wrapperClasses = "group w-full block max-w-[343px] lg:max-w-[309px] hover:max-w-[378px] lg:hover:max-w-[667px] transition-all duration-300 ease-in-out will-change-[max-width]";
+  const wrapperClasses =
+    "group w-full block   transition-[max-width] duration-300 ease-in-out will-change-[max-width]";
 
-  // If there's a link, make the entire card clickable (regardless of buttons)
   if (hasLink) {
     return (
-      <Link 
-        href={link} 
-        className={wrapperClasses}
-      >
-        <div className="dark flex size-full flex-col transition-all duration-300 ease-in-out hover:shadow-lg cursor-pointer will-change-[box-shadow]">
+      <Link href={link} className={wrapperClasses}>
+        <div className="dark flex h-full flex-col cursor-pointer hover:shadow-lg transition-shadow duration-300">
           {CardContent}
         </div>
       </Link>
     );
   }
 
-  // If no link, just return the card content
   return (
     <div className={wrapperClasses}>
-      <div className="dark flex size-full flex-col">
-        {CardContent}
-      </div>
+      <div className="dark flex h-full flex-col">{CardContent}</div>
     </div>
   );
 };

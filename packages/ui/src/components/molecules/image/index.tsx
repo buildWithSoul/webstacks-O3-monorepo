@@ -5,12 +5,12 @@ import type { ImageProps as NextImageProps } from 'next/image';
 import type { FC } from 'react';
 
 export type ImageFragment = {
-  _type: string;
+  _type?: string;
   alt?: string;
   asset?: {
     _id?: string;
-    _ref: string;
-    _type: 'reference';
+    _ref?: string;
+    _type?: 'reference';
     url?: string;
     metadata?: {
       dimensions?: {

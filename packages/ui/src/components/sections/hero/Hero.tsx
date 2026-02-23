@@ -1,29 +1,44 @@
-import { storyblokEditable } from '@storyblok/react/rsc';
+'use client'
 
-type HeroProps = {
-  header?: string;
-  description?: string;
-  alignment?: 'center' | 'left' | 'right';
-  subDescription? : string;
-};
+import type { FC } from 'react'
+import Image from 'next/image'
+import { storyblokEditable, type SbBlokData } from '@storyblok/react'
+import { ContentBlock, type ContentBlockBlok } from '../../organisms'
 
-export const Hero = ({ header, description, alignment = 'center', ...blok }: HeroProps) => {
+export interface HeroBlok extends SbBlokData {
+  content?: ContentBlockBlok[]
+  image?: {
+    filename: string
+    alt?: string
+  }
+}
+
+export const Hero: FC<{ blok: HeroBlok }> = ({ blok }) => {
   return (
-    <section
-      {...storyblokEditable(blok)}
-      className="min-h-[20vh] flex items-center bg-gradient-to-br from-slate-900 to-slate-950 px-6"
-    >
-      <div className="mx-auto max-w-3xl">
-        <h1 className="mb-6 text-4xl font-bold leading-tight text-black md:text-6xl">
-          {header}
-        </h1>
+    <section {...storyblokEditable(blok)} className="section-padding-xl">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2 items-center">
 
-        <p className="mb-10 text-lg leading-relaxed text-slate-300">
-          {description}
-        </p>
+        <div >
+          {blok.content?.map((nestedBlok) => (
+            <ContentBlock
+              key={nestedBlok._uid}
+              blok={nestedBlok}
+            />
+          ))}
+        </div>
 
-    
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          {blok.image?.filename && (
+            <Image
+              src={blok.image.filename}
+              alt={blok.image.alt ?? ''}
+              fill
+              className="object-cover"
+            />
+          )}
+        </div>
+
       </div>
     </section>
-  );
-};
+  )
+}

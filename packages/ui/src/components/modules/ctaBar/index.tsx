@@ -18,12 +18,12 @@ export interface CTABarProps extends SbBlokData {
 const CTABar: FC<CTABarProps> = ({
   buttons,
   className = '',
-  type = 'button',
-  placeholder,
   ...blok
 }) => {
   const actualBlok = (blok as any)?.blok || blok
   const items = buttons || actualBlok?.buttons
+  const type = actualBlok?.type ?? 'button'
+  const placeholder = actualBlok?.placeholder ?? 'button'
 
   return (
     <div
@@ -45,7 +45,7 @@ const CTABar: FC<CTABarProps> = ({
 
       {items?.map((item: ButtonProps) => {
         const { _uid, ...buttonProps } = item as any
-        return <Button key={_uid || JSON.stringify(buttonProps)} {...buttonProps} />
+        return <Button key={_uid || JSON.stringify(buttonProps)} {...buttonProps}  />
       })}
     </div>
   )

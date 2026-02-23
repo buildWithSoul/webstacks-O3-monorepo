@@ -4,7 +4,7 @@ import { ImageTextCard } from "@repo/ui";
 import type { LinkFragment } from "@repo/ui";
 
 const meta: Meta<typeof ImageTextCard> = {
-  title: "Molecules/Cards/ImageTextCard",
+  title: "Molecules/Cards/ImageCard",
   component: ImageTextCard,
   tags: ["autodocs"],
 
@@ -47,6 +47,9 @@ const meta: Meta<typeof ImageTextCard> = {
       },
     },
   },
+  parameters:{
+    layout:'padded'
+  }
 };
 
 export default meta;

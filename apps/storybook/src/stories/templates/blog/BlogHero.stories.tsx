@@ -7,6 +7,9 @@ const meta: Meta<typeof BlogHero> = {
   title: 'Templates/Blog/BlogHero',
   component: BlogHero,
   tags: ['autodocs'],
+  parameters:{
+    layout:'fullscreen'
+  },
   argTypes: {
     post: {
       control: false,

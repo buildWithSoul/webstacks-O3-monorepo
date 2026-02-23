@@ -6,9 +6,7 @@ const meta: Meta<typeof IconTextCard> = {
   title: "Molecules/Cards/IconTextCard",
   component: IconTextCard,
   tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
+
   argTypes: {
     icon: {
       control: "text",

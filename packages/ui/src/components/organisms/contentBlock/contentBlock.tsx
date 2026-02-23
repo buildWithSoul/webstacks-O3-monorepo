@@ -1,19 +1,23 @@
-import { storyblokEditable, SbBlokData } from "@storyblok/react";
-import { RichText } from "../../molecules/richText/richText";
-import { twMerge } from "tailwind-merge";
-import { Eyebrow, Heading, Button, EyebrowBlockProps } from "../../atoms";
-import { RichTextContent } from "../../../types/storyblok";
-import { ButtonProps } from "../../atoms/button";
+'use client'
 
-interface ContentBlockProps extends SbBlokData {
-  blok: {
-    eyebrow?: EyebrowBlockProps[];
-    heading?:string;
-    content?: RichTextContent;
-    subheading?: string;
-    buttons?: ButtonProps[];
-    layout?: "stacked" | "leading" | "split";
-  };
+import { storyblokEditable, type SbBlokData } from '@storyblok/react'
+import { RichText } from '../../molecules/richText/richText'
+import { twMerge } from 'tailwind-merge'
+import { Eyebrow, Heading, type EyebrowBlockProps } from '../../atoms'
+import type { RichTextContent } from '../../../types/storyblok'
+import CTABar, { CTABarProps } from '../../modules/ctaBar'
+
+export interface ContentBlockBlok extends SbBlokData {
+  eyebrow?: EyebrowBlockProps[]
+  heading?: string
+  content?: RichTextContent
+  subheading?: string
+  ctaBar?: CTABarProps[]   
+  layout?: 'stacked' | 'leading' | 'split'
+}
+
+interface ContentBlockProps {
+  blok: ContentBlockBlok
 }
 
 export function ContentBlock({ blok }: ContentBlockProps) {
@@ -21,72 +25,64 @@ export function ContentBlock({ blok }: ContentBlockProps) {
     eyebrow,
     heading,
     content,
-    buttons,
     subheading,
-    layout = "stacked",
-  } = blok;
+    ctaBar,
+    layout = 'stacked',
+  } = blok
 
   const layoutClasses = {
-    stacked: "mx-auto text-center",
-    leading: "",
-    split:
-      "grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center",
-  };
-
-  const buttonContainerClasses = {
-    stacked: "flex flex-wrap gap-4 justify-center items-center w-full",
-    leading: "flex flex-wrap gap-4 justify-start items-center w-full",
-    split: "flex flex-wrap gap-4 justify-start items-center w-full",
-  };
-
+    stacked: 'mx-auto text-center',
+    leading: '',
+    split: 'grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center',
+  }
   return (
     <div {...storyblokEditable(blok)}>
-      <div className={twMerge(layoutClasses[layout], 'max-w-(--widths-1280-704-343) mx-auto')}>
+      <div
+        className={twMerge(
+          layoutClasses[layout],
+          'max-w-(--widths-1280-704-343) mx-auto'
+        )}
+      >
         <div>
-          {eyebrow && eyebrow.length > 0 && <Eyebrow {...eyebrow[0]} />}
+          {eyebrow?.length ? <Eyebrow {...eyebrow[0]} /> : null}
 
           {heading && (
-            <Heading as="h1" heading={heading} className="text-display-5xl mb-4"/>
-             
+            <Heading
+              as="h1"
+              heading={heading}
+              className="text-display-5xl mb-4"
+            />
           )}
 
-          {layout !== "split" && subheading && (
-            <p className="text-sm mb-4 text-(--text-body-dark)">{subheading}</p>
+          {layout !== 'split' && subheading && (
+            <p className="text-sm mb-4 text-(--text-body-dark)">
+              {subheading}
+            </p>
           )}
         </div>
 
         <div>
-          {layout === "split" && subheading && (
-            <p className="text-sm mb-4 text-(--text-body-dark)">{subheading}</p>
+          {layout === 'split' && subheading && (
+            <p className="text-sm mb-4 text-(--text-body-dark)">
+              {subheading}
+            </p>
           )}
 
           {content && (
             <RichText
               doc={content}
               className={twMerge(
-                layout === "stacked" &&
-                  "[&_ul]:w-fit [&_ul]:mx-auto [&_ul]:pl-0"
+                layout === 'stacked' &&
+                  '[&_ul]:w-fit [&_ul]:mx-auto [&_ul]:pl-0'
               )}
             />
           )}
 
-          {buttons && buttons.length > 0 && (
-            <div className={twMerge(buttonContainerClasses[layout])}>
-              {buttons.map((button, idx) => (
-                <Button
-                  key={button._uid}
-                  href={button.href}
-                  mode={"filled"}
-                  tone={idx == 0 ? "primary" : "secondary"}
-                  target={button.target}
-                >
-                  {button.label}
-                </Button>
-              ))}
-            </div>
-          )}
+          {ctaBar?.map((cta) => (
+            <CTABar key={cta._uid} blok={cta} className={`${layout === 'stacked' && 'w-fit m-auto'} mt-8`}/>
+          ))}
         </div>
       </div>
     </div>
-  );
+  )
 }
