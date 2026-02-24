@@ -1,14 +1,43 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { VideoPlayButton } from "../../atoms";
-import { StoryblokAsset } from "../../../types/storyblok";
+import { useState, type FC } from 'react'
+import { storyblokEditable, type SbBlokData } from '@storyblok/react'
+import { VideoPlayButton } from '../../atoms'
+import { twMerge } from 'tailwind-merge'
 
-type VideoProps = {
-  video: StoryblokAsset;
-  thumbnail?: StoryblokAsset;
-  autoPlay?: boolean;
-};
+export interface VideoBlok extends SbBlokData {
+  title?: string
+  videoType?: 'youtube' | 'wistia'
+  youtubeUrl?: string
+  wistiaUrl?: string
+  thumbnail?: {
+    filename?: string
+    alt?: string
+  }
+  autoPlay?: boolean,
+    classname?:string
+
+}
+
+const getVideoUrl = (blok: VideoBlok): string | null => {
+  if (blok.videoType === 'youtube' && blok.youtubeUrl) {
+    const match = blok.youtubeUrl.match(
+      /(?:youtube\.com\/(?:.*v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+    )
+    const id = match?.[1]
+    return id ? `https://www.youtube.com/embed/${id}` : null
+  }
+
+  if (blok.videoType === 'wistia' && blok.wistiaUrl) {
+    const match = blok.wistiaUrl.match(
+      /(?:wistia\.(?:com|net)\/(?:medias|embed\/iframe)\/)([a-zA-Z0-9_-]+)/
+    )
+    const id = match?.[1]
+    return id ? `https://fast.wistia.net/embed/iframe/${id}` : null
+  }
+
+  return null
+}
 
 const isEmbedUrl = (url: string): boolean => {
   const embedPatterns = [
@@ -17,27 +46,39 @@ const isEmbedUrl = (url: string): boolean => {
     'vimeo.com',
     'player.vimeo',
     'dailymotion.com/embed',
-    'storyblok.com/video/embed'
-  ];
-  return embedPatterns.some(pattern => url.includes(pattern));
-};
+    'storyblok.com/video/embed',
+  ]
+  return embedPatterns.some((pattern) => url.includes(pattern))
+}
 
-export function Video({
-  video,
-  thumbnail,
-  autoPlay = false,
-}: VideoProps) {
-  const [isPlaying, setIsPlaying] = useState(autoPlay);
+export const Video: FC<{ blok: VideoBlok }> = ({ blok }) => {
+  const {
+    thumbnail,
+    autoPlay = false,
+    title,
+    classname
+  } = blok
 
-  const videoUrl = video.filename;
-  const isEmbed = isEmbedUrl(videoUrl);
+  const [isPlaying, setIsPlaying] = useState(autoPlay)
 
+  const videoUrl = getVideoUrl(blok)
+  if (!videoUrl) return null
+
+  const isEmbed = isEmbedUrl(videoUrl)
   return (
-    <div className="relative w-full aspect-video bg-(--surface-background)">
+    <div
+      {...storyblokEditable(blok)}
+      className={
+        twMerge(
+          'relative w-(--widths-858-704-343) aspect-video bg-(--surface-background) border border-(--stroke-primary)',
+          classname
+        )
+      }
+    >
       {!isPlaying && thumbnail && (
         <img
           src={thumbnail.filename}
-          alt={thumbnail.alt ?? "Video thumbnail"}
+          alt={thumbnail.alt ?? 'Video thumbnail'}
           className="absolute inset-0 h-full w-full object-cover"
         />
       )}
@@ -61,7 +102,7 @@ export function Video({
               className="absolute inset-0 h-full w-full"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
-              title="Video player"
+              title={title || 'Video player'}
             />
           ) : (
             <video
@@ -78,5 +119,6 @@ export function Video({
         </>
       )}
     </div>
-  );
+  )
 }
+

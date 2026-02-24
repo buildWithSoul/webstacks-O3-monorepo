@@ -40,7 +40,7 @@ export function ContentBlock({ blok }: ContentBlockProps) {
       <div
         className={twMerge(
           layoutClasses[layout],
-          'max-w-(--widths-1280-704-343) mx-auto'
+          'max-w-(--widths-1280-704-343) '
         )}
       >
         <div>

@@ -59,6 +59,7 @@ const contentBlockBlok: ContentBlockBlok = {
           label: 'Learn more',
           href: '#',
           target: '_self',
+          tone: 'secondary'
         },
       ],
     },

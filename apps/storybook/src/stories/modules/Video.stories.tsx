@@ -1,34 +1,51 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { Video } from "@repo/ui";
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { Video } from '@repo/ui'
 
 const meta: Meta<typeof Video> = {
-  title: "Modules/Video",
+  title: 'Modules/Video',
   component: Video,
-  argTypes: {
-    video: { control: false, description: "Storyblok video asset" },
-    thumbnail: { control: false, description: "Storyblok thumbnail" },
-    autoPlay: { control: "boolean", description: "Autoplay video" },
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
   },
-  tags: ["autodocs"],
-};
+}
 
-export default meta;
+export default meta
+type Story = StoryObj<typeof Video>
 
-type Story = StoryObj<typeof Video>;
-
-export const Default: Story = {
+export const YouTube: Story = {
   args: {
-    video: {
-        filename: "",
-        id: "v1",
-        name: ""
+    blok: {
+      _uid: 'video-youtube',
+      component: 'video',
+      videoType: 'youtube',
+      youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      title: 'YouTube Video',
+      thumbnail: {
+        filename:
+          'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Video thumbnail',
+      },
+      autoPlay: false,
     },
-    thumbnail: {
-        filename: "",
-        alt: "",
-        id: "v2",
-        name: ""
-    },
-    autoPlay: false,
   },
-};
+}
+
+export const Wistia: Story = {
+  args: {
+    blok: {
+      _uid: 'video-wistia',
+      component: 'video',
+      videoType: 'wistia',
+      wistiaUrl: 'https://fast.wistia.net/embed/iframe/kdhsjzoap5',
+      title: 'Wistia Video',
+      thumbnail: {
+        filename:
+          'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+        alt: 'Video thumbnail',
+      },
+      autoPlay: false,
+    },
+  },
+}
+

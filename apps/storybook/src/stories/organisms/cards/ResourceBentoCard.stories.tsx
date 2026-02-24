@@ -5,20 +5,9 @@ const meta: Meta<typeof ResourceBentoCard> = {
   title: 'Organisms/ResourceBentoCard',
   component: ResourceBentoCard,
   tags: ['autodocs'],
- 
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          maxWidth: '960px',
-          padding: '24px',
-          background: '#f8f8f8',
-        }}
-      >
-        <Story />
-      </div>
-    ),
-  ],
+ parameters:{
+  layout: 'fullscreen'
+ },
   argTypes: {
     size: {
       control: 'radio',

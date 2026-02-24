@@ -14,6 +14,10 @@ export * from './accordion';
 export * from './awardsBlade';
 export * from './formBlock';
 export * from './cardDeck';
-export * from './conversionPanel'
+export * from './conversionPanel';
+export * from './metricsBlock';
+export * from './resourceCarousel';
+export * from './resourceBentoCardDeck';
+export * from './statsBar';
 
 

@@ -6,7 +6,7 @@ import {
 } from '@repo/ui'
 
 const meta: Meta<typeof LeadershipCardDeck> = {
-  title: 'Section/LeadershipCardDeck',
+  title: 'Sections/LeadershipCardDeck',
   component: LeadershipCardDeck,
   parameters: {
     layout: 'fullscreen',
@@ -109,15 +109,3 @@ export const TwoRowsMixed: Story = {
   } satisfies LeadershipCardDeckBlok,
 }
 
-export const WithoutContentBlock: Story = {
-  args: {
-    _uid: 'deck-no-content',
-    component: 'leadership_card_deck',
-    rows: [
-      {
-        cardsPerRow: '4',
-        cards: cards10,
-      },
-    ],
-  } satisfies LeadershipCardDeckBlok,
-}

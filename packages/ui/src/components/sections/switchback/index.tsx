@@ -1,101 +1,89 @@
-import Image from "next/image";
+'use client'
 
-import { storyblokEditable } from "@storyblok/react";
+import type { FC } from 'react'
+import Image from 'next/image'
+import { storyblokEditable, type SbBlokData } from '@storyblok/react'
+import { twMerge } from 'tailwind-merge'
 
-import type { FC } from "react";
-import type { SbBlokData } from "@storyblok/react";
-import { getMedia } from "../../../utils/getMedia";
-import { headingContainerStyle, mediaContainerStyle } from "./styles";
-import { renderEyebrow, renderHeading } from "../../../utils/headingUtils";
-import { StoryblokServerRichText } from "@storyblok/react/rsc";
-import { SanityVideo } from "../../../types/sanity";
+import { ContentBlock, type ContentBlockBlok } from '../../organisms'
+import { Video, type VideoBlok } from '../../modules'
 
-export interface SwitchbackProps extends SbBlokData {
-  heading?: any;
-  eyebrow?: any;
-  body?: any;
-  reverse?: boolean;
-  pixelAccent?: boolean;
-  mediaType?: "image" | "video";
-  image?: any;
-  video?: SanityVideo;
-  imageAlt?: string;
+export interface SwitchbackBlok extends SbBlokData {
+  content?: ContentBlockBlok[]
+  mediaType?: 'image' | 'video'
+  image?: {
+    filename?: string
+    alt?: string
+  }
+  video?: VideoBlok
+  variant?: 'left' | 'right'
 }
 
-export const Switchback: FC<SwitchbackProps> = ({
-  heading,
-  eyebrow,
-  body,
-  reverse = false,
-  pixelAccent,
-  mediaType,
-  image,
-  video,
-  imageAlt,
-  ...blok
-}) => {
-  // Handle media for Storyblok
-  const renderMedia = () => {
-    if (mediaType === "image" && image) {
-      // Extract dimensions from filename if available (e.g., 4320x2163 from URL)
-      const filename = image.filename || image.url || "";
-      const dimensionMatch = filename.match(/\/(\d+)x(\d+)\//);
+export const Switchback: FC<{ blok: SwitchbackBlok }> = ({ blok }) => {
+  const {
+    content,
+    mediaType = 'image',
+    image,
+    video,
+    variant = 'right',
+  } = blok
 
-      const width = dimensionMatch ? parseInt(dimensionMatch[1]) : 592;
-      const height = dimensionMatch ? parseInt(dimensionMatch[2]) : 475;
+  const isReversed = variant === 'left'
+
+  const renderMedia = () => {
+    if (mediaType === 'image' && image?.filename) {
+      const match = image.filename.match(/\/(\d+)x(\d+)\//)
+      const width = match ? Number(match[1]) : 592
+      const height = match ? Number(match[2]) : 475
 
       return (
         <Image
-          src={filename}
-          alt={imageAlt || image.alt || ""}
+          src={image.filename}
+          alt={image.alt ?? ''}
           width={width}
           height={height}
-          className="w-full h-auto rounded-lg object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority={false}
+          className="w-full h-auto object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
         />
-      );
+      )
     }
 
-    if (mediaType === "video" && video) {
-      return getMedia({
-        mediaType: "video",
-        media: video as any,
-        aspectRatio: "aspect-[592/475]",
-        hasShadow: false,
-        playButtonPosition: "bottom-left",
-      });
+    if (mediaType === 'video' && video) {
+      return <Video blok={video} />
     }
 
-    return null;
-  };
+    return null
+  }
 
   return (
-    <div
+    <section
       {...storyblokEditable(blok)}
-      className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8"
+      className={twMerge('section-padding-xl bg-(--surface-background)')}
     >
-      <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
-        <div className={mediaContainerStyle({ reverse })}>
-          <div className="relative">
-            {pixelAccent && (
-              <img
-                src="/images/pixel-image-accent.png"
-                alt=""
-                className="absolute -bottom-8 -right-8 pointer-events-none -z-10 scale-[1.15]"
-              />
-            )}
-            {renderMedia()}
-          </div>
+      <div
+        className={twMerge(
+          `
+          mx-auto
+          grid
+          max-w-7xl
+          grid-cols-1
+          gap-16
+          items-center
+          lg:grid-cols-2
+          `,
+          isReversed && 'lg:[&>*:first-child]:order-2'
+        )}
+      >
+        <div>
+          {content?.map((nestedBlok) => (
+            <ContentBlock key={nestedBlok._uid} blok={nestedBlok} />
+          ))}
         </div>
-        <div className={headingContainerStyle({ reverse })}>
-          <div className="flex flex-col gap-4">
-            {renderEyebrow(eyebrow)}
-            {renderHeading(heading)}
-            {body && <StoryblokServerRichText doc={body} />}
-          </div>
+
+        <div className="relative w-full overflow-hidden">
+          {renderMedia()}
         </div>
       </div>
-    </div>
-  );
-};
+    </section>
+  )
+}

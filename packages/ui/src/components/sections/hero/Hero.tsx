@@ -27,7 +27,7 @@ export const Hero: FC<{ blok: HeroBlok }> = ({ blok }) => {
           ))}
         </div>
 
-        <div className="relative aspect-[4/3] w-full overflow-hidden">
+        <div className="relative aspect-4/3 w-full overflow-hidden">
           {blok.image?.filename && (
             <Image
               src={blok.image.filename}

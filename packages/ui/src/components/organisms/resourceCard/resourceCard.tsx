@@ -103,7 +103,7 @@ export const ResourceCard: FC<ResourceCardProps> = (props) => {
   const resourceUrl = `${getResourceRoute(_type)}/${resourceSlug}`;
   
   return (
-    <Link href={resourceUrl} className="group max-w-85.75 md:max-w-84.25 lg:max-w-101.25 relative flex h-full flex-col overflow-hidden transition-all duration-200 hover:border-(--stroke-card-hover) bg-(--surface-card) border  border-(--stroke-card)">
+    <Link href={resourceUrl} className="group sm:max-w-[330px] relative flex h-full flex-col overflow-hidden transition-all duration-200 hover:border-(--stroke-card-hover) bg-(--surface-card) border  border-(--stroke-card)">
       {/* Featured Image */}
       {displayImage && (
         <div className="relative aspect-video overflow-hidden">

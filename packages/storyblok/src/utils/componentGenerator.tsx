@@ -45,7 +45,7 @@ export const getComponent = (component: SbBlokData, rels?: any) => {
       return <Hero key={component._uid} blok={component} />;
 
     case "switchback":
-      return <Switchback key={component._uid} {...component} />;
+      // return <Switchback key={component._uid} {...component} />;
 
     case "iconCardDeck":
       return (

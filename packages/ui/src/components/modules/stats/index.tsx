@@ -21,7 +21,7 @@ export const StatItem: FC<StatItemProps> = ({ blok, variant = "nested" }) => {
   const isMetric = variant === "metric";
 
   const containerClasses = twMerge(
-    "flex flex-col gap-(--gaps-18-16-16) p-(--gaps-16-12-12) max-w-59 w-full",
+    "flex flex-col gap-(--gaps-18-16-16) p-(--gaps-16-12-12)  w-full",
     isMetric ? "items-center" : "items-start border-t border-(--stroke-primary)"
   );
 
