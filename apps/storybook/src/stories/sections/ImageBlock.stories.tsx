@@ -40,6 +40,7 @@ const storyblokImage = {
   filename: 'https://images.unsplash.com/photo-1768697581060-52e2edbee7fa?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   alt: 'Image',
 };
+const description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta, lorem ut consequat pretium, justo justo lacinia enim, a lacinia nibh nulla a urna. Sed ac neque eros. Vivamus et nisi nec nibh suscipit mattis. In porta, augue a condimentum convallis, enim est ultricies orci, in facilisis erat justo ac diam.'
 
 const getWrapper = (canvas: ReturnType<typeof within>) =>
   canvas.getByRole('img').parentElement;
@@ -47,7 +48,8 @@ const getWrapper = (canvas: ReturnType<typeof within>) =>
 export const Default: Story = {
   args: {
     image: storyblokImage,
-  },
+description  
+},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const wrapper = getWrapper(canvas);
@@ -66,6 +68,7 @@ export const Large: Story = {
 
     image: storyblokImage,
     size: 'large',
+    description
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -79,6 +82,7 @@ export const Medium: Story = {
   args: {
     image: storyblokImage,
     size: 'medium',
+    description
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -92,6 +96,7 @@ export const Small: Story = {
   args: {
     image: storyblokImage,
     size: 'small',
+    description
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

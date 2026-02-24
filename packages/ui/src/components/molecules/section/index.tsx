@@ -29,7 +29,7 @@ export const Section: FC<SectionProps> = ({
     <Component
       id={id}
       className={twMerge(
-        "w-(--widths-1440-834-375) p-(--padding-top-down-sectional-96-72-48-xl) flex flex-col gap-12 items-center bg-(--surface-background)" ,
+        "w-(--widths-1440-834-375) section-padding-xl flex flex-col gap-12 items-center bg-(--surface-background)" ,
         className
       )}
       {...rest}

@@ -3,7 +3,7 @@ import NextImage from 'next/image';
 
 import type { FC } from 'react';
 import { headingVariants } from '../../../../atoms/heading';
-import CTABar from '../../../../molecules/ctaBar';
+import CTABar from '../../../../modules/ctaBar';
 import { StoryblokNavigationSpotlightCard } from '../../../../../types/storyblok';
 
 const MediaCard: FC<StoryblokNavigationSpotlightCard> = (props) => {

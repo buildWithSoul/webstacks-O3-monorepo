@@ -1,0 +1,61 @@
+'use client'
+
+import type { FC } from 'react'
+import { storyblokEditable, SbBlokData } from '@storyblok/react'
+import { twMerge } from 'tailwind-merge'
+import { Image } from '../../../molecules'
+import { Heading } from '../../../atoms'
+
+export interface LeadershipCardBlok extends SbBlokData {
+  name: string
+  title: string
+  image?: {
+    filename: string
+    alt?: string
+  }
+}
+
+interface LeadershipCardProps {
+  blok: LeadershipCardBlok
+  className?: string
+}
+
+export const LeadershipCard: FC<LeadershipCardProps> = ({
+  blok,
+  className,
+}) => {
+  return (
+    <div
+      {...storyblokEditable(blok)}
+      className={twMerge(
+        'flex flex-col overflow-hidden bg-white text-center',
+        className
+      )}
+    >
+      {blok.image?.filename && (
+        <Image
+          asset={{
+            url: blok.image.filename,
+          }}
+          alt={blok.image.alt || blok.name}
+          aspectRatio="3/4"
+          objectCover
+          unsetMaxWidth
+          className="w-full bg-gray-100"
+          sizes="(max-width: 768px) 100vw, 300px"
+        />
+      )}
+
+      <div className="w-full bg-(--surface-background) p-(--padding-20-18-18)">
+       
+        <Heading size={'2xl'} as='h3'>
+          {blok.name}
+
+        </Heading>
+        <p className="mt-2 text-sm text-(--text-body-dark)">
+          {blok.title}
+        </p>
+      </div>
+    </div>
+  )
+}

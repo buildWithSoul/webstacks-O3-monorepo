@@ -1,5 +1,3 @@
-
-
 import { FC } from "react";
 import { Button } from "../../../atoms";
 
@@ -53,60 +51,68 @@ export const BlogPagination: FC<{
     };
   
     return (
-      <div className="flex w-full justify-around items-center gap-8">
+      <div className="flex w-full items-center justify-between gap-4  md:gap-8">
         <Button
           type="button"
           onClick={() => onPageChange(currentPage - 1)}
           aria-label="Previous page"
-          mode="filled"
-          tone="secondary"
+          mode="link"
           size="sm"
           leadingIcon="arrow-left"
           disabled={currentPage === 1}
-          className="!w-10 !h-10 !min-w-10 !px-0"
-        />
+        >
+          <span >Back</span>
+        </Button>
   
-        <div className="flex items-center gap-3">
-          {getPageNumbers().map((page, index) => {
-            // Skip rendering ellipsis as a separate element
-            if (page === '…') {
+        <div className="flex items-center gap-3 md:flex">
+          <span className="text-sm font-medium text-(--text-link) md:hidden">
+            Page {currentPage} of {totalPages}
+          </span>
+  
+          <div className="hidden items-center gap-3 md:flex">
+            {getPageNumbers().map((page, index) => {
+              // Skip rendering ellipsis as a separate element
+              if (page === '…') {
+                return (
+                  <span key={index} className="px-1 text-sm text-gray-500">
+                    …
+                  </span>
+                );
+              }
+  
               return (
-                <span key={index} className="text-sm text-gray-500 px-1">
-                  …
-                </span>
+                <button
+                  key={index}
+                  className={`flex focus:focus-primary size-10 cursor-pointer items-center justify-center rounded-md border text-md font-semibold transition-all ${
+                    page === currentPage
+                      ? 'border-(--stroke-secondary-button-hover) bg-(--surface-pagination) text-button-secondary'
+                      : 'border-(--stroke-pagination) text-body hover:bg-(--surface-pagination) '
+                  }`}
+                  onClick={() => typeof page === 'number' && onPageChange(page)}
+                  aria-label={`Page ${page}`}
+                  aria-current={page === currentPage ? 'page' : undefined}
+                >
+                  <span className="text-(--text-link) text-sm font-medium mt-0.5">
+                    {page}
+                  </span>
+                </button>
               );
-            }
-  
-            return (
-              <button
-                key={index}
-                className={`flex justify-center items-center size-10 rounded text-md font-semibold cursor-pointer transition-all ${
-                  page === currentPage 
-                    ? 'text-button-secondary bg-switcher-active border-[0.5px] border-primary' 
-                    : 'text-body hover:text-heading'
-                }`}
-                onClick={() => typeof page === 'number' && onPageChange(page)}
-                aria-label={`Page ${page}`}
-                aria-current={page === currentPage ? 'page' : undefined}
-              >
-                {page}
-              </button>
-            );
-          })}
+            })}
+          </div>
         </div>
   
         <Button
           type="button"
           onClick={() => onPageChange(currentPage + 1)}
           aria-label="Next page"
-          mode="filled"
+          mode="link"
           tone="primary"
           size="sm"
           trailingIcon="arrow-right"
           disabled={currentPage === totalPages}
-          className="!w-10 !h-10 !min-w-10 !px-0"
-        />
+        >
+          <span>Next</span>
+        </Button>
       </div>
     );
   };
-  

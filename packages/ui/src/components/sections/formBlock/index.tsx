@@ -1,79 +1,65 @@
-'use client';
-import { FC, ReactNode } from 'react';
-import { SanityPageContent } from '../../../types/sanity';
-import { Eyebrow } from '../../atoms';
-import { RichText } from '../../molecules/richText/richText';
-import HubSpotFormComponent from '../../molecules/hubspotForm';
-import { renderHeading } from '../../../utils/headingUtils';
+import type { FC } from "react";
+import { storyblokEditable, SbBlokData } from "@storyblok/react";
+import { Heading, Button } from "../../atoms";
+import { RichText } from "../../molecules/richText/richText";
+import { Form } from "../../organisms/form";
+import { renderHeading } from "../../../utils/headingUtils";
+import { ButtonProps } from "../../atoms/button";
 
-export interface FormBlockProps extends SanityPageContent {
-  heading?: any;
-  eyebrow?: any;
-  body?: any;
-  // Generic form support - can accept any form component or children
-  children?: ReactNode;
-  formComponent?: ReactNode;
-  // HubSpot form configuration
-  hubspotPortalId?: string;
-  hubspotFormId?: string;
-  redirectUrl?: string;
-  // Form reference from Sanity
-  form?: {
-    _id: string;
-    name: string;
-    hubspotFormId?: string;
-    redirectUrl?: string;
-  };
-  reverse?: boolean;
+interface FormBlockProps extends SbBlokData {
+  heading: any[];
+  description?: any;
+  buttons?: ButtonProps[];
 }
 
-export const FormBlock: FC<FormBlockProps> = ({ 
-  heading, 
-  eyebrow, 
-  body, 
-  children, 
-  formComponent, 
-  form,
-  hubspotPortalId,
-  hubspotFormId,
-  redirectUrl,
-  reverse 
+export const FormBlock: FC<FormBlockProps> = ({
+  heading,
+  description,
+  buttons,
+  ...blok
 }) => {
-  return (
-    <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col gap-12 lg:flex-row lg:gap-16 lg:justify-center">
-        <div className="flex w-full flex-col justify-center gap-4 lg:w-[500px] shrink-0">
-          {eyebrow?.eyebrow && (
-            <Eyebrow
-              text={eyebrow.eyebrow} 
-              as={(eyebrow.elementType || 'h6') as 'h6' | 'span' | 'div'}
-            />
-          )}
-          {heading && renderHeading(heading)}
+  const slicedButtons = buttons?.slice(0, 2);
 
-          {body && (
-            <RichText doc={body}  />
+  return (
+    <section
+      {...storyblokEditable(blok)}
+      className="
+        section-padding-xl
+        items-start
+        bg-(--surface-background)
+      "
+    >
+      <div className=" grid grid-cols-1 lg:grid-cols-2 gap-(--gaps-48-40-40) section-padding-md rounded-md bg-(--surface-secondary-background)">
+        <div>
+          {renderHeading(heading[0])}
+
+          {description && (
+            <div className="mb-8 text-(--text-body-dark)">
+              <RichText doc={description} />
+            </div>
           )}
-        </div>
-        <div className="w-full lg:w-[652px] shrink-0">
-          {/* HubSpot Form - check both direct props and form object */}
-          {(hubspotPortalId && hubspotFormId) || (form?.hubspotFormId) ? (
-            <HubSpotFormComponent
-              portalId={hubspotPortalId || '1907998'}
-              formId={hubspotFormId || form?.hubspotFormId || ''}
-              redirectUrl={redirectUrl || form?.redirectUrl}
-            />
-          ) : (children || formComponent) ? (
-            <>{formComponent || children}</>
-          ) : (
-            // Fallback: Show a placeholder
-            <div className="text-center text-disabled">
-              <p>Form component not provided</p>
-              <p className="text-sm mt-2">Add HubSpot IDs or pass a form component via the `formComponent` prop or `children`</p>
+
+          {slicedButtons && slicedButtons.length > 0 && (
+            <div className="flex flex-col sm:flex-row gap-4">
+              {slicedButtons.map((button, index) => (
+                <Button
+                  key={button._uid}
+                  href={button.href}
+                  target={button.target}
+                  mode={"filled"}
+                  tone={button.tone ?? (index === 0 ? "primary" : "secondary")}
+                >
+                  {button.label}
+                </Button>
+              ))}
             </div>
           )}
         </div>
+
+        <div>
+          <Form />
+        </div>
       </div>
-    </div>
+    </section>
   );
 };

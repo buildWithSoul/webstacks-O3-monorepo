@@ -59,7 +59,7 @@ export const SliderControls: FC<SliderControlsProps> = ({
             tone="secondary"
             size="sm"
             leadingIcon="arrow-left"
-            className="!w-10 !h-10 !min-w-10 !px-0"
+            className="w-10! h-10! min-w-10! px-0!"
           />
           <Button
             type="button"
@@ -69,7 +69,7 @@ export const SliderControls: FC<SliderControlsProps> = ({
             tone="primary"
             size="sm"
             trailingIcon="arrow-right"
-            className="!w-10 !h-10 !min-w-10 !px-0"
+            className="w-10! h-10! min-w-10! px-0!"
           />
         </div>
       )}

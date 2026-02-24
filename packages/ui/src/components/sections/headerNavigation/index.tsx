@@ -12,7 +12,7 @@ import { Link } from '../../atoms';
 import { SITE_CONFIG } from '../../../lib/constants';
 import { Brand } from '../../atoms/brand';
 import Navigation from './components/navigation';
-import CTABar from '../../molecules/ctaBar';
+import CTABar from '../../modules/ctaBar';
 import Hamburger from './components/hamburger';
 import MobileNavigation from './components/mobile';
 

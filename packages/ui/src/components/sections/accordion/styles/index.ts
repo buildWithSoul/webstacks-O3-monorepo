@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
 
-export const containerStyle = cva('flex gap-12', {
+export const containerStyle = cva('flex gap-(--gaps-56-48-48) xl:gap-[135px]', {
   variants: {
     layout: {
       stack: 'flex-col',

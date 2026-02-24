@@ -1,27 +1,37 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { within, expect } from '@storybook/test';
-import { HeadingBlock } from '@repo/ui';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { within, expect } from "@storybook/test";
+import { HeadingBlock } from "@repo/ui";
 
+const mockEyebrow = [
+  {
+    _uid: "eyebrow-1",
+    component: "eyebrow",
+    eyebrow: "EYEBROW EXAMPLE",
+    elementType: "span",
+  },
+];
 
-const mockEyebrow = {
-  eyebrow: 'Introducing',
-  elementType: 'span',
-};
-
-const mockHeading = {
-  heading: 'Build faster with confidence',
-  elementType: 'h2',
-};
+const mockHeading = [
+  {
+    _uid: "heading-1",
+    component: "heading",
+    heading: "Where performance meets possibility",
+    elementType: "h1",
+    headingSize: "6xl",
+    fontFamily: "display",
+  },
+];
 
 const mockBody = {
-  type: 'doc',
+  type: "doc",
   content: [
     {
-      type: 'paragraph',
+      type: "paragraph",
       content: [
         {
-          type: 'text',
-          text: 'This is a simple body copy rendered via Storyblok rich text.',
+          type: "text",
+          text:
+            "Every website should be built to evolve. From the first line of code to the final interaction, it’s a living product designed to adapt, scale, and drive growth over time.",
         },
       ],
     },
@@ -29,85 +39,63 @@ const mockBody = {
 } as any;
 
 const meta: Meta<typeof HeadingBlock> = {
-  title: 'Sections/HeadingBlock',
+  title: "Sections/HeadingBlock",
   component: HeadingBlock,
-   decorators: [
-    (Story) => (
-      <div>
-        <main>
-          <Story />
-          
-        </main>
-      </div>
-    ),
-  ],
-    tags: ['autodocs'],
-    argTypes: {
+  tags: ["autodocs"],
+parameters : {
+  layout : 'fullscreen'
+},
+  argTypes: {
     variant: {
-      description: 'Layout style of the heading block',
-      control: { type: 'radio' },
-      options: ['stacked', 'split', 'leading'],
+      description: "Layout variant",
+      control: { type: "radio" },
+      options: ["centered", "leading", "split"],
       table: {
-        category: 'Layout',
+        category: "Layout",
       },
     },
-
-    alignment: {
-      description: 'Text alignment for stacked layout',
-      control: { type: 'radio' },
-      options: ['center', 'left'],
-      table: {
-        category: 'Layout',
-      },
-    },
-
     eyebrow: {
-      description: 'Eyebrow content (CMS driven)',
+      description: "Eyebrow block (Storyblok)",
       control: false,
       table: {
-        category: 'Content',
-        type: { summary: 'Rich text / CMS object' },
+        category: "Content",
+        type: { summary: "Blocks[]" },
       },
     },
-
     heading: {
-      description: 'Heading content (CMS driven)',
+      description: "Heading block (Storyblok)",
       control: false,
       table: {
-        category: 'Content',
-        type: { summary: 'Rich text / CMS object' },
+        category: "Content",
+        type: { summary: "Blocks[]" },
       },
     },
-
     body: {
-      description: 'Body rich text content',
+      description: "Body content (RichText)",
       control: false,
       table: {
-        category: 'Content',
-        type: { summary: 'RichTextContent' },
+        category: "Content",
+        type: { summary: "RichTextContent" },
       },
     },
-
     _uid: { table: { disable: true } },
     component: { table: { disable: true } },
     editable: { table: { disable: true } },
   },
-
 };
 
 export default meta;
 type Story = StoryObj<typeof HeadingBlock>;
 
-
-const basePlay: Story['play'] = async ({ canvasElement }) => {
+const basePlay: Story["play"] = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   await expect(
-    canvas.getByText('Build faster with confidence'),
+    canvas.getByText("Where performance meets possibility")
   ).toBeInTheDocument();
 
   await expect(
-    canvas.getByText('Introducing'),
+    canvas.getByText("EYEBROW EXAMPLE")
   ).toBeInTheDocument();
 };
 
@@ -116,34 +104,20 @@ export const Default: Story = {
     eyebrow: mockEyebrow,
     heading: mockHeading,
     body: mockBody,
+    variant: "centered",
   },
   play: basePlay,
 };
 
-
-export const StackedLeft: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    variant: 'stacked',
-    alignment: 'left',
-  },
-};
-
-export const Split: Story = {
-  ...Default,
-  args: {
-    ...Default.args,
-    variant: 'split',
-  },
-};
-
 export const Leading: Story = {
-  ...Default,
   args: {
     ...Default.args,
-    variant: 'leading',
+    variant: "leading",
   },
 };
-
-
+export const Split: Story = {
+  args: {
+    ...Default.args,
+    variant: "split",
+  },
+};

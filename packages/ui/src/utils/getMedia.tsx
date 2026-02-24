@@ -80,7 +80,8 @@ export const getMedia = (options: GetMediaOptions) => {
     case 'media':
       switch (media?._type) {
         case 'video':
-          return media && <VideoBlock {...media} aspectRatio={aspectRatio} playButtonPosition={playButtonPosition} />;
+          const videoBlok = { ...media } as any; 
+          return <VideoBlock blok={videoBlok} />
         default:
           return null;
       }

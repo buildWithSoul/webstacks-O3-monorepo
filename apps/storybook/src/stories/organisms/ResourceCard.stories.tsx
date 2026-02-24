@@ -96,7 +96,7 @@ const baseArgs: ResourceCardProps = {
 export const BlogPost: Story = {
   args: {
     ...baseArgs,
-    excerpt: 'Learn how modern teams accelerate development using design systems.',
+    excerpt: 'Learn how modern teams accelerate development using design systems.Learn how modern teams accelerate development using design systems.Learn how modern teams accelerate development using design systems.Learn how modern teams accelerate development using design systems.Learn how modern teams accelerate development using design systems.',
     showBadge: true,
   },
   play: async ({ canvasElement }) => {

@@ -18,7 +18,7 @@ import { FormModal } from "../../molecules/formModal";
 type NativeButtonProps = ComponentPropsWithoutRef<"button"> &
   ComponentPropsWithoutRef<"a">;
 
-type ButtonProps = NativeButtonProps & {
+export type ButtonProps = NativeButtonProps & {
   className?: string;
   label?: string;
   children?: ReactNode;
@@ -199,7 +199,9 @@ const Button: FC<ButtonProps> = ({
             <Icon color={iconColor} size={20} icon={actualLeadingIcon} aria-hidden={true} />
           </span>
         )}
-        {actualLabel || children}
+        <span className="mt-0.5 lg:mt-0" >
+          {actualLabel || children}
+        </span>
         {actualTrailingIcon && actualTrailingIcon !== "None" &&  mode!=='bleed' && !leadingIcon &&(
           <span>
             <Icon color={iconColor} size={20} icon={actualTrailingIcon} aria-hidden={true} />
@@ -273,6 +275,7 @@ const Button: FC<ButtonProps> = ({
             background : background? background : 'light'
           }),
           "group",
+          'h-10 lg:h-13',
           className
         )}
         // Spread user props first so our controlled props take precedence
@@ -284,7 +287,7 @@ const Button: FC<ButtonProps> = ({
         // Ensure button semantics for popup
         {...(isPopup ? { role: "button", type: "button" } : {})}
       >
-        <span className="flex gap-2 items-center  text-[length:var(--text-jumper-text-class-text-sm)]">
+        <span className="flex gap-2 items-center  text-sm">
           {ButtonContent()}
         </span>
       </Component>

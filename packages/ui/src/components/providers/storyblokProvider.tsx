@@ -2,7 +2,7 @@
 
 import { storyblokInit, apiPlugin, StoryblokComponent, storyblokEditable } from '@storyblok/react';
 // import { HeadingBlock } from '../sections/headingBlock';
-import CTABar from '../molecules/ctaBar';
+import CTABar from '../modules/ctaBar';
 // import { ImageCardDeck } from '../sections/cardDeck/imageCardDeck';
 // import { IconCardDeck } from '../sections/cardDeck/iconCardDeck';
 import { ImageBlock, StatisticsPanel } from '../sections';

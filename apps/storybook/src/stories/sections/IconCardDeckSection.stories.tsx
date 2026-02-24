@@ -1,19 +1,38 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import { within, expect } from '@storybook/test';
-import { IconCardDeck } from '@repo/ui';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
+import { within, expect } from '@storybook/test'
+import { IconCardDeck } from '@repo/ui'
+import type { ContentBlockBlok } from '@repo/ui'
 
-
-const mockEyebrow = {
-  eyebrow: 'Platform features',
-  elementType: 'h6',
-};
-
-const mockHeading = {
+const contentBlockBlok: ContentBlockBlok = {
+  _uid: 'content-block-1',
+  component: 'content_block',
+  layout: 'leading',
+  eyebrow: [
+    {
+      _uid: 'eyebrow-1',
+      component: 'eyebrow',
+      eyebrow: 'Platform features',
+      elementType: 'h6',
+    },
+  ],
   heading: 'Everything you need to scale',
-  elementType: 'h2',
-};
+  content: {
+    type: 'doc',
+    content: [
+      {
+        type: 'paragraph',
+        content: [
+          {
+            type: 'text',
+            text: 'Powerful building blocks designed for modern product teams.',
+          },
+        ],
+      },
+    ],
+  } as any,
+}
 
-const mockBody = {
+const richBody = {
   type: 'doc',
   content: [
     {
@@ -21,83 +40,141 @@ const mockBody = {
       content: [
         {
           type: 'text',
-          text: 'Powerful building blocks designed for modern product teams.',
+          text:
+            'A design system creates order out of complexity. It ensures every component—from buttons to banners—works together seamlessly and reflects a unified brand language.',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+    },
+    {
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          marks: [{ type: 'bold' }],
+          text: 'Includes:',
+        },
+      ],
+    },
+    {
+      type: 'paragraph',
+    },
+    {
+      type: 'ordered_list',
+      attrs: { order: 1 },
+      content: [
+        {
+          type: 'list_item',
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Lorem ipsum dolor sit amet, consectetur' }],
+            },
+          ],
+        },
+        {
+          type: 'list_item',
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Lorem ipsum dolor sit amet, consectetur' }],
+            },
+          ],
+        },
+        {
+          type: 'list_item',
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Lorem ipsum dolor sit amet, consectetur' }],
+            },
+          ],
+        },
+        {
+          type: 'list_item',
+          content: [
+            {
+              type: 'paragraph',
+              content: [{ type: 'text', text: 'Lorem ipsum dolor sit amet, consectetur' }],
+            },
+          ],
         },
       ],
     },
   ],
-};
+}
 
-const card = (heading: string, description: string, icon = 'check') => ({
-  heading,
-  description,
-  icon,
-});
+const card = () => ({
+  _uid: crypto.randomUUID(),
+  component: 'iconTextCard',
+  heading: 'Building Consistency Into Every Website Experience',
+  icon: 'rocket',
+  body: richBody,
+  button: [
+    {
+      label: 'Get Started',
+      trailingIcon: 'arrow-right',
+    },
+    {
+      label: 'Learn more',
+      trailingIcon: 'arrow-right',
+    },
+  ],
+})
 
-const rows2 = [
+const rows = [
   {
-    cardsPerRow: '2',
-    cards: [
-      card('Fast setup', 'Get started in minutes'),
-      card('Secure by default', 'Enterprise-grade security'),
-    ],
+    cardsPerRow: '4',
+    cards: [card(), card(), card(), card()],
   },
-];
-
-
-const basePlay: Story['play'] = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  await expect(
-    canvas.getByText('Everything you need to scale'),
-  ).toBeInTheDocument();
-   await expect(
-    canvas.getByText('Platform features'),
-  ).toBeInTheDocument();
-
-  await expect(
-    canvas.getByText('Powerful building blocks designed for modern product teams.'),
-  ).toBeInTheDocument();
-
-  await expect(
-    canvas.getByText('Fast setup'),
-  ).toBeInTheDocument();
-
-  await expect(
-    canvas.getByText('Secure by default'),
-  ).toBeInTheDocument();
-
-};
-
+]
 
 const meta: Meta<typeof IconCardDeck> = {
   title: 'Sections/IconCardDeck',
   component: IconCardDeck,
   tags: ['autodocs'],
   argTypes: {
-    heading: { control: false },
-    eyebrow: { control: false },
-    body: { control: false },
+    content: { control: false },
     rows: { control: false },
-    theme: {
-      control: 'radio',
-      options: ['light', 'dark'],
-      table: { category: 'Appearance' },
-    },
   },
-};
+  parameters:{
+    layout:'fullscreen'
+  }
+}
 
-export default meta;
-type Story = StoryObj<typeof IconCardDeck>;
+export default meta
+type Story = StoryObj<typeof IconCardDeck>
 
+const basePlay: Story['play'] = async ({ canvasElement }) => {
+  const canvas = within(canvasElement)
 
-export const TwoCard: Story = {
+  await expect(
+    canvas.getByText('Everything you need to scale')
+  ).toBeInTheDocument()
+
+  await expect(
+    canvas.getByText('Platform features')
+  ).toBeInTheDocument()
+
+  await expect(
+    canvas.getByText('Powerful building blocks designed for modern product teams.')
+  ).toBeInTheDocument()
+
+  await expect(
+    canvas.getAllByText('Building Consistency Into Every Website Experience').length
+  ).toBeGreaterThan(0)
+
+  await expect(
+    canvas.getAllByText('Get Started').length
+  ).toBeGreaterThan(0)
+}
+
+export const FourCard: Story = {
   args: {
-    eyebrow: mockEyebrow,
-    heading: mockHeading,
-    body: mockBody,
-    rows: rows2,
-  },
+    content: [contentBlockBlok],
+    rows,
+  } as any,
   play: basePlay,
-} as any;
-
+}

@@ -18,6 +18,7 @@ const mockHeading = [
     component: 'heading',
     heading: 'Frequently asked questions',
     elementType: 'h2',
+    fontFamily: 'display'
   },
 ];
 
@@ -30,75 +31,60 @@ const mockBody = {
         {
           type: 'text',
           text:
-            'Everything you need to know about our product and billing.',
+            'Every website should be built to evolve. From the first line of code to the final interaction, it’s a living product designed to adapt, scale, and drive growth over time. This block represents how structure, content, and design work together to deliver an experience that feels seamless today—and ready for what’s next.',
         },
       ],
     },
   ],
 };
 
-const mockItems = [
-  {
-    _uid: 'item-1',
-    component: 'accordionItem',
-    label: 'What is your refund policy?',
-    content: {
-      type: 'doc',
-      content: [
-        {
-          type: 'paragraph',
-          content: [
-            {
-              type: 'text',
-              text:
-                'We offer a 30-day money-back guarantee if you are not satisfied.',
-            },
-          ],
+const mockItems= [
+      {
+        _uid: 'item-1',
+        title: 'Design Sytems',
+         icon: {
+          id: 'icon-1',
+          filename: 'https://cdn-icons-png.flaticon.com/512/3524/3524636.png',
+          alt: 'Settings icon',
         },
-      ],
-    },
-  },
-  {
-    _uid: 'item-2',
-    component: 'accordionItem',
-    label: 'How long does setup take?',
-    content: {
-      type: 'doc',
-      content: [
-        {
-          type: 'paragraph',
           content: [
-            {
-              type: 'text',
-              text:
-                'Most teams are up and running within a few minutes.',
-            },
-          ],
+          {
+            type: "paragraph",
+            content: [
+              {
+                type: "text",
+                text: "View invoices, update payment methods, and more.",
+              },
+            ],
+          } 
+        ],
+        cta: {
+          label: 'Go to settings',
+          href: '/settings',
         },
-      ],
-    },
-  },
-  {
-    _uid: 'item-3',
-    component: 'accordionItem',
-    label: 'Do you offer enterprise plans?',
-    content: {
-      type: 'doc',
-      content: [
-        {
-          type: 'paragraph',
-          content: [
-            {
-              type: 'text',
-              text:
-                'Yes, we offer custom plans for larger organizations.',
-            },
-          ],
+      },
+      {
+        _uid: 'item-2',
+        title: 'Billing & invoices',
+        content: [
+          {
+            type: "paragraph",
+            content: [
+              {
+                type: "text",
+                text: "View invoices, update payment methods, and more.",
+              },
+            ],
+          } 
+        ],
+         icon: {
+          id: 'icon-2',
+          filename: 'https://cdn-icons-png.flaticon.com/512/3524/3524659.png',
+          alt: 'Billing icon',
         },
-      ],
-    },
-  },
-];
+      
+      } as any,
+    ]
 
 
 
@@ -129,6 +115,7 @@ const meta: Meta<typeof Accordion> = {
     viewport: {
       defaultViewport: 'desktop',
     },
+    layout:'fullscreen'
   },
   tags: ['autodocs'],
   argTypes: {

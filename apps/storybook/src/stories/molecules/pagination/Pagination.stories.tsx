@@ -6,7 +6,7 @@ const meta: Meta<typeof Pagination> = {
   title: 'Molecules/Pagination',
   component: Pagination,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
   argTypes: {
